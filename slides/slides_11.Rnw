@@ -1,0 +1,505 @@
+\documentclass[xcolor={dvipsnames}]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+\setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 1: Course introduction}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Overview}
+
+This course:\pause
+\begin{itemize}
+\item Part of a sequence \pause
+\begin{itemize}
+\item Fall: research design \pause
+\item Winter: methods \pause
+\item Spring: practical applications
+\end{itemize}
+\end{itemize}
+
+\pause
+
+Did you take SOSC 13100 in fall quarter of 2022?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{center}
+Main take-aways from fall quarter?
+\end{center}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Course objectives}
+\pause
+\begin{itemize}
+\item Students will approach data thinking like a social scientist; i.e., thinking about what data inputs are, how they’re measured, relationships among variables, thinking about data generating processes when making inferences\pause
+\item Build on foundations of causal inference introduced in fall SSI I, with respect to both experimental and observational data \pause
+\item Have facility with basic statistical tests and methods \pause
+\item Have facility with basic statistical software programming and data visualization 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Course objectives}
+
+By the end of the quarter, you should be able to \dots\pause
+\begin{itemize}
+\item Formulate a falsifiable research ``hypothesis'' \pause
+\item Determine what evidence (data, statistical tests) you would need to falsify that hypothesis \pause
+\item Interpret results from statistical analysis \pause
+\item Run basic statistical analysis in R
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Overview}
+
+What about qualitative research methods? \pause
+\begin{itemize}
+\item Data can be both quantitative and qualitative. \pause
+\item Principles of research design can be shared across methodological approaches. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\section{Overview}
+\begin{frame}{Overview}
+
+\begin{itemize}
+\item High level: how to answer questions with data \pause
+\item Summarizing univariate and multivariate data numerically and visually, data exploration \pause
+\item Probability as a model of the world \pause
+\item Formalizing our uncertainty about that model, using statistics \pause
+\item What it requires to infer causal relationships \pause
+\item Linear regression \pause (and inference with) \pause
+\item Beyond linear regression: other statistical methods
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{What we do with data}
+
+We'll get started on working with data, and we'll also get started on thinking critically about how you use data to answer questions.\\~\ \pause
+
+
+What data would you need to make the argument in the article below?
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=.8\textwidth]{../assets/guardian.png} 
+   % \caption{example caption}
+   % \label{fig:example}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Inferential questions}
+
+\begin{itemize}
+\item What can the data you \textit{do} have tell you about data you \textit{don't} have? \pause
+\item What data would you need to answer questions about \textit{what would have happened}? \pause
+\item What can we say about our \textit{uncertainty} about estimates or predictions?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Statistical software}
+
+Programming in R.\pause
+\begin{itemize}
+\item Assuming you're starting from scratch. \pause
+\item But if you do have some programming skills, with statistical software, python, or other languages, there can be a lot of carryover. \pause
+\item If you don't have any baseline skills, focus on the rstudio primers \url{https://rstudio.cloud/learn/primers}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Reference texts}
+
+\begin{center}
+{[}See \href{https://docs.google.com/document/d/1d_eGgmsByZohQslKIirVflpDUzvUiXZFAeej3PvTDzU/edit?usp=sharing}{syllabus} {]}
+\end{center}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Asking and answering questions}
+
+\begin{itemize}
+\item Google! \pause
+\item Ask on our course StackOverflow team: \url{https://stackoverflowteams.com/c/sosc13200-w23-2} \pause {[}I'll send invites shortly{]}  \pause
+\item Use general StackOverflow (\url{https://stackoverflow.com/}) for \texttt{R} questions or CrossValidated (\url{https://stats.stackexchange.com/}) for stats. \pause
+\end{itemize}
+
+Class participation includes asking and \textit{answering} questions on the class StackOverflow.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+% %-------------------------------------------------------------------------------%
+
+\begin{frame}{Assessment}
+
+\begin{itemize}
+\item Homework: 60\%
+\item Final project: 30\%
+\item Participation: 10\%
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Homework}
+
+\begin{itemize}
+\item Solution sets will be posted \textit{at the same time} as problem sets. \pause
+\item Do as much as you can on the problem set before checking the solutions. \pause
+\item Check your work, and then fill out a form on how you did, what you understood and didn't.\pause
+\item You get marked both on completion of the problem set, \textbf{AND} filling out the form.\pause
+\item (If you find errors in the solution set, post them on the class StackOverflow and you will get extra credit) \pause
+\item For homework assignments, always submit \textit{both} your .R file showing your work, and and a compiled .pdf\ file on Canvas.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Homework grading}
+
+check(+/-) \pause
+\begin{itemize}
+\item Check: You fully completed the assignment, and submitted all components. (A) \pause
+\item Check plus: You went above and beyond, your solutions were clear and detailed. (A+)  \pause
+\item Check minus: You made an attempt, but it wasn't complete. Maybe you didn't submit all components, or didn't fully answer some of the questions. (B or C) \pause
+\item Unmarked: You did not submit enough of an assignment for credit. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+
+\begin{frame}{Assignment for Friday}
+
+\begin{itemize}
+\item Download software on your own computer. \pause
+\item Set up your working directory. \pause
+\item Compile and submit a report.\pause
+\item (Fill out the feedback form as well, even though there aren't solutions.) 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Final Project}
+
+\pause
+\begin{itemize}
+\item More in-depth, open-ended problem set. \pause
+\item Make sure you understand the homework solutions, the final will not have a solution set. \pause
+\item You pick from approved data sets--or propose your own. \pause
+\item Run through a series of coding exercises and statistical analyses. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Github}
+
+\begin{itemize}
+\item \url{https://github.com/UChicago-pol-methods/SOSC13200-W23}\pause
+\item Serves as a repository for class documents. \pause
+\item You don't need a GitHub account, or need to know how to use git. \pause
+\item But if you \textit{do} find mistakes in slides or homeworks, you can get extra extra credit for submitting a pull request on GitHub with revisions. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{center}
+Other questions/concerns about class policies?
+\end{center}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Getting started in R}
+
+\begin{center}
+{[} R script {]}
+\end{center}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\end{document}
+%
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%

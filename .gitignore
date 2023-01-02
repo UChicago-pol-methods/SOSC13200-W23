@@ -1,0 +1,13 @@
+*.DS_Store
+*.Rhistory
+assignments/pset-spinning-template
+*.tex
+*.log
+*.nav
+*.snm
+*.gz
+*.toc
+*.bbl
+*.vrb
+slides/figs*
+data/student-datasets
