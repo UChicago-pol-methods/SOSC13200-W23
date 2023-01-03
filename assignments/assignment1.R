@@ -1,7 +1,7 @@
 #' ---
-#' title: "Assignment 1, Social Science Inquiry II (SOSC13200-W22-3)"
+#' title: "Assignment 1, Social Science Inquiry II (SOSC13200-W23-2)"
 #' author: "<your name here>"
-#' date: "Friday 1/14/22 at 5pm"
+#' date: "Friday 1/6/23 at 5pm"
 #' ---
 #' 
 #' For the first assignment, I want you to update this file with your name, and 
@@ -42,7 +42,7 @@
 #' 
 #' a. Make a folder for this class somewhere on your own computer. Preferably 
 #' not on your desktop. Mine is here: 
-#' `~Users/mollyofferwestort/Documents/Git/SOSC13200-W22`. 
+#' `~Users/mollyofferwestort/Documents/Git/SOSC13200-W23`. 
 #'
 #' b. Inside that folder, make one folder called `assignments`, and one folder 
 #' called `data`. 
