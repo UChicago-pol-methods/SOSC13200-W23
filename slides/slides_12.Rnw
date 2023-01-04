@@ -1,0 +1,678 @@
+\documentclass[xcolor={dvipsnames},handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+\setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 1: Course introduction, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Is social science \textit{science}?}
+
+\begin{itemize}
+\item In discussing methods for social science research, we should think about what social science is, and what its goals are. \pause
+\item What is science?\pause
+\item What is social science?\pause
+\item Is social science \textit{science}? \pause Why?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Definition of scientific research [KKV]}
+
+\begin{enumerate}
+\item The goal is inference. \pause
+\item The procedures are public. \pause
+\item The conclusions are uncertain. \pause
+\item \textbf{The content is the method.}
+\end{enumerate}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Definition of social science [KKV]}
+
+``Social science constitutes an attempt to make sense of social situations that we perceive as more or less complex.''
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item What does complex mean here?
+\item My proposal/interpretation: something is science if it can be studied scientifically. 
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Philosophy of science}
+
+\begin{itemize}
+\item These terms do not have definitions that are universally agreed on.\pause
+\item \dots and there is a whole field on the philosophy of science.
+\visible<3>{
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=.8\textwidth]{../assets/philosophy-of-science.png} 
+   % \caption{example caption}
+   % \label{fig:example}
+\end{figure}}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Approach}
+
+\begin{itemize}
+\item We will focus on study that is \text{empirical}, where scientific knowledge is built based on observed, measured phenomena. \pause
+\item There are other approaches. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{The content is the method.}
+
+\begin{itemize}
+\item Claim: Research is science if it uses a scientific method. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Path of research development}
+
+A common linear paradigm for a research project:\\
+\vspace{5pt} 
+\hspace{5pt}
+\begin{tikzpicture}[>=latex',node distance = 2.25cm]
+\node (n0) {question};
+\node [right of = n0] (n1) {design};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n0) -- (n1);
+\node [right of = n1] (n2) {collection};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n1) -- (n2);
+\node [right of = n2] (n3) {analysis};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2) -- (n3);
+\node [right of = n3] (n4) {answer};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n3) -- (n4);
+\end{tikzpicture}
+
+\pause
+\vspace{10pt}
+ \cite{tukey1980we} framing:\\
+\hspace{5pt}
+\vspace{-10pt}
+\begin{tikzpicture}[>=latex',node distance = 2.25cm]
+\node (n0) {idea};
+\node [right of = n0] (n1) { $\overset{ \text{\huge$\curvearrowright$}}{\underset{\textrm{\raisebox{\depth}{\scalebox{1}[-1]{\huge$\curvearrowleft$}} } }{\text{ \stackanchor{question}{design} }}}$ };
+\node [right of = n0] (x1) {\ \ \ \ \ \ \ \ };
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n0) -- (n1);
+\node [right of = n1] (n2) {collection};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1) -- (n2);
+\node [right of = n2] (n3) {analysis};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2) -- (n3);
+\node [right of = n3] (n4) {answer};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n3) -- (n4);
+\end{tikzpicture}
+
+\pause
+\vspace{10pt}
+Maybe more like:\\
+\vspace{-15pt}
+\hspace{5pt}
+\begin{tikzpicture}[>=latex',node distance = 2.25cm] %\hspace{-14pt}
+\node (n0) {idea};
+\node [right of = n0] (n1) { $\overset{ \text{\huge$\curvearrowright$}}{\underset{\textrm{\raisebox{\depth}{\scalebox{1}[-1]{\huge$\curvearrowleft$}} } }{\text{ \stackanchor{question }{design} }}}$ };
+\node [right of = n0] (x1) {\ \ \ \ \ \ \ \ };
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n0) -- (n1);
+\node [right of = n1] (n2) {\stackanchor{collection/ }{analysis}};
+\node [right of = n1] (x2) {\ \ \ \ \ \ \ \ \  };
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (n2) to [bend right=60] (n1.north);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x1) -- (n2);
+\node [right of = n2] (n3) {answer};
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}] (x2) -- (n3);
+\draw [-{Classical TikZ Rightarrow[length = 1.5mm]}, dashed, color = white] (n3.east) to [bend left=150] (x1.south west);
+\end{tikzpicture}
+
+% \pause
+% \textbf{Iteration and tweaking} is already built into how we do our work; the idea is that we can do so in systematic and principled ways. 
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize
+\begin{itemize}
+\item We already combine exploratory and confirmatory analysis systematically in the social sciences, albeit informally. When a researcher runs a pilot on Amazon mechanical turk testing some different treatments, then implements only the most successful treatment in the main study, this is integrating exploratory and confirmatory analysis. 
+\item Researchers interested in a given theoretical questions might test many different versions of treatment consistent with theory. When one of those versions of treatment is found to have an effect, that study gets replicated and iterated on, 
+%\item When a study gets published that might cause us to update our theories, it will often get replicated and iterated on, 
+the intervention tweaked and further explored. 
+\item we learn and iterate, develop theories based on what we see, and come up with new ways to test these theories
+%\item In the social sciences, there is no ground truth to validate against, and so we will always be doing this. 
+\item This is already built into how we do our work, the idea is that we can incorporate this into our research designs and analysis to do so in systematic and principled ways. 
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Proposing theories [KKV]}
+
+\begin{itemize}
+\item Propose theories that are \textit{falsifiable}. \pause
+\item If you want to be able to test this theory, it should have \textit{observable implications}. (The more the better.) \pause
+\item Clarity and precision in your theory is helpful. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{How does this inform how we think about data?}
+
+\pause
+\begin{itemize}
+\item Data is not something that is handed down to us in its complete and final form--we select and shape our data. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Principles of data collection [KKV]}
+
+\begin{enumerate}
+\item Record and report data generation process.\pause
+\item Collect data on as many observable implications as possible. \pause
+\item Maximize the validity of measurements. \pause
+\item Ensure that data-collection methods are reliable.\pause
+\item Data and analyses should be as replicable as possible. 
+\end{enumerate}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item What does it mean to maximize validity of measurements?
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Observable implications}
+
+\begin{itemize}
+\item What are these?\pause
+\item How do observable implications relate to causal inference?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Inference}
+
+\begin{itemize}
+\item What is descriptive inference?\pause
+\item What is causal inference?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Elements of (descriptive/causal) inference [Holland]}
+
+\begin{itemize}
+\item Define a population of interest. $U$\pause
+\item Determine a variable that is defined over this population, for which there is variation. $A$\pause
+\item Define response variable ``of interest.'' $Y$ \pause
+\end{itemize}
+
+We can consider how $A$ and $Y$ vary together. Without further assumptions, this is just correlation. 
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{center}
+What does it mean for something to cause something else?
+\end{center}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What does it mean for something to cause something else? [Rubin]}
+
+\begin{itemize}
+\item Possibility for multiple values of treatment--\textit{for each individual}. Treatment \textit{could have been different}. $S(u) = t$ OR $S(u) = c$\pause
+\item Some temporal element: outcome variable is realized after ``exposure'' to treatment variable. $S(u)\rightarrow Y(u)$\pause
+\item Conceptual possibility for multiple different versions of response variable--\textit{for each individual}. $Y_t(u)$ may not equal $Y_c(u)$\pause
+\end{itemize}
+Consider the individual \textit{causal effect}
+\[
+Y_t(u)-Y_c(u).
+\]
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{No causation without manipulation [Holland]}
+
+\begin{itemize}
+\item Causes are only things that could (hypothetically) be treatments in experiments. \pause
+\item NOT attributes--e.g., race and biological sex can't plausibly be manipulated, because there is no meaningful \textit{counterfactual}. \pause
+\begin{itemize}
+\item What we can manipulate: others' \textit{perception} of race/sex \citep{bertrand2004emily} \pause
+\item To the extent that sex/gender are social constructs, can we consider counterfactual socialization?
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Fundamental problem of causal inference}
+
+\begin{itemize}
+\item We only see the response variable under one version of treatment.\pause
+\item Why does this matter?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Resolution (?) of the fundamental problem of causal inference}
+
+\begin{itemize}
+\item Causal inference is not impossible. \pause
+\item But making causal inferences without making assumptions IS impossible. \pause
+\item So we need to depend on some assumptions. \pause
+\item The crux: how plausible are these assumptions?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Some special cases of causal inference}
+
+\begin{itemize}
+\item Temporal stability \pause
+\item Causal transience \pause
+\item Unit homogeneity \pause
+\item Constant causal effect \pause
+\item Independence \pause
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Temporal stability and causal transience}
+
+\begin{itemize}
+\item The value of response will not change based on \textit{when} you apply treatment to an observation. \pause
+\item The value of response will not change if you had at some point previously applied a different treatment to an observation. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Unit homogeneity}
+
+\begin{itemize}
+\item The value of response under a given treatment is the same for two observations; and the value of response for a different treatment is also the same. \pause
+\item You can observe response on the comparable units under one of each version of treatment. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Constant causal effect}
+
+\begin{itemize}
+\item The difference between the value of the response variable under one version of treatment as compared to another version of treatment is the same for \textit{every} observation. \pause
+\item How does this relate to the unit homogeneity assumption? \pause
+\item Does this allow us to back out the value of the causal effect, without other assumptions?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Independence}
+
+\begin{itemize}
+\item There are a ``large'' number of observations. \pause
+\item On average, the units that are assigned one version of treatment look like the units that receive another version of treatment. \pause
+\item (What does $\textrm{E}[Y_s |S = t]$ mean?)
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{The special role of experiments}
+
+\begin{itemize}
+\item In experiments, treatment is randomly assigned by the researcher. \pause
+\item So we know independence holds by design.  \pause
+\item We can compare groups and get the \textit{average} causal effect. \pause
+\item (When can we also get the \textit{individual} causal effect?) 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Group discussion}
+
+\begin{itemize}
+\item Is social science \textit{science}? Justify your answer. 
+\item What does it mean for something to cause something else? Come up with your own definition. 
+\item Holland emphasizes focusing on the effects of causes, rather than the causes of effects. Why do you think this is? Do you think there are cases when we should focus on the latter? If so, when?
+\item Give an example when you think each of the below causal assumptions would hold. 
+\begin{itemize}
+\item Temporal stability 
+\item Causal transience 
+\item Unit homogeneity 
+\item Constant causal effect 
+\item Independence 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike}
+    \bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+\backupend
+\end{document}
+%
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
