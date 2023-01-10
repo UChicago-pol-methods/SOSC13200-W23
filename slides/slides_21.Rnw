@@ -1,0 +1,214 @@
+\documentclass[xcolor={dvipsnames}]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 2: Summarizing data numerically and visually, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Reading papers}
+
+What to get out of reading a research paper:
+\begin{itemize}
+\item What is the main question of the paper?\pause
+\item What method do the authors use to address the question? \pause
+For empirical papers:\pause
+\begin{itemize}
+\item Data (Where does it come from/how is it generated? What is the sample population? What is being measured?)\pause
+\item Research design/strategy\pause
+\item Statistical tools\pause
+\end{itemize}
+\item What is the answer that the authors get to the main question?
+\end{itemize}
+
+\pause
+How would you answer these questions with the \cite{card1993minimum} paper?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{(Reviewing) Group discussion}
+
+\begin{itemize}
+\item Is social science \textit{science}? Justify your answer. 
+\item What does it mean for something to cause something else? Come up with your own definition. 
+\item Holland emphasizes focusing on the effects of causes, rather than the causes of effects. Why do you think this is? Do you think there are cases when we should focus on the latter? If so, when?
+\item Give an example when you think each of the below causal assumptions would hold. 
+\begin{itemize}
+\item Temporal stability 
+\item Causal transience 
+\item Unit homogeneity 
+\item Constant causal effect 
+\item Independence 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+Suggested responses from previous class
+\begin{itemize}
+\item Temporal stability/ causal transience: heating water at different times (let it return to same temperature); medical treatment; promotion (no)
+\item Unit homogeneity:  control for age/race/gender, most units will be the same; twins studies
+\item Constant causal effect: differing caloric diets?
+\item Independence: random assignment; sample people from same geographic location, within similar socioeconomic strata;
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Temporal stability and causal transience}
+
+\begin{itemize}
+\item The value of response will not change based on \textit{when} you apply treatment to an observation. \pause
+\item The value of response will not change if you had at some point previously applied a different treatment to an observation. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Unit homogeneity}
+
+\begin{itemize}
+\item The value of response under a given treatment is the same for two observations; and the value of response for a different treatment is also the same. \pause
+\item You can observe response on the comparable units under one of each version of treatment. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Constant causal effect}
+
+\begin{itemize}
+\item The difference between the value of the response variable under one version of treatment as compared to another version of treatment is the same for \textit{every} observation. \pause
+\item How does this relate to the unit homogeneity assumption? \pause
+\item Does this allow us to back out the value of the causal effect, without other assumptions?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Independence}
+
+\begin{itemize}
+\item There are a ``large'' number of observations. \pause
+\item On average, the units that are assigned one version of treatment look like the units that receive another version of treatment. \pause
+\item (What does $\textrm{E}[Y_s |S = t]$ mean?)
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike}
+    \bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+\backupend
+\end{document}
+%
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
