@@ -51,7 +51,7 @@ str(dat[1,])
 #' What happened?
 
 #' Index elements within a vector by index number.
-dat$id[1]
+dat$id[410]
 
 dat$id[11:20]
 
@@ -78,6 +78,9 @@ id2[which(id2>400)]
 
 which(id2>400 & id2 < 410)
 id2[which(id2>400 & id2 < 410)]
+id2[id2>400 & id2 < 410]
+
+# through here class 1
 
 #' Using table(), sum(), mean(), and other summary functions
 
