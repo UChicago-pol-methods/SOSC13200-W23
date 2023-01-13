@@ -1,4 +1,4 @@
-\documentclass[xcolor={dvipsnames}]{beamer}
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
 
 \usepackage{../assets/pres-template_MOW}
 
