@@ -11,3 +11,4 @@ assignments/pset-spinning-template
 *.vrb
 slides/figs*
 data/student-datasets
+*knitr.Rnw

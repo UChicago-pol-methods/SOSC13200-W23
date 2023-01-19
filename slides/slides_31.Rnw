@@ -1,0 +1,940 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 3: A brief introduction to probability, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<echo=FALSE, results=hide>>=
+set.seed(60637)
+@
+\nocite{aronow2019foundations,wasserman2004all,hernan2010causal}
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Housekeeping}
+
+\begin{itemize}
+\item Homework assignments
+  \begin{itemize}
+    \item Feedback is very helpful (thank you!)
+    \item If you spend $>30$ minutes without making progress, go to Stack Overflow or solutions.
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{What do we do with data}
+
+Now that we've gotten started on working with data \dots what do we want to get from that data?
+
+\pause
+\begin{itemize}
+\item Describe what's going on in the data \pause
+\item We can do a pretty good job of this with the data visualization tools we have, along with summary statistics for numerical descriptions
+\end{itemize}
+\pause
+
+This is already a really useful start, but beyond just describing the data we see in front of us, we may have other goals. We may want to:\pause
+
+\begin{itemize}
+\item Make generalizations to a larger population \pause
+\item Make informed guesses about how things would have turned out differently, if something different had happened \pause
+\end{itemize}
+These latter two are called \textit{inference}, and we'll need some additional tools and assumptions to make headway on them
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Probability}
+
+Why do we use probability theory? \pause
+
+\begin{itemize}
+\item Probability theory allows us to talk about \textit{random} events in structured way. \pause
+\begin{itemize}
+\item Often, we see only part of the picture we'd like to talk about. We only see some of the data, or we can only see one version of events. \pause
+\item Probability theory gives us a way to describe the process that results in the data that we observe. \pause
+\item It also allows us to \textit{formalize our uncertainty} when making inference.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Randomness}
+
+What does it mean to describe real world events as ``random''? \pause
+
+\begin{itemize}
+\item Probability theory is an abstract construct, but it is useful for empirical research to create a model of the world in which events are probabilistic. \pause
+\begin{itemize}
+\item If we are conducting measurement on some population but can only observe a sample, we assume that there is some randomness to who we observe and who we don't observe.\pause
+\end{itemize}
+\item If we are describing events with counterfactuals, such as turning out to vote or testing positive for COVID, it can be useful to describe those events as probabilistic.\pause
+\item These are \textit{models} of how the world works, and they help us make sense of the fundamentally squishy nature of social science research. With limited information about the world, we operate with uncertainty. Assigning probabilities conditional on the information we \textit{do} have helps us formalize that uncertainty.  \pause Even if we don't necessarily believe that human behavior is ``random.''
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Flipping a coin twice}
+
+Suppose we are flipping a coin twice, and the coin is fair. This is a random process, and we will describe the probability space associated with this process.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[label = terms]{Useful terms in probability}
+
+
+\pause
+\begin{itemize}
+  \item $\Omega$ : Sample space. Describes all possible outcomes in our setting.\pause
+  \begin{itemize}
+   \item $\omega$ : Generic notation for the realized outcomes in the sample space. \pause
+   \item Here, $\Omega = \{HH, HT, TH, TT \}$. \pause
+  \end{itemize}
+\item Event: a subset of $\Omega$. \pause
+\begin{itemize}
+ \item We will often use terms like $A$ or $B$ to define events. \pause
+ \item Here, the event that we get a head on first flip is $A = \{HT, HH\}$. \pause
+\end{itemize}
+\item $S$ : Event space. Describes all subsets of events, including null set. \hyperlink{event_space}{\beamerbutton{Full event space}}\pause
+\begin{itemize}
+ \item We use this in addition to the sample space, so we can describe all types of events that we can define the probability for. \pause
+\end{itemize}
+\item $\textrm{P}$ : Probability measure. An operator that assigns probability to all events in the event space. \pause
+\begin{itemize}
+ \item Here, the event that we get a head on the first flip, $\textrm{P}[A] = 1/2$.
+ \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item In probability, we often use uppercase terms to denote the random process, and lowercase terms to denote specific outcomes of that random process.
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{An aside on mathematical notation}\small
+
+Mathematical notation is a tool that gives us a common language to express concepts with precision. There are different conventions in different communities, and no approach is ``right'' or ``wrong''--it's just a question of whether your notation is appropriately communicating to your audience what you want it to. \\~\ \pause 
+
+To use mathematical notation in R Markdown, write LaTeX typesetting commands inside of dollar signs. \\~\ \pause 
+
+For example,
+
+\begin{verbatim}
+$Y = \beta_0 + \beta_1 X$
+\end{verbatim}\\~\
+
+\pause 
+
+is rendered as \\~\
+
+$Y = \beta_0 + \beta_1 X$.\\~\ \pause
+
+
+We have just used probability notation as a way to fully describe any random generative process. 
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Sampling}
+\scriptsize
+
+We can simulate our double coin flip process in R, using the \texttt{sample()} function. There are four possible outcomes, and all are equally likely.
+
+<<>>=
+Omega <- c('HH', 'HT', 'TH', 'TT')
+probs <- c(0.25, 0.25, 0.25, 0.25)
+
+sample(x = Omega,
+       size = 1,
+       prob = probs)
+@
+
+
+\pause
+We can run this simulation many times, and our results should \textit{approximately} follow the probabilities we assigned.
+
+<<>>=
+n <- 1000
+result_n <- sample(x = Omega,
+       size = n,
+       prob = probs,
+       replace = TRUE)
+
+table(result_n)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Independent events}
+
+Two events are \textit{independent} if
+$$
+\textrm{P}[AB] = \textrm{P}[A]\textrm{P}[B]
+$$\\~\
+\pause
+
+\textit{Notational aside: The event $AB$ is that both $A$ and $B$ happen. There are other ways to write this, including $A \cap B$.}
+
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}
+
+Returning to our example of flipping two fair coins. Let's say:
+
+\begin{itemize}
+\item Event $A$: we get a head on the first coin flip; $A = \{HT, HH\}$.
+\item Event $B$: we get a head on the second coin flip; $B = \{TH, HH\}$.
+\item We can see the event $AB$ as the overlap in their respective sets, $AB = \{HH\}$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+\scriptsize
+
+The coin flips are unrelated, so the events should be independent. We can check this mathematically.
+
+\pause
+
+First, we know that all of the outcomes $\Omega = \{HH, HT, TH, TT \}$ are equally likely.
+
+\begin{align*}
+\textrm{P}[A] &= \textrm{P}[\{HT\}] + \textrm{P}[\{HH\}] = 0.25 + 0.25 = 0.5\\\
+\textrm{P}[B] &= \textrm{P}[\{TH\}] + \textrm{P}[\{HH\}] = 0.25 + 0.25 = 0.5
+\end{align*}
+
+
+\pause
+Then, we can calculate the product of the probabilities, and the probability of the joint event.
+
+\begin{align*}
+\textrm{P}[A]\textrm{P}[B] &= 0.5 \times 0.5 = 0.25\\\
+\textrm{P}[AB] &= \textrm{P}[\{HH\}] = 0.25\
+\end{align*}
+
+
+\pause
+We see that they are the same, so we have independence.
+
+$$
+\textrm{P}[A]\textrm{P}[B] = \textrm{P}[AB]
+$$
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+We can also check if observed proportions in our simulations show the same thing\pause
+
+<<>>=
+Omega <- c('HH', 'HT', 'TH', 'TT');  probs <- c(0.25, 0.25, 0.25, 0.25)
+result_n <- sample(x = Omega,
+                   size = n,
+                   prob = probs,
+                   replace = TRUE)
+
+(observed_props <- prop.table(table(result_n)))
+@
+
+\pause
+<<>>=
+(PA <- mean(result_n == 'HT' | result_n == 'HH'))
+@
+
+\pause
+<<>>=
+(PB <- mean(result_n == 'TH' | result_n == 'HH'))
+@
+
+\pause
+<<>>=
+(PAB <- mean(result_n == 'HH'))
+PA*PB
+@
+
+The proportions look pretty close.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+{What about for a case where $A$ and $B$ are not independent?}
+
+\small 
+
+\pause
+\begin{itemize}
+\item $A$ is still the event we get a head on the first coin flip; $A = \{HT, HH\}$.
+\item $B$ is now the event that we get a head on both coin flips; $B = \{HH\}$.
+\item $AB$ is the intersection of these two sets, which is just $AB = \{HH\}$.
+\end{itemize} 
+
+
+\ \ ~\
+
+\scriptsize
+
+\pause
+<<>>=
+(observed_props <- prop.table(table(result_n)))
+@
+
+\pause
+<<>>=
+(PA <- mean(result_n == 'HT' | result_n == 'HH'))
+@
+
+\pause
+<<>>=
+(PB <- mean(result_n == 'HH'))
+@
+
+\pause
+<<>>=
+(PAB <- mean(result_n == 'HH'))
+PA*PB
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Conditional probability}
+
+
+If $\textrm{P}[B]>0$, the \textit{conditional probability} of an event $A$ occurring, given event $B$ has occurred is:
+
+$$
+\textrm{P}[A|B] = \frac{\textrm{P}[AB]}{\textrm{P}[B]}
+$$
+\pause This can also be read as, out of all of the times event $B$ occurs, how many times does event $A$ also occur?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+For our coin flip example, we'll stick with:
+\begin{itemize}
+\item $A$ is  the event that we get a head on the first coin flip; $A = \{HT, HH\}$.
+\item $B$ is the event that we get a head on the both coin flips; $B = \{HH\}$.
+\item $A  B$ is $\{HH\}$
+\end{itemize}
+
+\pause
+\begin{align*}
+\textrm{P}[A|B]& = \frac{\textrm{P}[AB]}{\textrm{P}[B]}\\\
+& = \frac{\textrm{P}[\{ HH \}]}{\textrm{P}[\{ HH \}]}\\\
+& = 1
+\end{align*}
+
+\pause
+What is $\textrm{P}[B|A]$?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bayes Rule}
+
+A useful theorem to return to is \textit{Bayes Rule}
+
+$$
+\textrm{P}[A|B] = \frac{\textrm{P}[B|A]\textrm{P}[A]}{\textrm{P}[B]}
+$$
+
+\pause Why is Bayes rule so useful?
+\pause It basically tells us how we update probability based on observed data.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bayes Rule}
+
+
+Example: Suppose everyone in the University of Chicago community is given a new rapid test for COVID.
+
+\begin{itemize}
+\item We are concerned with \textit{false negatives}, when we get a negative test for a person who actually \textit{is} infected.
+\item And \textit{false positives}, when we get a positive test for a person who \textit{is not} infected.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bayes Rule}
+
+
+Example: Suppose everyone in the University of Chicago community is given a new rapid test for COVID.\\~\
+
+A student gets a positive test back. What is the probability that they have COVID?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bayes Rule}
+
+
+\begin{itemize}
+\item Event $A$: person has COVID
+\item Event $B$:  a positive test
+\end{itemize}
+
+\pause
+
+Should we think these events are independent?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Bayes Rule}
+
+
+\begin{itemize}
+\item Event $A$: person has COVID
+\item Event $B$:  a positive test
+\end{itemize}
+
+\pause
+
+
+Doctors know that the probability of having COVID is 3\% in this population : $\textrm{P}[A]$
+<<>>=
+PA <- 0.03
+@
+\pause
+
+The overall rate of positive tests is 5\% : $\textrm{P}[B]$
+<<>>=
+PB <- 0.05
+@
+
+\pause
+If you have COVID, your test will turn up positive 95\% of the time : $\textrm{P}[B|A]$
+<<>>=
+PB_if_A <- 0.95
+@
+
+
+\pause
+\begin{align*}
+\textrm{P}[A|B] & = \frac{\textrm{P}[B|A]\textrm{P}[A]}{\textrm{P}[B]}
+\end{align*}
+
+
+\pause
+<<>>=
+( PB_if_A * PA )/PB
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Prosecutor's fallacy}
+
+$$
+\textrm{P}[A|B]\overset{?}= \textrm{P}[B|A]
+$$
+
+\pause
+As a general rule, we cannot assume the conditional probability of $A$ given $B$ is the same as the probability of $B$ given $A$
+\pause
+
+\begin{itemize}
+ \item In a court case, the probability that a person is guilty given that we see a DNA match is NOT the same as the probability of a DNA match given  that they are guilty.
+\pause
+\item This fallacy often occurs when we observe evidence that we are very unlikely to see among innocent people, and very likely to observe among guilty people
+\pause
+\item But the overall number of innocent people in the population is very large, so the number of false positives is much higher than the number of true positives
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Why thinking about conditional probability is so important in social science research}
+
+``20\% of people hospitalized with COVID-19 are vaccinated''
+
+\pause
+Does this tell us that vaccines aren't very effective?
+
+\pause
+Some things we should think about:
+\begin{itemize}
+\item What percentage of the population in areas served by hospitals are vaccinated?
+\item Are people who are vaccinated at higher risk for breakthrough cases? Or more likely to be hospitalized? Are they older, or have pre-existing conditions?
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Why thinking about conditional probability is so important in social science research}
+
+
+
+What data do you need to answer the question: ``Do white officers shoot minority citizens at a higher rate than non-white officers?''
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Remember this article?
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics{../assets/npr.png} 
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Remember this article?
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics{../assets/guardian.png} 
+\end{figure}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics{../assets/johnson-et-al-PNAS.png} 
+\end{figure}
+\small
+
+\begin{itemize}
+\item In a 2020 PNAS paper, Johnson and co-authors evaluated the relationship between race of victims shot by police, and the characteristics of the police shooters
+\pause
+\item The authors claim, ``White officers are not more likely to shoot minority civilians than non-White officers''--and the paper has been used in congressional testimony to support the claim that diversity in police forces would not be beneficial in reducing bias in officer-involved shootings
+\pause
+\item Their database only has data on fatal shootings--not on cases where people were NOT shot.
+\item Their results report ``whether a person fatally shot was more likely to be Black (or Hispanic) than White'' conditional on the race of the officer involved
+\pause
+\item Does this address original claim?
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+``White officers are not more likely to shoot minority civilians than non-White officers''
+
+\begin{align*}
+\textrm{P}[\text{shot} | \text{White officer, minority civilian}] -\\
+\textrm{P}[\text{shot} | \text{Minority officer, minority civilian}]
+\end{align*}
+
+What data are we missing to address this question?
+
+\pause
+
+\begin{itemize}
+\item Dean Knox \& Jonathan Mummolo wrote a letter critiquing the original article, based on the authors' failure to appropriately apply Bayes Rule;\pause
+\item The article was eventually retracted \pause
+\item (It's a bit more complicated than that, but know your conditional probability when thinking about difficult subjects!)
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{apalike}
+    \bibliography{../assets/bib}
+    
+\end{frame}
+%-------------------------------------------------------------------------------%
+\begin{frame}[label = event_space]{Flipping two coins event space:}
+
+
+\begin{align*}
+S & = \{\emptyset, \\
+&\{HH\}, \{HT\},\{TH\}, \{TT\},\\
+&\{HH, HT\}, \{HH, TH\},\{HH, TT\}, \{HT, TH\}, \{HT, TT\}, \{TH, TT\}\\
+& \{HH, HT, TH\}, \{HH, HT, TT\}, \{HH, TH, TT\}, \{HT, TH, TT\},\\
+&\{HH, HT, TH, TT\} \}
+\end{align*}
+
+\hyperlink{terms}{\beamerbutton{Back to terms}}
+
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+
+\backupend
+\end{document}
+%
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+<<echo = FALSE>>=
+f <- 'slides_31.Rnw'
+knitr::purl(f)
+knitr::Sweave2knitr(f)
+@
