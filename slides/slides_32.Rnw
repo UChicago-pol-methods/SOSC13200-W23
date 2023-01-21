@@ -1,0 +1,2198 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+\usetikzlibrary{calc}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+\setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 3: A brief introduction to probability, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs32/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<>>=
+library(ggplot2)
+library(gridExtra)
+set.seed(60637)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Recall our terms from probability.}
+
+Our random process: flipping a fair coin twice.
+
+\pause
+\begin{itemize}
+\item $\Omega$ : Sample space. Describes all possible outcomes in our setting.
+\begin{itemize}
+\item $\omega$ : Generic notation for the realized outcomes in the sample space. 
+\item Here, $\Omega = \{HH, HT, TH, TT \}$. 
+\end{itemize}
+\item Event: a subset of $\Omega$. 
+\begin{itemize}
+\item We will often use terms like $A$ or $B$ to define events. 
+\item Here, the event that we get a head on first flip is $A = \{HT, HH\}$. 
+\end{itemize}
+\item $S$ : Event space. Describes all subsets of events, including null set. \hyperlink{event_space}{\beamerbutton{Full event space}}
+\begin{itemize}
+\item We use this in addition to the sample space, so we can describe all types of events that we can define the probability for. 
+\end{itemize}
+\item $\textrm{P}$ : Probability measure. An operator that assigns probability to all events in the event space. 
+\begin{itemize}
+\item Here, the event that we get a head on the first flip, $\textrm{P}[A] = 1/2$.
+\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Random variables}
+
+\begin{itemize}
+\item A random variable is a mapping $X$ from our sample space $\Omega$, to the Real numbers.
+$$X : \Omega \to {\rm I\!R}$$\pause
+\item Random variables are ways to quantify random events described by our sample space. \pause
+\item We'll mostly work with random variables going forward, but it's important to remember that the random variable is built on the foundations of the sample space -- and often, \textbf{you'll be the one deciding how that quantification happens}.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+For example, with our two coin flips, let $X(\omega)$ be the number of heads in the sequence $\omega$.
+\pause
+
+Then the random variable, and its probability distribution, can be described as:
+\begin{table}[]
+\begin{tabular}{ccc}
+$\omega$ & $\textrm{P}[\{\omega\}]$ & $X(\omega)$ \\ \hline
+TT & 1/4 & 0 \\
+TH & 1/4 & 1 \\
+HT & 1/4 & 1 \\
+HH & 1/4 & 2
+\end{tabular}
+\end{table}
+
+and,
+
+\begin{table}[]
+\begin{tabular}{cc}
+$x$ & $\textrm{P}[X = x]$ \\ \hline
+0 & 1/4 \\
+1 & 1/2 \\
+2 & 1/4
+\end{tabular}
+\end{table}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+% -------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\scriptsize
+
+We can simulate this in `R` as well.
+
+\pause
+
+<<>>=
+X <- c(0, 1, 2)
+probs <- c(0.25, 0.5, 0.25)
+
+sample(x = X,
+       size = 1,
+       prob = probs)
+
+@
+
+\pause
+
+<<>>=
+n <- 1000
+result_n <- sample(x = X,
+                   size = n,
+                   prob = probs,
+                   replace = TRUE)
+
+table(result_n)
+@
+
+\pause
+
+
+<<>>=
+
+prop.table(table(result_n))
+
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\scriptsize
+We can plot a histogram to look at the distribution of results.
+\tiny
+
+\begin{figure}
+\centering
+<<fig = TRUE, width = 5, height = 3.5>>=
+ggplot(data.frame(result_n), aes(x = result_n)) +
+  geom_histogram(bins = 3, color = 'white', fill = 'lightgreen') +
+  theme_bw() + xlab('Number heads')
+
+@
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Probability Mass Function of a discrete random variable}
+
+
+\begin{itemize}
+\item A random variable is \textit{discrete} if it takes countably many values.\pause
+\item The probability mass function of a discrete RV $X$ tells us the probability we will see an outcome at some value $x$. \pause
+\end{itemize}
+
+$$
+f(x) = \textrm{P}[X = x]
+$$
+
+\pause
+
+For our coin flip example,
+
+
+$$
+f(x) = \begin{cases}
+1/4 & x = 0 \\
+1/2 & x = 1 \\
+1/4 & x = 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Illustrating the PMF of a discrete RV}
+\tiny
+\begin{figure}
+\centering
+<<fig = TRUE, width = 5, height=3.8, echo=FALSE>>=
+plotdata <- data.frame(
+  x = c(-1, 0, 1, 2),
+  xend = c(0, 1, 2, 3),
+  fx = c(0, 1/4, 1/2, 1/4),
+  Fx = c(0, 1/4, 3/4, 1) # cumsum(fx)
+)
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.5, 2.5),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0,0), xend = x, yend = fx)) +
+  ggtitle('PMF of X as number of heads in 2 fair coin flips') +
+  theme_bw()
+@
+\end{figure}
+\pause
+
+Note that the probabilities sum to 1. This is one of the foundational axioms of probability.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Cumulative Distribution Functions}
+
+The cumulative distribution function of $X$ tells us the probability we will see an outcome less than or equal to some value $x$.
+
+\pause
+
+$$
+F(x) = \textrm{P}[X \le x]
+$$
+
+\pause
+
+For our coin flip example,
+
+
+$$
+F(x) = \begin{cases}
+0 & x < 0 \\
+1/4 & 0 \le x < 1 \\
+3/4 & 1 \le x < 2 \\
+1 & x \ge 2
+\end{cases}
+$$
+
+\pause
+
+CDFs are really useful, because if we know the CDF, we can fully describe the distribution of \textit{any} random variable.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Illustrating the CDF of a RV}
+
+
+\begin{figure}
+\centering
+<<fig = TRUE, width = 5, height=3.8, echo=FALSE>>=
+ggplot(plotdata, aes(x = x, y = Fx)) +
+  geom_segment(aes(x = x, y = Fx, xend = xend, yend = Fx)) +
+  geom_point() +
+  geom_point(aes(x = xend, y = Fx), shape= 21, fill = 'white') +
+  coord_cartesian(xlim = c(-0.5, 2.5),
+                  ylim = c(0,1)) +
+  ggtitle('CDF of X as number of heads in 2 fair coin flips') + theme_bw()
+@
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Illustrating the CDF of a RV}
+
+\scriptsize
+And we can use \texttt{ggplot2} to see what the \textit{Empirical} CDF looks like
+\tiny
+\begin{figure}
+\centering
+<<fig = TRUE, width = 5, height=3.5>>=
+
+ggplot(data.frame(result_n), aes(x = result_n)) +
+  stat_ecdf() +
+  coord_cartesian(xlim = c(-0.5, 2.5)) +
+  ylab('Empirical Fx') +
+  ggtitle('ECDF of X as number of heads in 2 fair coin flips') + theme_bw()
+
+@
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Joint and conditional relationships}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bivariate relationships}
+
+
+We often care about how random variables vary with each other
+\begin{itemize}
+\item age and voter turnout
+\item sex and income
+\item education and earnings
+\end{itemize}
+
+\pause
+
+Just like with univariate random variables, we can describe these bivariate relationships by their distributions
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Joint PMF of discrete random variables}
+
+$$
+f(x,y) = \textrm{P}[X=x, Y=y]
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Returning to our example of flipping two fair coins
+\begin{itemize}
+\item Let $X$ be 1 if we get \textit{at least one heads}, and 0 otherwise
+\item Let $Y$ be 1 if we get \textit{two} heads in our two coin flips, and 0 otherwise
+\end{itemize}
+
+\pause
+
+Then the joint probability distribution can be described as:
+
+\begin{table}[]
+\begin{tabular}{llll}
+$\omega$ & $\textrm{P}[\{\omega\}]$ & $X(\omega)$ & $Y(\omega)$ \\
+TT & 1/4 & 0 & 0 \\
+TH & 1/4 & 1 & 0 \\
+HT & 1/4 & 1 & 0 \\
+HH & 1/4 & 1 & 1
+\end{tabular}
+\end{table}
+
+or, considering the joint PMF,
+
+
+$$
+f(x, y) = \begin{cases}
+1/4 & x = 0, y = 0 \\
+1/2 & x = 1, y = 0 \\
+1/4 & x = 1, y = 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\scriptsize
+
+<<>>=
+Omega <- c('HH', 'HT', 'TH', 'TT')
+probs <- c(0.25, 0.25, 0.25, 0.25)
+
+result_n <- sample(x = Omega,
+                   size = n,
+                   prob = probs,
+                   replace = TRUE)
+
+result_mat <- data.frame(omega = result_n,
+                         x = ifelse(result_n == 'TT', 0, 1),
+                         y = ifelse(result_n == 'HH', 1, 0))
+
+options <- list(theme(panel.grid.minor = element_blank()), 
+                scale_x_continuous(breaks = c(0, 1))) + # save some style options
+  theme_bw()
+
+p1 <- ggplot(result_mat) + 
+  geom_histogram(aes(x = x), bins = 3, position = 'identity', color = 'white') + 
+  options
+
+p2 <- ggplot(result_mat) + 
+  geom_histogram(aes(x = y), bins = 3, position = 'identity', color = 'white') + 
+  options
+
+@
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\tiny
+<<fig = TRUE, width = 6, height=3.5>>=
+grid.arrange(p1, p2, ncol = 2)
+@
+
+
+\small
+
+\pause
+
+Seeing $X$ and $Y$ plotted side by side doesn't really give us a full picture of their relationship.
+\pause
+
+These are the \textit{marginal} distributions of $X$ and $Y$, i.e., their distributions where we \textit{marginalize} or sum over the distribution of the other random variable.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Marginal distributions}
+
+
+$$
+f_X(x) = \textrm{P}[X = x]=\sum_y \textrm{P}[X=x, Y=y] = \sum_yf_{X, Y}(x,y)
+$$
+
+\pause
+
+\begin{table}[]
+\begin{tabular}{cccc}
+& $Y = 0$ & $Y = 1$ &  \\
+$X = 0$ & $1/4$ & $0$ &$\bm{1/4}$ \\
+$X = 1$ & $1/2$ & $1/4$ &$\bm{3/4}$ \\
+& $\bm{3/4}$ &$\bm{1/4}$ &
+\end{tabular}
+\end{table}
+
+\pause
+
+\textit{Notational aside: we can subscript $X$ in $f_X$ to denote that it is the mass function of $X$ specifically, as $X$ and $Y$ have different probability mass functions. But often we will just omit the subscript for convenience.}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{.5\textwidth}{!}{
+<<fig = TRUE, width = 6, height=6, echo=FALSE>>=
+hist_top <- p1
+empty <- ggplot() + geom_point(aes(1,1), colour="white") +
+  theme(axis.ticks=element_blank(),
+        panel.background=element_blank(),
+        axis.text.x=element_blank(), axis.text.y=element_blank(),
+        axis.title.x=element_blank(), axis.title.y=element_blank())
+
+count_mat <- aggregate(
+  list(count = result_mat$omega), 
+  list(x = result_mat$x, y = result_mat$y), length)
+
+scatter <- ggplot(result_mat, aes(x = x, y = y, color = omega)) +
+  geom_jitter(width = 0.25, height = 0.25, alpha = 0.5) +
+  scale_x_continuous(breaks = c(0, 1)) +
+  scale_y_continuous(breaks = c(0,1)) +
+  theme(panel.grid.minor = element_blank(), legend.position = 'none')
+
+hist_right <- p2 + coord_flip()
+
+grid.arrange(hist_top, empty, scatter, hist_right, ncol=2, nrow=2, widths=c(4, 2), heights=c(2, 4))
+
+@
+}
+\end{figure}
+
+Plotting $X$ and $Y$ jointly gives us a better understanding of their joint relationship.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Conditional distributions}
+
+We are also often interested in conditional relationships.
+
+$$
+f_{Y|X}(y|x) = \textrm{P}[Y = y | X = x] = \frac{\textrm{P}[X=x, Y=y]}{\textrm{P}[X=x]}  = \frac{f_{X,Y}(x,y)}{f_X(x)}
+$$
+
+
+\pause
+For example,
+
+
+$$
+f_{Y|X}(y|x) = \begin{cases}
+1 & x = 0, y = 0 \\
+2/3 & x = 1, y =0  \\
+1/3 & x = 1, y = 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+\pause
+
+Here, what is the probability of observing two heads, conditional on having observed at least one heads?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\Large
+\centering
+\textcolor{Maroon}{Summarizing single variable distributions}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Expectation}
+
+
+\pause
+
+$$
+\textrm{E}[X] = \sum_x x f(x)
+$$
+
+\pause
+
+\begin{itemize}
+\item Expectation is an \textit{operator} on a random variable; it maps the distribution of $X$ to a specific number. \pause
+\item Specifically, the expectation operator tells us about the mean, or average value of $X$ across its distribution.
+\end{itemize}
+
+\pause
+
+\textit{Notational aside: it is common to write the expectation of a distribution as $\mu$.}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Let's flip a single coin, and let $X$ be 1 if we get a head, and 0 otherwise.
+
+\pause
+
+
+$$
+f(x) = \begin{cases}
+1/2 & x = 0 \\
+1/2 & x = 1 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+\pause
+
+Mathematically,
+
+
+\begin{align*}
+\textrm{E}[X] & = \sum_x x f(x)\\
+& = 0 \times \frac{1}{2} + 1 \times \frac{1}{2}\\
+& = \frac{1}{2}
+\end{align*}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Visually,
+
+\begin{figure}
+\centering
+\resizebox{.75\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+plotdata <- data.frame(
+  x = c(0, 1),
+  fx = c(1/2, 1/2)
+)
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = 0.5, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=0.5, y=0.75, label="E[X]") +
+  ggtitle('PMF of X as number of heads in 1 fair coin flip')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Spread of a distribution}
+
+
+We often describe the spread of a distribution by its variance
+
+\begin{align*}
+\textrm{Var}[X] & = \textrm{E}[(X - \textrm{E}[X])^2]
+\end{align*}
+
+Or equivalently,
+
+\begin{align*}
+& = \textrm{E}[X^2]-\textrm{E}[X]^2
+\end{align*}
+
+\pause
+
+The standard deviation is the square root of the variance.
+
+\pause
+
+\textit{Notational aside: it is common to write the variance of a distribution as $\sigma^2$, or the standard deviation as $\sigma$.}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}
+% <!-\item For the variance in our example, we'll use the formula, -->
+% 
+% <!-\item \begin{align*} -->
+% <!-\item \textrm{Var}[X] & = \textrm{E}[X^2]-\textrm{E}[X]^2 \\ -->
+% <!-\item \end{align*} -->
+% <!-\item $\textrm{E}[X]^2$ is $\textrm{E}[X] \times \textrm{E}[X] = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$.  -->
+% 
+% <!-\item -\item -->
+% 
+% <!-\item We get $\textrm{E}[X^2]$ in a similar way to how we got the expectation: -->
+% <!-\item \begin{align*} -->
+% <!-\item \textrm{E}[X^2] & = \sum_x x^2 f(x)\\ -->
+% <!-\item & = 0^2 \times \frac{1}{2} + 1^2 \times \frac{1}{2}\\ -->
+% <!-\item & = \frac{1}{2} -->
+% <!-\item \end{align*} -->
+% 
+% <!-\item -\item -->
+% 
+% <!-\item Putting it together, -->
+% 
+% <!-\item \begin{align*} -->
+% <!-\item \textrm{Var}[X] & = \textrm{E}[X^2]-\textrm{E}[X]^2 \\ -->
+% <!-\item & = \frac{1}{2} \item \frac{1}{4}\\ -->
+% <!-\item & = \frac{1}{4} -->
+% <!-\item \end{align*} -->
+% 
+% <!-\item \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% 
+% }
+% 
+% 
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+The variance is the average squared distance from the mean. The standard deviation is the square root of this.
+
+
+\begin{figure}
+\centering
+\resizebox{.7\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = 0.5, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=0.5, y=0.75, label="E[X]", col = 'grey') +
+  geom_segment(aes(x = 0.5, xend = 0.0, y = 0.5, yend = 0.5), arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_segment(aes(x = 0.5, xend = 1, y = 0.5, yend = 0.5), arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  annotate(geom="text", x=0.75, y=0.58, label="Distance\nfrom mean") +
+  annotate(geom="text", x=0.25, y=0.45, label="-0.5", color = 'skyblue') +
+  annotate(geom="text", x=0.75, y=0.45, label="0.5", color = 'skyblue') +
+  geom_point(aes(x = 0.5, y = 0.5), color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 1 fair coin flip')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+The variance is the average squared distance from the mean. The standard deviation is the square root of this.
+
+\begin{figure}
+\centering
+\resizebox{.7\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = 0.5, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=0.5, y=0.75, label="E[X]", col = 'grey') +
+  geom_segment(aes(x = 0.5, xend = 0.25, y = 0.5, yend = 0.5), arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_segment(aes(x = 0.5, xend = 0.75, y = 0.5, yend = 0.5), arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  annotate(geom="text", x=0.75, y=0.58, label="Squared distance\nfrom mean") +
+  annotate(geom="text", x=0.25, y=0.45, label="0.25", color = 'skyblue') +
+  annotate(geom="text", x=0.75, y=0.45, label="0.25", color = 'skyblue') +
+  geom_point(aes(x = 0.5, y = 0.5), color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 1 fair coin flip')
+@
+}
+\end{figure}
+
+Variance = $0.25\times 0.5 + 0.25\times 0.5 = 0.25$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+The variance is the average squared distance from the mean. The standard deviation is the square root of this.
+
+\begin{figure}
+\centering
+\resizebox{.7\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = 0.5, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=0.5, y=0.75, label="E[X]", col = 'grey') +
+  geom_segment(aes(x = 0.5, xend = 0.0, y = 0.5, yend = 0.5), arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_segment(aes(x = 0.5, xend = 1, y = 0.5, yend = 0.5), arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  annotate(geom="text", x=0.75, y=0.6, label="Square root of average\nsquared distance\nfrom mean") +
+  annotate(geom="text", x=0.25, y=0.45, label="0.5", color = 'skyblue') +
+  annotate(geom="text", x=0.75, y=0.45, label="0.5", color = 'skyblue') +
+  geom_point(aes(x = 0.5, y = 0.5), color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 1 fair coin flip')
+@
+}
+\end{figure}
+
+SD = $\sqrt{0.25} = 0.5$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Let's take another example, where we flip a coin twice, and let $X$ be the number of heads. However, let's say our coin is \textit{not} fair, and the probability of getting a heads is 0.75.\\~\
+
+\pause
+
+The random variable's probability distribution is then:
+
+$$
+f(x) = \begin{cases}
+1/16 & x = 0 \\
+3/8 & x = 1 \\
+9/16 & x = 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+\begin{minipage}[t][-0.01\textheight][t]{\textwidth}
+\footnotesize
+Let's take a look at the mean.
+\end{minipage}
+
+\begin{minipage}[t][0.62\textheight][t]{\textwidth}
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+plotdata <- data.frame(
+  x = c(0, 1, 2),
+  xend = c(1, 2, 3),
+  fx = c(1/16, 3/8, 9/16),
+  Fx = cumsum(c(1/16, 3/8, 9/16))
+)
+
+# Expected value
+Ex <- sum(plotdata$x*plotdata$fx)
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = 1.5, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=1.5, y=0.75, label="E[X]") +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+\end{minipage}
+
+
+\begin{minipage}[t][0.4\textheight][t]{\textwidth}
+\footnotesize
+\begin{align*}
+\textrm{E}[X] & = \sum_x x f(x) \\
+& = 0 \times \frac{1}{16} + 1 \times \frac{3}{8} + 2 \times \frac{9}{16}\\
+& = \frac{24}{16} = 1.5
+\end{align*}
+\end{minipage}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\begin{minipage}[t][-0.01\textheight][t]{\textwidth}
+\footnotesize
+And the spread.
+\end{minipage}
+
+\begin{minipage}[t][0.68\textheight][t]{\textwidth}
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = Ex, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=Ex, y=0.75, label="E[X]", color = 'grey') +
+  geom_segment(aes(x = Ex, xend = x, y = fx, yend = fx),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  annotate(geom="text", x=1.8, y=0.63, label="Distance\nfrom mean") +
+  annotate(geom="text", x=(plotdata$x+Ex)/2, y=(plotdata$fx-0.05), label=(plotdata$x-Ex), color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+\end{minipage}
+
+\begin{minipage}[t][0.4\textheight][t]{\textwidth}
+\footnotesize
+Variance = average squared distance from the mean
+\begin{align*}
+\textrm{Var}[X] & = \textrm{E}[(X - \textrm{E}[X])^2]\\
+&\color{white}{ = 2.25 \times \frac{1}{16} + 0.25 \times \frac{3}{8} + 0.25 \times \frac{9}{16} = 0.375}
+\end{align*}
+\end{minipage}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\begin{minipage}[t][-0.01\textheight][t]{\textwidth}
+\footnotesize
+And the spread.
+\end{minipage}
+
+\begin{minipage}[t][0.68\textheight][t]{\textwidth}
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = Ex, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=Ex, y=0.75, label="E[X]", color = 'grey') +
+  geom_segment(aes(x = Ex, xend = Ex+sign(x-Ex)*(x-Ex)^2, y = fx, yend = fx),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  annotate(geom="text", x=1.8, y=0.63, label="Squared distance\nfrom mean") +
+  annotate(geom="text", x=(plotdata$x+Ex)/2, y=(plotdata$fx-0.05), label=(plotdata$x-Ex)^2, color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+\end{minipage}
+
+\begin{minipage}[t][0.4\textheight][t]{\textwidth}
+\footnotesize
+Variance = average squared distance from the mean
+\begin{align*}
+\textrm{Var}[X] & = \textrm{E}[(X -\textrm{E}[X])^2]\\
+&{ = 2.25 \times \frac{1}{16} + 0.25 \times \frac{3}{8} + 0.25 \times \frac{9}{16} = 0.375}
+\end{align*}
+\end{minipage}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\begin{minipage}[t][-0.01\textheight][t]{\textwidth}
+\footnotesize
+And the spread.
+\end{minipage}
+
+\begin{minipage}[t][0.68\textheight][t]{\textwidth}
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+sdx <- sqrt(sum((plotdata$x-Ex)^2 * plotdata$fx))
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = Ex, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=Ex, y=0.75, label="E[X]", color = 'grey') +
+  geom_segment(aes(x = Ex, xend = Ex-sdx, y = 0.5, yend = 0.5),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  geom_segment(aes(x = Ex, xend = Ex+sdx, y = 0.5, yend = 0.5),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  annotate(geom="text", x=1.8, y=0.63, label="Square root of average\nsquared distance\nfrom mean") +
+  annotate(geom="text", x=(Ex+c(-1.05,1.05)*round(sdx, 3)/2), y=0.45,
+           label=round(sdx, 3), color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+\end{minipage}
+
+\begin{minipage}[t][0.4\textheight][t]{\textwidth}
+\footnotesize
+
+
+SD = square root of variance
+$$
+= \sqrt{0.375} = 0.612
+$$
+\end{minipage}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Applications}
+
+
+\begin{itemize}
+\item Coin flips are a pretty trivial example of a random event $\rightarrow$ random variable.\pause
+\item But often, as researchers, our job is to map events that happen in the world to variables in our data sets.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Presidential Daily Briefing}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{../assets/pdb.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Presidential Daily Briefing}
+
+{\onslide<1->
+What goes into the data set?}
+
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\onslide<2->
+\scriptsize
+\begin{itemize}
+\item Unit of observation: "entries" in daily briefings
+\item Record date
+\item President
+\item Pages in briefing
+\item Number of maps
+\item How to code redactions?
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}  %%<--- here
+\onslide<1->
+\begin{center}
+\includegraphics[width = \textwidth]{../assets/pdb_7-AUG-65.jpg}
+\end{center}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Presidential Daily Briefing}
+
+{\onslide<1->
+What goes into the data set?}
+
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\onslide<2->
+\scriptsize
+The \textit{event} that happens is a certain amount of the briefing is redacted before it's made public.
+\vfill 
+
+How is this encoded in a variable?
+\end{column}
+\begin{column}{0.6\textwidth}  %%<--- here
+\onslide<1->
+\begin{center}
+\includegraphics[width = \textwidth]{../assets/pdb_7-AUG-65.jpg}
+\end{center}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Presidential Daily Briefing}
+
+\scriptsize
+
+<<echo = TRUE>>=
+file <- "https://raw.githubusercontent.com/UChicago-pol-methods/IntroQSS-F22/main/data/carsonPDB.csv"
+df_pdb <- read.csv(file, as.is = TRUE)
+
+head(df_pdb)
+@
+\pause
+<<echo = TRUE>>=
+sapply(df_pdb[,c('Total_Pgs', 'maps', 'Redaction_total')], 
+       function(x) c('mean' = mean(x, na.rm = TRUE),
+                     'var' = var(x, na.rm = TRUE)))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}\Large
+\centering
+\textcolor{Maroon}{Summarizing joint distributions}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Covariance}
+
+$$
+\textrm{Cov}[X,Y] = \textrm{E}[(X - \textrm{E}[X])(Y-\textrm{E[Y]})]
+$$
+
+\pause
+
+Covariance is how much $X$ and $Y$ vary together.
+
+\pause
+\begin{itemize}
+\item If covariance is positive, when the value of $X$ is large (relative to its mean), the value of $Y$ will also tend to be large (relative to its mean)
+\item If covariance is negative, when the value of $X$ is large (relative to its mean), the value of $Y$ will tend to be small (relative to its mean)
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Correlation}
+
+$$
+\rho[X, Y] = \frac{\textrm{Cov}[X,Y]}{\sigma[X] \sigma[Y]}
+$$
+
+Rescaled version of covariance
+\begin{itemize}
+\item positive when covariance is positive
+\item negative when covariance is negative
+\end{itemize}
+
+\pause
+
+$$
+-1 \le \rho[X, Y]  \le 1
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\small
+
+What relationship would you expect to see between number of pages in a Presidential Daily Brief and number of redactions?
+
+\pause
+
+% \begin{figure}
+% \centering
+% \resizebox{.55\textwidth}{!}{
+% <<height = 3.5, width=5, fig.align='center', message=FALSE>>=
+% ggplot(df_pdb, aes(x = Total_Pgs, y = Redaction_total) ) +
+%   geom_point() +
+%   geom_smooth(method = "lm", se = FALSE)
+% @
+% }
+% \end{figure}
+
+\pause
+
+Number of pages and number of redactions have a positive linear relationship. Covariance (and correlation) is positive.
+
+
+% <<>>=
+% cov(df_pdb$Total_Pgs, df_pdb$Redaction_total)
+% cor(df_pdb$Total_Pgs, df_pdb$Redaction_total)
+% @
+% 
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Following content if time, or in handout.}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Continuous random variables}
+
+\begin{itemize}
+\item So far, our coin flip example was for a \textit{discrete} random variable.
+\item A random variable is \textit{continuous} if it has a continuous density function
+\item Practically, we will treat RVs as discrete if they have countably many outcomes, and RVs as continuous if the number of values they can take on is only constrained by our measurement tool.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Uniform distribution}
+
+\begin{itemize}
+\item If you take a draw from the standard uniform distribution, you are equally likely to draw any number between zero and one.
+\item We can simulate this in R. R allows you to sample from a number of canonical distributions; to see which distributions are available, search `?Distributions`.
+\end{itemize}
+
+<<>>=
+runif(n = 1, min = 0, max = 1)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We can again sample from the distribution many times, and plot a histogram to look at the distribution of results.
+
+
+\begin{figure}
+\centering
+\resizebox{.8\textwidth}{!}{
+<<fig = TRUE, width = 6, height=4, echo=FALSE>>=
+result_n <- runif(n, min = 0, max = 1)
+
+ggplot(data.frame(result_n), aes(x = result_n)) +
+  geom_histogram(breaks = seq(0, 1, length.out = 15),
+                 position = 'identity', color = 'white')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Probability Density Function of continuous random variables}
+
+\begin{itemize}
+\item Discrete random variables have non-zero mass on specific points, but for continuous random variables, $\textrm{P}[X = x] = 0$. Instead of mass, we refer to \textit{density} for continuous variables.%\footnote{Measure theory give a unified approach to measuring discrete and continuous random variables, but for simplicity, we'll keep the dichotomy of mass vs. density for discrete/continuous here.}\pause
+\item The \textit{probability density function} $f(x)$ for a continuous random variable gives the slope of the CDF at any given point. This means that we can integrate the area under the PDF to get the relative probability of being between two points.
+\end{itemize}
+
+$$
+\textrm{P}[a < X < b] = \int_a^b f(x)dx
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Illustrating the CDF of a continuous RV}
+
+\scriptsize
+
+We start by showing the CDF of the standard uniform distribution, to illustrate how the PDF relates to the CDF. The CDF for the standard uniform distribution is:
+
+$$
+F(x) =
+\begin{cases}
+0 & x < 0\\
+x & 0 \le x \le 1 \\
+1 & x > 1
+\end{cases}
+$$
+
+Notice that the slope is 1 between 0 and 1.
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 6, height=4, echo=FALSE>>=
+
+
+plotdata <- data.frame(
+  x = c(-1, 0, 1, 2),
+  Fx = c(0, 0, 1, 1)
+)
+
+ggplot(plotdata, aes(x = x, y = Fx)) +
+  geom_line() +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  ggtitle('CDF of Standard Uniform Distribution')
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Illustrating the PDF of a continuous random variable}
+
+The PDF for the standard uniform distribution is:
+$$
+f(x) = \begin{cases}
+1 & 0 < x < 1\\
+0 & \text{otherwise.}
+\end{cases}
+$$
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 4, height=4, echo=FALSE>>=
+plotdata <- data.frame(
+  x = c(-1, 0, 1, 1),
+  xend = c(0, 1, 1, 2),
+  fx = c(0, 1, 1, 0)
+)
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_segment(aes(x = x, y = fx, xend = xend, yend = fx)) +
+  geom_point() +
+  geom_point(aes(x = 0, y = 0), shape= 21, fill = 'white') +
+  geom_point(aes(x = 1, y = 0), shape= 21, fill = 'white') +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  ggtitle('PDF of Standard Uniform Distribution')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\scriptsize
+Notice that if we take the area under the density curve, the total area will sum to 1.
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 4, height=4, echo=FALSE>>=
+datapoly <- data.frame(x = c(0, 0, 1, 1),
+                       y = c(0, 1, 1, 0))
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_segment(aes(x = x, y = fx, xend = xend, yend = fx)) +
+  geom_point() +
+  geom_point(aes(x = 0, y = 0), shape= 21, fill = 'white') +
+  geom_point(aes(x = 1, y = 0), shape= 21, fill = 'white') +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  ggtitle('PDF of Standard Uniform Distribution')
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\scriptsize
+Notice that if we take the area under the density curve, the total area will sum to 1. Relative density gives us relative probability.
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 4, height=4, echo=FALSE>>=
+datapoly <- data.frame(x = c(0, 0, 1, 1),
+                       y = c(0, 1, 1, 0))
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_segment(aes(x = x, y = fx, xend = xend, yend = fx)) +
+  geom_point() +
+  geom_point(aes(x = 0, y = 0), shape= 21, fill = 'white') +
+  geom_point(aes(x = 1, y = 0), shape= 21, fill = 'white') +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  geom_polygon(data = datapoly, aes(x = x, y = y), fill = 'blue', alpha = 0.5) +
+  ggtitle('PDF of Standard Uniform Distribution')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+\scriptsize
+
+If we want to get the probability $X$ is between 0 and 0.75,
+
+$$
+\textrm{P}[0 \le x \le .75] = \int_0^.75 f(x)dx
+$$
+\pause
+we take the area under the density curve between 0 and 0.75 -- which is also 0.75. (Notice that we don't need to use calculus here.)
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+datapoly <- data.frame(x = c(0, 0, 0.75, 0.75),
+                       y = c(0, 1, 1, 0))
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_segment(aes(x = x, y = fx, xend = xend, yend = fx)) +
+  geom_point() +
+  geom_point(aes(x = 0, y = 0), shape= 21, fill = 'white') +
+  geom_point(aes(x = 1, y = 0), shape= 21, fill = 'white') +
+  coord_cartesian(xlim = c(-0.5, 1.5),
+                  ylim = c(0,1)) +
+  geom_polygon(data = datapoly, aes(x = x, y = y), fill = 'blue', alpha = 0.5) +
+  ggtitle('PDF of Standard Uniform Distribution')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Normal distribution}
+
+\scriptsize
+
+The Normal distribution is frequently used in probability and statistics, because it is a useful approximation to many natural phenomena.
+
+$$
+f(x) = \frac{1}{\sqrt{\sigma 2 \pi}}\textrm{exp}\left( -\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$
+
+It is defined by two parameters, $\mu$, the center of the distribution, and $\sigma$, which defines the distribution's standard deviation, or spread. The distribution is often notated $\mathcal{N}(\mu, \sigma^2)$.
+
+It has a bell curve shape, with more density around the middle, and less density at more extreme values.
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 6, height=4, echo=FALSE>>=
+result_n <- rnorm(n = 10000)
+plotdata <- data.frame(
+  x = result_n,
+  Fx = pnorm(result_n),
+  fx = dnorm(result_n)
+)
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_line() +
+  coord_cartesian(xlim = c(-2.5, 2.5),
+                  ylim = c(0,0.5)) +
+  geom_vline(xintercept = 0, lty = 'dashed', color = 'skyblue') +
+  geom_segment(aes(x = 0, xend = -1, y = 0.2, yend = 0.2),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_segment(aes(x = 0, xend = 1, y = 0.2, yend = 0.2),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = 0, y = 0.2), color = 'skyblue') +
+  annotate(geom="text", x = 0.5, y = .19, label = as.character(expression(sigma)), parse = TRUE, color = 'skyblue') +
+  annotate(geom="text", x = -0.5, y = .19, label = as.character(expression(sigma)), parse = TRUE, color = 'skyblue') +
+  annotate(geom="text", x = 0.075, y = .42, label = as.character(expression(mu)), parse = TRUE, color = 'skyblue') +
+  ggtitle('PDF of Standard Normal Distribution')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Normal distribution}
+
+\begin{figure}
+\centering
+\resizebox{.55\textwidth}{!}{
+<<fig = TRUE, width = 6, height=4, echo=FALSE>>=
+ggplot(plotdata, aes(x = x, y = Fx)) +
+  geom_line() +
+  coord_cartesian(xlim = c(-2.5, 2.5),
+                  ylim = c(0,1)) +
+  geom_vline(xintercept = 0, lty = 'dashed', color = 'skyblue') +
+  ggtitle('CDF of Standard Normal Distribution')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+<<echo = FALSE>>=
+f <- 'slides_32.Rnw'
+knitr::purl(f)
+knitr::Sweave2knitr(f)
+@
