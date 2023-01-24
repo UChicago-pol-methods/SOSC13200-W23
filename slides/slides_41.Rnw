@@ -1,0 +1,999 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+\usetikzlibrary{calc}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 4: Joint relationships, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs41/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ggplot2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Homework}
+
+\begin{itemize}
+\item Solution sets will be posted \textit{at the same time} as problem sets. \pause
+\item Do as much as you can on the problem set before checking the solutions. \pause
+\item Check your work, and then fill out a form on how you did, what you understood and didn't.\pause
+\item You get marked both on completion of the problem set, \textbf{AND} filling out the form.\pause
+\item (If you find errors in the solution set, post them on the class StackOverflow and you will get extra credit) \pause
+\item For homework assignments, always submit \textit{both} your .R file showing your work, and and a compiled .pdf\ file on Canvas.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Homework grading}
+
+check(+/-) \pause
+\begin{itemize}
+\item Check: You fully completed the assignment, and submitted all components. (A) \pause
+\item Check plus: You went above and beyond, your solutions were clear and detailed. (A+)  \pause
+\item Check minus: You made an attempt, but it wasn't complete. Maybe you didn't submit all components, or didn't fully answer some of the questions. (B or C) \pause
+\item Unmarked: You did not submit enough of an assignment for credit. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Angrist, Joshua D., and Alan B. Krueger. (1991) ``Does compulsory school attendance affect schooling and earnings?''}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{An aside on Nobels}
+
+\begin{figure}
+\centering
+\includegraphics{../assets/nobels21.jpeg}
+\caption{Joshua Angrist, Guido Imbens, David Card}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{An aside on Nobels}
+
+\begin{figure}
+\centering
+\includegraphics[width = .4\textwidth]{../assets/krueger19.jpeg}
+\caption{Alan Krueger}
+\end{figure}
+\pause
+Krueger and Card were economists at Princeton when they started collaborating \pause (Card started his career at the Booth School). \pause
+Josh Angrist started collaborating on the returns to schooling project as a PhD student in the department. 
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Reading papers}
+
+What to get out of reading a research paper:
+\begin{itemize}
+\item \textcolor{Maroon}{What is the main question of the paper?}\pause
+\item What method do the authors use to address the question? \pause
+For empirical papers:\pause
+\begin{itemize}
+\item Data (Where does it come from/how is it generated? What is the sample population? What is being measured?)\pause
+\item Research design/strategy\pause
+\item Statistical tools\pause
+\end{itemize}
+\item What is the answer that the authors get to the main question?
+\end{itemize}
+
+\pause
+How would you answer these questions with the \cite{angrist1991does} paper?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Establishing evidence: relationship between birth quarter and education}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Loading the data}
+
+\footnotesize
+
+<<load>>=
+dat <- read.csv('../data/angrist-krueger.csv', as.is = TRUE)
+head(dat)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Examining the data}
+\scriptsize
+<<summary>>=
+str(dat)
+summary(dat)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Data}
+
+\begin{itemize}
+\item Where does it come from/how is it generated?\pause
+\item What is the sample population? \pause
+\item What is being measured? 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+<<eval = FALSE>>=
+ggplot(dat, aes(x = year_of_birth, y = education)) +
+  geom_point()
+@
+
+% \begin{figure}
+% \centering
+% \resizebox{.6\textwidth}{!}{
+% <<plot_basic, fig = TRUE, width = 6, height=6, echo = FALSE>>=
+% ggplot(dat, aes(x = year_of_birth, y = education)) +
+%   geom_point()
+% 
+% }
+% \end{figure}
+% @
+
+
+\begin{figure}
+\centering
+\resizebox{.6\textwidth}{!}{
+\includegraphics{figs41/-plot_basic}
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\scriptsize
+<< >>=
+dat_agg <- aggregate(x = dat[, c('log_weekly_wage', 'education')], 
+                    by = list(`year_of_birth` = dat$year_of_birth, 
+                              `quarter_of_birth` = dat$quarter_of_birth),
+                    FUN = mean)
+
+dat_agg$year_of_birth_adj <- dat_agg$year_of_birth + 
+  0.25 * (dat_agg$quarter_of_birth-1)
+
+head(dat_agg)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\scriptsize
+<<eval = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, y = education)) +
+  geom_point() + # points
+  geom_line() # lines
+@
+
+
+\begin{figure}
+\centering
+\resizebox{.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, y = education)) +
+  geom_point() + # points
+  geom_line() # lines
+@
+}
+\end{figure}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\includegraphics{../assets/angrist-krueger1.png}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\scriptsize
+<<echo = TRUE, eval = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, 
+                   y = education, 
+                   label = quarter_of_birth)) +
+  geom_point(pch = 15, 
+             aes(color = as.factor(quarter_of_birth) )) + # points with color
+  geom_line() + # lines
+  geom_text(hjust = 0, nudge_x = 0.05) + # text labels on points
+  theme_bw() + # plot style
+  theme(legend.position = '') + # remove legend from colored text labels
+  ylab('Years of Completed Education') +  # y-axis label
+  xlab('Year of Birth') + # x-axis label
+  ggtitle('Angrist and Krueger, Figure I') + # title
+  scale_x_continuous(breaks = seq(30, 40, 2)) + # x-axis ticks
+  scale_y_continuous(breaks = seq(12.2, 13.2, .2)) # y-axis ticks
+
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\begin{figure}
+\centering
+\resizebox{.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, y = education, label = quarter_of_birth)) +
+  geom_point(pch = 15, aes(color = as.factor(quarter_of_birth) )) + # points with color
+  geom_line() + # lines
+  geom_text(hjust = 0, nudge_x = 0.05) + # text labels on points
+  theme_bw() + # plot style
+  theme(legend.position = '') + # remove legend from colored text labels
+  ylab('Years of Completed Education') +  # y-axis label
+  xlab('Year of Birth') + # x-axis label
+  ggtitle('Angrist and Krueger, Figure I') + # title
+  scale_x_continuous(breaks = seq(30, 40, 2)) + # x-axis ticks
+  scale_y_continuous(breaks = seq(12.2, 13.2, .2)) # y-axis ticks
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\includegraphics{../assets/angrist-krueger2.png}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\includegraphics{../assets/angrist-krueger3.png}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Data exploration: Education on birth year}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/angrist-krueger4.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\scriptsize
+<<echo = TRUE>>=
+# function for moving average
+ma <- function(x, n = 5){ 
+  ma_x <- as.numeric(filter(x, rep(1 / n, n), sides = 2))
+  ma_x2 <- (ma_x - x/5)*5/4
+  return(ma_x2)
+}
+
+# get dat_agg in right order
+dat_agg <- dat_agg[order(dat_agg$year_of_birth_adj),]
+
+# calculate moving average
+dat_agg$moving_average <- ma(dat_agg$education)
+
+# update adjusted birth year in main dataset
+dat$year_of_birth_adj <- dat$year_of_birth + 0.25 * (dat$quarter_of_birth-1)
+
+# and match aggregated moving average to main data
+dat$moving_average <- dat_agg$moving_average[match(dat$year_of_birth_adj, 
+                                                 dat_agg$year_of_birth_adj)]
+
+# calculate deviation from moving average
+dat$deviation <- dat$education-dat$moving_average
+
+# get aggregate deviation
+dat_agg$deviation <- aggregate(x = dat$deviation, 
+                              by = list(dat$year_of_birth_adj), mean)$x
+
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\scriptsize
+<<eval = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, 
+                   y = deviation, 
+                   fill = as.factor(quarter_of_birth),
+                   label = quarter_of_birth)) +
+  geom_col(na.rm = TRUE) +
+  geom_text(hjust = 0, nudge_y = 0.003, nudge_x = -0.1, na.rm = TRUE) + # text labels on points
+  coord_cartesian(ylim = c(-0.2, 0.2)) +
+  theme_bw() + # plot style
+  theme(legend.position = '') + # remove legend from colored text labels
+  ylab('Schooling Differential') +  # y-axis label
+  xlab('Year of Birth') + # x-axis label
+  ggtitle('Angrist and Krueger, Figure IV, Panel I') + # title
+  scale_x_continuous(breaks = seq(30, 40, 2)) # x-axis ticks
+
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{.6\textwidth}{!}{
+<<fig = TRUE, width = 6, height=6, echo = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, 
+                   y = deviation, 
+                   fill = as.factor(quarter_of_birth),
+                   label = quarter_of_birth)) +
+  geom_col(na.rm = TRUE) +
+  geom_text(hjust = 0, nudge_y = 0.003, nudge_x = -0.1, na.rm = TRUE) + # text labels on points
+  coord_cartesian(ylim = c(-0.2, 0.2)) +
+  theme_bw() + # plot style
+  theme(legend.position = '') + # remove legend from colored text labels
+  ylab('Schooling Differential') +  # y-axis label
+  xlab('Year of Birth') + # x-axis label
+  ggtitle('Angrist and Krueger, Figure IV, Panel I') + # title
+  scale_x_continuous(breaks = seq(30, 40, 2)) # x-axis ticks
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data exploration: Education on birth year}
+
+What is the case that the difference in education across quarters is due to compulsory schooling?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Inference}
+
+\begin{itemize}
+\item Over what population do these effects apply? \pause
+\begin{itemize}
+\item Time frame
+\item Geography
+\item Policy
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Policy implications}
+What should we do with this evidence?\pause
+\begin{itemize}
+\item Should we change compulsory school attendance laws in the US?
+\item If you were hired as a consultant for another country, would you recommend to change compulsory school attendance laws? Under what conditions?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Estimating causal effects: returns to education}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data analysis: Returns to education}
+
+\scriptsize
+<<eval = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, y = log_weekly_wage, 
+                   label = quarter_of_birth)) +
+  geom_point(pch = 15, 
+             aes(color = as.factor(quarter_of_birth) )) + # points with color
+  geom_line() + # lines
+  geom_text(hjust = 0, nudge_x = 0.05) + # text labels on points
+  theme_bw() + # plot style
+  theme(legend.position = '') + # remove legend from colored text labels
+  scale_x_continuous(breaks = seq(30, 40, 2)) + # x-axis ticks
+  scale_y_continuous(breaks = seq(5.6, 6.1, .1)) + # y-axis ticks
+  coord_cartesian(ylim = c(5.6, NA)) + 
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Year of Birth') + # x-axis label
+  ggtitle('Angrist and Krueger, Figure V', 
+          subtitle = 'Mean Log Weekly Wage, by Quarter of Birth\nAll Men Born 1930-1949; 1980 Census')
+@
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Data analysis: Returns to education}
+
+\begin{figure}
+\centering
+\resizebox{.6\textwidth}{!}{
+<<fig = TRUE, width = 6, height=6, echo = FALSE>>=
+ggplot(dat_agg, aes(x = year_of_birth_adj, y = log_weekly_wage, 
+                   label = quarter_of_birth)) +
+  geom_point(pch = 15, 
+             aes(color = as.factor(quarter_of_birth) )) + # points with color
+  geom_line() + # lines
+  geom_text(hjust = 0, nudge_x = 0.05) + # text labels on points
+  theme_bw() + # plot style
+  theme(legend.position = '') + # remove legend from colored text labels
+  scale_x_continuous(breaks = seq(30, 40, 2)) + # x-axis ticks
+  scale_y_continuous(breaks = seq(5.6, 6.1, .1)) + # y-axis ticks
+  coord_cartesian(ylim = c(5.6, NA)) + 
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Year of Birth') + # x-axis label
+  ggtitle('Angrist and Krueger, Figure V', 
+          subtitle = 'Mean Log Weekly Wage, by Quarter of Birth\nAll Men Born 1930-1949; 1980 Census')
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Data analysis: Returns to education}
+
+\includegraphics{../assets/angrist-krueger5.png}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Wald estimator}
+Computes returns to education as ratio:
+\begin{itemize}
+\item numerator: the difference in earning by quarter of birth \pause
+\item denominator: the difference in education by quarter of birth \pause
+\item comparison: men born in first quarter vs. men born in last three quarters\pause
+\end{itemize}
+
+The Wald estimator is a simple example of \textbf{Instrumental Variables} analysis, where you \textit{instrument} for changes in $X$ with changes in some instrument, $Z$. 
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Wald estimator}
+Computes returns to education as ratio:
+\begin{itemize}
+\item numerator: the difference in earning by quarter of birth \pause
+\item denominator: the difference in education by quarter of birth \pause
+\item comparison: men born in first quarter vs. men born in last three quarters
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Wald estimator}
+
+The Wald estimator is a simple example of \textbf{Instrumental Variables} analysis, where you \textit{instrument} for changes in $X$ with changes in some instrument, $Z$.\pause
+
+$$
+{\beta}_{IV} = \frac{\delta y/ \delta z}{\delta x /\delta z}
+$$
+\pause
+
+With the Wald estimator, $Z$ is binary. 
+$$
+\hat{\beta}_{Wald} = \frac{\bar y_1 -\bar y_0}{\bar x_1 -\bar x_0}
+$$
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Data analysis: Returns to education}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/angrist-kruegert3.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\textcolor{Maroon}{What makes this paper so compelling? What is its contribution to research methods in the social sciences?}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
