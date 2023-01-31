@@ -1,0 +1,802 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+\usetikzlibrary{calc}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 4: Joint relationships, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+% \SweaveOpts{concordance=TRUE, prefix.string = figs42/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{Loading packages for this class}
+% 
+% <<packages>>=
+% library(ggplot2)
+% @
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% 
+% }
+% 
+% 
+% %-------------------------------------------------------------------------------%
+
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Miguel, Edward, \& Kremer, Michael (2004). Worms: identifying impacts on education and health in the presence of treatment externalities.}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{An aside on Nobels}
+
+\begin{figure}
+\centering
+\includegraphics{../assets/nobels19.jpeg}
+\caption{Esther Duflo, Michael Kremer, and Abhijit Banerjee}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{An aside on Nobels}
+
+2019 economics nobel awarded for: ``their experimental approach to alleviating global poverty.''\pause \ Why is this a big deal? \pause
+\begin{itemize}
+\item One way to understand human behavior: posit a theory. E.g., propose a utility function.  \pause
+\item[$\rightarrow$] Deduce implications of theory. \pause
+\item[$\rightarrow$] (maybe) Test implications against data. \pause 
+\item[$\rightarrow$] Update and revise theory. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Experiments}
+
+How do we know if policies are working?\pause 
+\begin{itemize}
+\item Duflo, Banerjee, Kremer motivated by work of development agencies. \pause
+\item Interventions are large scale, complicated, and hard to deduce how ``effective'' they should be based on theory alone. \pause
+\item A solution: build rigorous evidence for policy efficacy. \pause
+\item One way to build evidence: experiments. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Joint relationships}
+
+\begin{itemize}
+\item Correlation: $X$ and $Y$ are correlated. E.g., $\uparrow$ age and $\uparrow$ income. \pause
+\item Causation: $W$ \textit{moves} $Y$. E.g., when I fertilize the plants, I get a higher yield. 
+\begin{itemize}
+\item Implies a \textit{counterfactual}. \pause. If I \textit{hadn't} moved $W$, we would see a different outcome for $Y$. \pause
+\item Recall \cite{holland1986statistics}: ``No causation without manipulation.''
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Joint relationships: notation}
+
+\begin{itemize}
+\item Dependent variable: ($Y$), the thing we want to study variation in; also ``outcome'', ``response''. \pause
+\item Independent variable: ($D$ or $W$) in causal settings, the thing that we manipulate. Also ``treatment.'' In non-causal settings, something that may have some natural variation in the population associated with the dependent variable. 
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Potential outcomes: notation}
+
+Assume $W$ is binary. \pause
+$$
+Y_i = \begin{cases}
+Y_i(0) & W_i = 0 \\
+Y_i(1) & W_i = 1 \\
+\end{cases}
+$$
+
+\pause
+Why is $\E[Y_i(0)]$ different from $\E[Y_i|W = 0]$? \pause
+
+(What is the expectation \textit{over}?)
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Individual treatment effect}
+
+$$
+\tau_i = Y_i(1)-Y_i(0)
+$$ \pause
+
+We're interested in the treatment effect, the difference in potential outcomes had we applied treatment $W$, vs. if we had not. \pause
+
+\begin{itemize}
+\item What we can't see: $\tau_i$\pause
+\item Fundamental problem of causal inference: we can't see \textit{both} potential outcomes for a given unit \textit{at the same time}. \pause
+\item  \cite{holland1986statistics}'s assumptions: some structure we can impose on the data to back out counterfactuals. (We usually don't know if assumptions are true.) \pause
+\item Experiments use the independence assumption\dots\pause this one we have some more control over. 
+\end{itemize} 
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Independence}
+
+\begin{itemize}
+\item Units that receive treatment look, on average, like units that do not. \pause
+\item In experiments, we assign treatment \textit{randomly}, so we know that there is no inherent difference between subjects that \textit{could have} received treatment and \textit{could have} received control--all subjects \textit{could have} received all versions of treatment, hypothetically. \pause(The subjunctive mood of research design \dots)
+\item Why is this so special? \pause
+\item What this give us: $\E[Y_i | W_i = 0] = \E[Y_i(1)]$ \pause
+\item We can back out an estimate of the average treatment effect:
+$$
+\tau = \E[Y_i(1)-Y_i(0)]
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Back to our study at hand\dots}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Reading papers}
+
+What to get out of reading a research paper:
+\begin{itemize}
+\item \textcolor{Maroon}{What is the main question of the paper?}\pause
+\item What method do the authors use to address the question? \pause
+For empirical papers:\pause
+\begin{itemize}
+\item Data (Where does it come from/how is it generated? What is the sample population? What is being measured?)\pause
+\item Research design/strategy\pause
+\item Statistical tools\pause
+\end{itemize}
+\item What is the answer that the authors get to the main question?
+\end{itemize}
+
+\pause
+How would you answer these questions with the \cite{miguel2004worms} paper?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{The problem}
+
+\begin{itemize}
+\item Is deworming as a large-scale policy effective?\pause
+\item Why don't we already have good evidence?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Research design}
+
+\begin{itemize}
+\item 75 rural Kenyan primary schools in Busia region phased into treatment in a randomized order. \pause
+\item Why is treatment assigned at the school level? 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Spillovers (or treatment externalities)}
+
+\begin{itemize}
+\item In general, we would like to assume $Y_i(W_i)$ does not change depending on some $W_j$ for $j \neq i$. \pause
+\item This doesn't always hold. \pause How do helminth infections spread?\pause
+\item One way to address this: make sure that everyone in one area gets treatment, or everyone gets control. \pause
+\item Useful for understanding impacts of \textit{policies}. What would outcomes look like if \textit{everyone} got treatment, vs. if \textit{everyone} got control. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Random assignment}
+
+\begin{itemize}
+\item 3 groups of 25 schools each \pause
+\item ``The schools were first stratified by administrative subunit (zone) and by their involvement in other nongovernmental assistance programs, and were then listed alphabetically and every third school was assigned to a given project group.''\pause
+\begin{itemize}
+\item What is the stratification doing? \pause
+\item Is this assignment random? 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Pre-experimental data}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremer1.png}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}{Different ways to design experiments}
+% 
+% Not all experiment designs are equal for a given objective. \pause 
+% \begin{itemize}
+% \item Simple vs. complete random assignment.\pause
+% \item Stratified assignment. \pause
+% \item Blocked assignment. 
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% 
+% }
+% 
+% %-------------------------------------------------------------------------------%
+\begin{frame}{Data}
+
+\begin{itemize}
+\item Where does it come from/how is it generated?\pause
+\item What is the sample population? \pause
+\item What is being measured? 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%------------------------------------------------------------------------------%
+\begin{frame}{Treatment and phasing}
+
+\begin{itemize}
+\item What does the phasing do for us?\pause
+\item Sometimes studies need to account for more than just research objectives. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Treatment and phasing}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremer3.png}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Estimation strategy}
+
+\begin{align*}
+Y_{ijt} = & a + \beta_1 \times T_{1it} + \beta_2 \times T_{2it} + \X'_{ijt}\delta + \sum_d\left(\gamma_d \times N^T{dit}\right) + \\
+& \sum_\delta \left(\phi_d \times N_{dit} \right) + u_i + e_{ijt}
+\end{align*}
+\pause
+\begin{itemize}
+\item $Y_{ijt}$ is individual health/education outcome for school $i$, student $j$, and year $t \in {1,2}$. \pause
+\item $T_{1it}$ and $T_{2it}$ are indicators for treatment in years 1 and 2\pause
+\item $\X'_{ijt}$ are school/pupil characteristics\pause
+\item $N_{dit}$ total number of pupils in primary schools at distance $d$ from school $i$ in year $t$
+\item $N^T_{dit}$ number of these pupils in schools randomly assigned to deworming treatment
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Within-school externalities}
+
+\begin{itemize}
+\item The coefficients on $T_{1it}$ and $T_{2it}$, $\beta_1$ and $\beta_2$ capture \textit{direct effects} on the treated, as well as \textit{indirect effects} on untreated in treatment schools. \pause
+\item Why is it challenging to decompose these components? \pause
+\item Proposed solution: make assumptions about who got treatment, compare untreated in Group 1 in 1998 to those who \textit{would be} untreated in Group 2 in 1999 (why might this work?)\pause
+\item Result: evidence of large good externalities; infections lower among Group 1 untreated\pause
+\item Why might externalities be so large within schools?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Geographic component}
+\begin{quote}
+Since local population density may affect disease transmission, and since
+children who live or attend school near treatment schools could have lower
+environmental exposure to helminths, which would lead to less reinfection and
+lower worm burdens, worm burden may depend on both the total number of
+primary school pupils ($N_{dit}$) and the number of those pupils in schools randomly assigned to deworming treatment ($N^T_{dit}$) within a certain distance from
+school $i$ in year $t$ of the program.
+\end{quote}
+
+\pause
+\begin{itemize}
+\item the $\gamma_d$ capture deworming treatment externalities across schools
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}{Within-school externalities}
+% 
+% \begin{itemize}
+% \item The coefficients on $T_{1it}$ and $T_{2it}$, $\beta_1$ and $\beta_2$ capture \textit{direct effects} on the treated, as well as \textit{indirect effects} on untreated in treatment schools. \pause
+% \item Why is it challenging to decompose these components? \pause
+% \item Proposed solution: make assumptions about who got treatment, compare untreated in Group 1 in 1998 to those who \textit{would be} untreated in Group 2 in 1999 (why might this work?)\pause
+% \item Result: evidence of large good externalities; infections lower among Group 1 untreated\pause
+% \item Why might externalities be so large within schools?
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% 
+% }
+% 
+% %-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\centering
+\textcolor{Maroon}{What is the answer that the authors get to the main question?}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Results}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremerA1.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Results}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremerA2.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Results}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremerA4.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Results}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremerA5.png}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Results}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/miguel-kremerApolicy.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+
+%%% [[TEMPLATE]] %%%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
