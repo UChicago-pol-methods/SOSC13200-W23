@@ -1,0 +1,1796 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 5: Uncertainty and inference, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs51/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ri)
+library(ggplot2)
+set.seed(60637)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]{}
+\Large
+\textcolor{Maroon}{Example adapted from:}
+\\~\
+\\~\
+\centering
+\textcolor{Maroon}{Chattopadhyay, Raghabendra \& Duflo, Esther (2004). Women as policy makers: Evidence from a randomized policy experiment in India.}
+\\~\
+as discussed in 
+\\~\
+\textcolor{Maroon}{Gerber, Alan S. \& Green, Donald P. (2012). Field experiments: Design, analysis, and interpretation.}
+\nocite{chattopadhyay2004women, gerber2012field, butler2011politicians}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Chattopadhyay \& Duflo example}
+
+\begin{itemize}
+\item Population: 7 villages\pause
+\item Treatment: $W = 1$ if female-headed council, $W = 0$ if male \pause
+\item Outcome: Budget allocation to sanitation\pause
+\end{itemize}
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ & $\tau_i$ \\
+Village 1 & 10 & 15 & 1 & 15 & 5 \\
+Village 2 & 15 & 15 & 0 & 15 & 0 \\
+Village 3 & 20 & 30 & 0 & 20 & 10 \\
+Village 4 & 20 & 15 & 0 & 20 & -5 \\
+Village 5 & 10 & 20 & 0 & 10 & 10 \\
+Village 6 & 15 & 15 & 0 & 15 & 0 \\
+Village 7 & 15 & 30 & 1 & 30 & 15 \\
+{\textbf{Average}} & {\textbf{15}} & {\textbf{20}} & & &{\textbf{5}}
+\end{tabular}
+\end{table}
+
+$$
+\text{ATE} = {\E[\tau_i]=5}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Chattopadhyay \& Duflo example}
+
+What we actually see:
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ & $\tau_i$ \\
+Village 1 & \textcolor{red}{?} & 15 & 1 & 15 & \textcolor{red}{?} \\
+Village 2 & 15 & \textcolor{red}{?} & 0 & 15 & \textcolor{red}{?} \\
+Village 3 & 20 & \textcolor{red}{?} & 0 & 20 & \textcolor{red}{?} \\
+Village 4 & 20 & \textcolor{red}{?} & 0 & 20 & \textcolor{red}{?} \\
+Village 5 & 10 & \textcolor{red}{?} & 0 & 10 & \textcolor{red}{?} \\
+Village 6 & 15 & \textcolor{red}{?} & 0 & 15 & \textcolor{red}{?} \\
+Village 7 & \textcolor{red}{?} & 30 & 1 & 30 & \textcolor{red}{?}
+\end{tabular}
+\end{table}
+\pause
+To produce an \textit{estimate} of the ATE, we can compare people who received treatment 1 to people who received treatment 0.
+\pause
+$$
+\bar{Y}(1) = 22.5 \ \ \ \ \ \ \ \ \bar{Y}(0) = 16
+$$
+\pause
+$$
+\hat{\tau} = 22.5 - 16 = \bm{6.5}
+$$
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Estimand}
+
+The \textit{estimand} is the parameter of interest--it is the quantity that we would like to know about.
+
+\pause
+
+For example, when we care about causal effects, the estimand may be:
+
+\begin{itemize}
+\item the Average Treatment Effect (ATE)
+\item  the Average effect of Treatment on the Treated (ATT)
+\item  the Average effect of Treatment on the Control (ATC)
+\end{itemize}
+
+\pause
+
+Why might these three quantities differ?
+
+\pause
+
+
+\textit{Notational aside: we often denote the estimand with the greek letter $\theta$. Specific estimands may have conventional notations, such as $\tau$ for the ATE, $\mu$ for the mean, or $\sigma$ for the standard deviation.}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Estimator}
+
+An \textit{estimator} is a function of the data we observe; it is a statistic that gives us an informed guess about the value of the estimand. \\~\
+\pause 
+Below, the estimator is the function $g(\cdot)$. \\~\
+
+$$
+g(X_1, \dots, X_n)
+$$
+\pause
+We can also think of it as a recipe. Given some data, $X_1, \dots, X_n$, follow the instructions $g(\cdot)$ to produce an \textbf{estimate}.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Estimate}
+
+An \textit{estimate} is what we calculate from our estimator with a specific set of data. Below, the estimate is the quantity $\hat{\theta}_n$. 
+
+$$
+\hat{\theta}_n = g(X_1, \dots, X_n)
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/eee.jpg}
+\end{figure}
+
+(image cred: \@simongrund89)
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Difference-in-means}
+
+Proposed estimator for $\E[\tau_i]$: compare people who received treatment $1$ to people who received treatment $0$. \\~\
+
+\pause
+This is the difference in means estimator:
+
+$$
+\hat\tau_{DM} = \frac{\sum_i^n Y_i W_i}{\sum_i^n W_i} - \frac{\sum_i^n Y_i (1-W_i)}{\sum_i^n (1-W_i)}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+
+\begin{frame}{Chattopadhyay \& Duflo example}
+
+\begin{itemize}
+\item We have produced an estimate here, by taking the difference in means. \pause 
+\item But what can we say about our uncertainty about this estimate? The number of observations in each group is pretty small.\pause
+\item Is the estimate meaningfully different from zero? \pause
+\item How likely would we be to see an effect this size just by chance?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Chattopadhyay \& Duflo example}
+
+\begin{itemize}
+\item One way to think about this is to assume the individual treatment effect for all individuals is exactly zero. Then, no matter how we randomized treatment assignment, we would see the same $Y_i$s.\pause
+\item We can then say how often we would see a treatment effect estimate of this size just by chance, under the assumption that individual treatment effects were actually zero.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Sharp null hypothesis of no effect}
+
+Assuming all treatment effects are exactly zero is called the \textbf{sharp null hypothesis of no effect.} \pause Also referred to as ``Fisher's null'' after Sir Ronald Aylmer Fisher (1890-1962).
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../assets/youngronaldfisher.jpeg}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Sharp null hypothesis of no effect}
+
+We might write the sharp null hypothesis this way:
+$$
+\text{H}_0:\tau_i = 0, \text{ for all } i \text{ in our pop.}
+$$
+This implies that potential outcomes are identical under treatment and control, for all individuals.
+$$
+Y_i(0) = Y_i(1)
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Sharp null hypothesis of no effect}
+
+\begin{itemize}
+\item To test this hypothesis, we also need to know (or assume we know) the randomization procedure\pause
+\item Here, we'll assume exactly two villages are assigned treatment. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Chattopadhyay \& Duflo example}
+Then we can fill in this table\dots
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ & $\tau_i$ \\
+Village 1 & \textcolor{red}{?} & 15 & 1 & 15 & \textcolor{red}{?} \\
+Village 2 & 15 & \textcolor{red}{?} & 0 & 15 & \textcolor{red}{?} \\
+Village 3 & 20 & \textcolor{red}{?} & 0 & 20 & \textcolor{red}{?} \\
+Village 4 & 20 & \textcolor{red}{?} & 0 & 20 & \textcolor{red}{?} \\
+Village 5 & 10 & \textcolor{red}{?} & 0 & 10 & \textcolor{red}{?} \\
+Village 6 & 15 & \textcolor{red}{?} & 0 & 15 & \textcolor{red}{?} \\
+Village 7 & \textcolor{red}{?} & 30 & 1 & 30 & \textcolor{red}{?}
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Chattopadhyay \& Duflo example}
+\dots as this:
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ &$\tau_i$ \\
+Village 1 & \textcolor{red}{15} & 15 & 1 & 15 & \textcolor{red}{0} \\
+Village 2 & 15 & \textcolor{red}{15} & 0 & 15 & \textcolor{red}{0} \\
+Village 3 & 20 & \textcolor{red}{20} & 0 & 20 & \textcolor{red}{0} \\
+Village 4 & 20 & \textcolor{red}{20} & 0 & 20 & \textcolor{red}{0} \\
+Village 5 & 10 & \textcolor{red}{10} & 0 & 10 & \textcolor{red}{0} \\
+Village 6 & 15 & \textcolor{red}{15} & 0 & 15 & \textcolor{red}{0} \\
+Village 7 & \textcolor{red}{30} & 30 & 1 & 30 & \textcolor{red}{0}
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Gerber Green example}
+We can re-run the randomization, and the potential outcomes and observed $Y_i$ will not change, but the treatment effect estimate will. 
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ & $\tau_i$ \\
+Village 1 & \textcolor{red}{15} & 15 & \textcolor{blue}{0} & 15 & \textcolor{red}{0} \\
+Village 2 & 15 & \textcolor{red}{15} & \textcolor{blue}{1} & 15 &\textcolor{red}{0} \\
+Village 3 & 20 & \textcolor{red}{20} & \textcolor{blue}{0} & 20 &\textcolor{red}{0} \\
+Village 4 & 20 & \textcolor{red}{20} & \textcolor{blue}{0} & 20 &\textcolor{red}{0} \\
+Village 5 & 10 & \textcolor{red}{10} & \textcolor{blue}{0} & 10 &\textcolor{red}{0} \\
+Village 6 & 15 & \textcolor{red}{15} & \textcolor{blue}{1} & 15 &\textcolor{red}{0} \\
+Village 7 & \textcolor{red}{30} & 30 & \textcolor{blue}{0} & 30 &\textcolor{red}{0}
+\end{tabular}
+\end{table}
+\pause
+$$
+\bar{Y}(1) = 15 \ \ \ \ \ \ \ \ \bar{Y}(0) = 19
+$$
+\pause
+$$
+\color{blue}{\hat{\tau} = 15-19 = \bm{-4}}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Gerber Green example}
+We can re-run the randomization, and the potential outcomes and observed $Y_i$ will not change, but the treatment effect estimate will. 
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ & $\tau_i$ \\
+Village 1 & \textcolor{red}{15} & 15 & \textcolor{blue}{0} & 15 & \textcolor{red}{0} \\
+Village 2 & 15 & \textcolor{red}{15} & \textcolor{blue}{0} & 15 &\textcolor{red}{0} \\
+Village 3 & 20 & \textcolor{red}{20} & \textcolor{blue}{1} & 20 &\textcolor{red}{0} \\
+Village 4 & 20 & \textcolor{red}{20} & \textcolor{blue}{1} & 20 &\textcolor{red}{0} \\
+Village 5 & 10 & \textcolor{red}{10} & \textcolor{blue}{0} & 10 &\textcolor{red}{0} \\
+Village 6 & 15 & \textcolor{red}{15} & \textcolor{blue}{0} & 15 &\textcolor{red}{0} \\
+Village 7 & \textcolor{red}{30} & 30 & \textcolor{blue}{0} & 30 &\textcolor{red}{0}
+\end{tabular}
+\end{table}
+\pause
+$$
+\bar{Y}(1) = 20 \ \ \ \ \ \ \ \ \bar{Y}(0) = 17
+$$
+\pause
+$$
+\color{blue}{\hat{\tau} = 20-17= \bm{3}}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Gerber Green example}
+We can re-run the randomization, and the potential outcomes and observed $Y_i$ will not change, but the treatment effect estimate will. 
+
+\begin{table}[]
+\begin{tabular}{lccccc}
+& $Y_i(0)$ & $Y_i(1)$ & $W_i$ & $Y_i$ & $\tau_i$ \\
+Village 1 & \textcolor{red}{15} & 15 & \textcolor{blue}{0} & 15 & \textcolor{red}{0} \\
+Village 2 & 15 & \textcolor{red}{15} & \textcolor{blue}{0} & 15 &\textcolor{red}{0} \\
+Village 3 & 20 & \textcolor{red}{20} & \textcolor{blue}{1} & 20 &\textcolor{red}{0} \\
+Village 4 & 20 & \textcolor{red}{20} & \textcolor{blue}{0} & 20 &\textcolor{red}{0} \\
+Village 5 & 10 & \textcolor{red}{10} & \textcolor{blue}{0} & 10 &\textcolor{red}{0} \\
+Village 6 & 15 & \textcolor{red}{15} & \textcolor{blue}{0} & 15 &\textcolor{red}{0} \\
+Village 7 & \textcolor{red}{30} & 30 & \textcolor{blue}{1} & 30 &\textcolor{red}{0}
+\end{tabular}
+\end{table}
+\pause
+$$
+\bar{Y}(1) = 25 \ \ \ \ \ \ \ \ \bar{Y}(0) = 15
+$$
+\pause
+$$
+\color{blue}{\hat{\tau} = 25-15 = \bm{10}}
+$$
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Because we know how treatment was assigned, we know all the possible ways treatment could be assigned across the villages, and the exact probability.\pause
+\item There are seven villages, and we say that exactly two will get treatment. Each village is assigned treatment with equal probability.
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+We can use the package \texttt{ri} to find the \textit{exact} distribution of $\hat\tau_{DM}$ under the sharp null. \\~\
+
+Our real data:
+\scriptsize
+<<>>=
+df <- data.frame(
+        # our initial treatment vector
+        W = c(1, 0, 0, 0, 0, 0, 1),
+        # our initial response vector
+        Y = c(15, 15, 20, 20, 10, 15, 30),
+        # treatment assignment probability
+        probs = rep(2/7, 7)
+)
+
+df
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+And our difference in means estimate of the average treatment effect under the real data:
+
+<<>>=
+Y1 <- df$Y[which(df$W == 1)]
+Y0 <- df$Y[which(df$W == 0)]
+
+(dm_hat <- mean(Y1) - mean(Y0))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+Adding in the hypothetical data. 
+
+<<>>=
+df <-  cbind( # binds the columns together
+        df,
+        # Y(0) under the sharp null of no effect
+        Y0 = df$Y,
+        # Y(1) under the sharp null of no effect
+        Y1 = df$Y)
+
+df
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+Consider all the ways treatment could be assigned: (this is what \texttt{ri} is doing for us)
+
+\scriptsize
+<<>>=
+(perms <- genperms(df$W))
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+Then generate the sampling distribution of the ATE estimate under the sharp null of no effect.
+
+<<>>=
+Ys_null <- list(
+        Y0 = df$Y0,
+        Y1 = df$Y1
+)
+
+dm <- gendist(Ys_null,
+              perms, 
+              prob=df$probs)
+dm
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+
+The mean under our null distribution is \textit{exactly} zero. Why?
+
+<<>>=
+mean(dm)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.5\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+gg_bins <- aggregate(list(rf = dm), by = list(dm = dm), length)
+gg_bins$col <- abs(gg_bins$dm) >= dm_hat
+
+ggplot(gg_bins, aes(x = dm, y = rf)) +
+        geom_col() +
+        geom_vline(xintercept = 0, color = 'red') +
+        xlab('Difference in means estimates') + 
+        ylab('Frequency') +
+        ggtitle('Distribution of difference in means estimates under\nthe sharp null')
+@
+}
+\end{figure}
+\pause \scriptsize
+<<>>=
+prop.table(table(dm))
+(pval <- mean(abs(dm) >= dm_hat))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.5\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(gg_bins, aes(x = dm, y = rf, fill = col)) +
+        geom_col() +
+        geom_vline(xintercept = 0, color = 'red') + 
+        scale_fill_manual(values=c("grey35", "#619CFF")) +
+        theme(legend.position = 'none') +
+        xlab('Difference in means estimates') + 
+        ylab('Frequency') +
+        ggtitle('Distribution of difference in means estimates under\nthe sharp null')
+@
+}
+\end{figure}
+\pause \scriptsize
+<<>>=
+prop.table(table(dm))
+(pval <- mean(abs(dm) >= dm_hat))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{p-value}
+
+\begin{itemize}
+\item Under the null distribution, if we were to re-randomize the experiment many times, we would see a value \textit{at least as extreme as our estimate} \Sexpr{ round(pval*100,2)}\% of the time.\pause
+\item That doesn't seem \textbf{that} unlikely--more than one in three times, we would see an estimate as large as we got, just by chance. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\texttt{ri} produces the same exact p-value.
+
+
+<<>>=
+dispdist(distout = dm, 
+         ate = dm_hat, 
+         display.plot = FALSE)$two.tailed.p.value.abs
+@
+
+\pause
+That's because it is doing the exact same thing under the hood. 
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Why is this test called an ``exact'' test?\pause
+\item Because we know the \textit{exact} distribution of our estimate under the specified null. We do not have to approximate the distribution.
+\item This will not be true for all of our hypothesis testing\dots
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Hypotheses}
+
+\begin{itemize}
+\item We framed our null hypothesis as below:
+
+$$
+H_0: \tau_i = 0, \text{ for all } i \text{ in our pop.}
+$$
+
+\pause
+\item Implicitly, the alternative is that for some individual(s), the treatment effect is non-zero. 
+
+$$
+H_A: \tau_i \neq 0, \text{ for some } i \text{ in our pop.}
+$$
+
+\pause
+
+\item In our case, we did not find strong evidence to reject the null hypothesis, i.e., our data is consistent with what we would see if the null hypothesis were true.
+
+\pause
+
+\item Note that we do NOT say that we reject or accept the alternative hypothesis.
+
+\pause
+
+\item We can only say that our results were not consistent with or were consistent with what we would have seen under the null--i.e., we have evidence to reject or fail to reject the null. 
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Distributions of estimators}
+
+\begin{itemize}
+\item Our difference in means estimator is a function of the data we observe. \pause
+\item Because there is randomness in the data, here, due to random assignment of treatment, the estimator is also a random variable.\pause
+\item Just like other random variables have distributions to describe them, estimators also have distributions.\pause
+\item We don't know the \textit{true} distribution of the difference in means estimator, for the same reason that we don't know individual treatment effects.\textcolor{red}{(FPoCI!)}\pause
+\item But we DO know what the distribution would be under the null. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Note that we are conducting inference with respect to: \pause
+
+\begin{itemize}
+\item a defined population \pause
+\item a defined treatment \pause
+\item a defined outcome \pause
+\item a known treatment assignment mechanism \pause
+\item a given estimating procedure
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{The null}
+
+\begin{itemize}
+\item How do we determine what the null is?\pause
+\item We formalize our hypotheses in terms of the effect we are trying to find in the data. Is there a treatment effect? Is there a difference between these two groups?\pause
+\item The null is (often, but not always) the case when there is no effect, or no difference.\pause
+\item We can imagine other kinds of hypotheses, for example that effects are bounded away from zero and positive, or exactly .2. And we can characterize the distribution of our test statistic under the null. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{The null}
+
+\begin{itemize}
+\item Is the sharp null of no individual level effects plausible in this setting? \pause
+\item Does it matter?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[c]{Getting to some real data\dots}
+
+\Large
+\centering
+\textcolor{Maroon}{Butler, Daniel M., \& Broockman, David E. (2011). Do politicians racially discriminate against constituents? A field experiment on state legislators.}\\~\
+
+Data is available at the Yale ISPS data archive: \\~\
+\url{isps.yale.edu/research/data}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Loading the data}
+
+\scriptsize
+
+<<load>>=
+df <- read.csv('../data/butler-broockman.csv', as.is = TRUE)
+head(df)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Examining the data}
+\scriptsize
+<<summary>>=
+str(df)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Data}
+
+\begin{itemize}
+\item Where does it come from/how is it generated?\pause
+\item What is the sample population? \pause
+\item What is being measured? 
+\end{itemize}
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+Recall that treatment is 1 if the sender was DeShawn Jackson, and 0 if Jake Mueller. 
+
+<<>>=
+table(df$treat_deshawn)
+@
+
+
+\pause
+
+The primary outcome is whether legislators replied at all. 
+
+<<>>=
+table(df$reply_atall)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We're going to manipulate our data so it takes the format $Y$ $\sim$ $W$. 
+
+
+<<>>=
+df$W <- df$treat_deshawn
+df$Y <- df$reply_atall
+@
+
+
+\pause
+
+To get the difference-in-means estimate of the ATE, 
+
+<<>>=
+Y1 <- df$Y[which(df$W == 1)]
+Y0 <- df$Y[which(df$W == 0)]
+@
+
+
+\pause
+
+<<>>=
+(dm_hat <- mean(Y1) - mean(Y0))
+@
+
+\pause
+Legislators were 1.7 percentage points less likely to reply to an email if the sender was identified as DeShawn Jackson as compared to Jake Mueller. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Note that again, the population that we're taking inference over is legislators--all of whom are included in our experiment. We're not assuming we're sampling from some other distribution. The only source of randomness is how treatment is assigned. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+\item There are ${4859 \choose 2428}$ different ways treatment could be assigned--this is too many to generate the whole matrix of permutations and get the \textit{exact} sampling distribution. \pause
+\item Instead, we'll simulate the sampling process many times to find the \textit{approximate} sampling distribution of $\hat\tau_{DM}$ under the sharp null. \pause
+\end{itemize}
+
+
+<<>>=
+# randomization inference function
+my_ri <- function(df){
+        df_ri <- df
+        df_ri$newW <- sample(df$W)
+        Y1_ri <- df$Y[which(df_ri$newW == 1)]
+        Y0_ri <- df$Y[which(df_ri$newW == 0)]
+        ate_hat <- mean(Y1_ri)-mean(Y0_ri)
+  return(ate_hat)
+}
+
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+Let's try it. \pause
+
+<<>>=
+my_ri(df)
+@
+
+\pause
+And again. 
+<<>>=
+my_ri(df)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We can do this many times to find the distribution of $\hat\tau_{DM}$ under the sharp null. 
+\pause
+
+\scriptsize
+<<>>=
+# number of iterations
+n_iter <- 1000
+
+# replicate does the same (random) function many times
+dm <- replicate(n = n_iter, my_ri(df))
+head(dm)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+null_dist <- data.frame(dm)
+null_dist$bins <- cut(dm, breaks = 50)
+null_dist <- aggregate(list(count = null_dist$dm), by = list(bins = null_dist$bins), length)
+null_dist$bin_max <- as.numeric(gsub(".?(-?[0-9]+[.]+[0-9]+).*", "\\1", null_dist$bins))
+null_dist$bin_min <- as.numeric(gsub(".*,(-?[0-9]+[.]+[0-9]+(e-[0-9]+)?)]$", "\\1", null_dist$bins))
+null_dist$bin_mid <- (null_dist$bin_max - null_dist$bin_min)/2 + null_dist$bin_min
+null_dist$col <- abs(null_dist$bin_min) >= abs(dm_hat)
+
+ggplot(null_dist, aes(x = bin_mid, y = count)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red')
+@
+}
+\end{figure}
+
+\pause
+
+<<>>=
+(pval <- mean(abs(dm) >= abs(dm_hat)))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(null_dist, aes(x = bin_mid, y = count, fill = col)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red') + 
+  scale_fill_manual(values=c("grey35", "#619CFF")) +
+  theme(legend.position = 'none')
+@
+}
+\end{figure}
+
+\pause
+
+<<>>=
+(pval <- mean(abs(dm) >= abs(dm_hat)))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+The types of hypotheses we've considered are two-sided hypotheses: we look at effects in either direction from zero. 
+
+\pause
+
+$$
+H_0: \tau_i = 0, \text{ for all } i \text{ in our pop.}
+$$
+
+
+$$
+H_A: \tau_i \neq 0, \text{ for some } i \text{ in our pop.}
+$$
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We can also consider other alternative hypotheses. For example, the hypothesis that treatment effects are less than zero. This is called a one-sided hypothesis. 
+
+
+\pause
+
+$$
+H_0: \tau_i = 0, \text{ for all } i \text{ in our pop.}
+$$
+
+
+$$
+H_A: \tau_i < 0, \text{ for some } i \text{ in our pop.}
+$$
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+\item The alternative hypothesis that we consider is a consequence of the social science theory we're trying to test. \pause
+\item Here, we want to see if legislators are \textit{less likely} to respond to a constituent named DeShawn Jackson, as compared to Jake Mueller.  \pause
+\item When we test a one-sided hypothesis, we want to check how likely we would be to observe statistics at least as large as the test statistic that we actually observe, in the direction of our hypothesis. 
+\end{itemize}
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+null_dist$col2 <- null_dist$bin_min <= dm_hat
+
+ggplot(null_dist, aes(x = bin_mid, y = count)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red') + 
+  scale_fill_manual(values=c("grey35", "#619CFF")) +
+  theme(legend.position = 'none')
+@
+}
+\end{figure}
+
+\pause
+
+<<>>=
+(pval <- mean(dm <= dm_hat))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(null_dist, aes(x = bin_mid, y = count, fill = col2)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red') + 
+  scale_fill_manual(values=c("grey35", "#619CFF")) +
+  theme(legend.position = 'none')
+@
+}
+\end{figure}
+
+
+<<>>=
+(pval <- mean(dm <= dm_hat))
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{P-values}
+
+
+Suppose $\hat{\theta}$ is the general form for an estimate produced by our estimator, and $\hat{\theta}^*$ is the value we have actually observed. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{P-values}
+
+\begin{itemize}
+\item A lower one-tailed p-value under the null hypothesis is 
+$$
+p = \P_0[\hat{\theta} \le \hat{\theta}^*]
+$$
+\end{itemize}
+i.e., the probability \textit{under the null distribution} that we would see an estimate of $\hat{\theta}$ that is less than or equal to what we saw from the data. 
+
+\pause
+\begin{figure}
+\centering
+\resizebox{0.4\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(null_dist, aes(x = bin_mid, y = count, fill = col2)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red') + 
+  scale_fill_manual(values=c("grey35", "#619CFF")) +
+  theme(legend.position = 'none')
+@
+}
+\end{figure}
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{P-values}
+
+\begin{itemize}
+\item An upper one-tailed p-value under the null hypothesis is 
+
+$$
+p = \P_0[\hat{\theta} \ge \hat{\theta}^*]
+$$
+\end{itemize}
+i.e., the probability \textit{under the null distribution} that we would see an estimate of $\hat{\theta}$ that is greater than or equal to what we saw from the data. 
+
+\pause
+\begin{figure}
+\centering
+\resizebox{0.4\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+null_dist$col3 <- null_dist$bin_min >= dm_hat
+ggplot(null_dist, aes(x = bin_mid, y = count, fill = col3)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red') + 
+  scale_fill_manual(values=c("grey35", "#619CFF")) +
+  theme(legend.position = 'none')
+@
+}
+\end{figure}
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{P-values}
+
+\begin{itemize}
+\item A two-tailed p-value under the null hypothesis is 
+$$
+p = \P_0[|\hat{\theta}| \ge |\hat{\theta}^*|]
+$$
+\end{itemize}
+
+i.e., the probability \textit{under the null distribution} that we would see an estimate of $\hat{\theta}$ as or more extreme as what we saw from the data. 
+\pause
+\begin{figure}
+\centering
+\resizebox{0.4\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(null_dist, aes(x = bin_mid, y = count, fill = col)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = 'red') + 
+  scale_fill_manual(values=c("grey35", "#619CFF")) +
+  theme(legend.position = 'none')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Frametitle}
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+<<echo = FALSE>>=
+f <- 'slides_51.Rnw'
+knitr::purl(f)
+knitr::Sweave2knitr(f)
+@
