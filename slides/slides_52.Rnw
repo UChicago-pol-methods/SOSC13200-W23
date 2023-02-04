@@ -1,0 +1,2434 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 5: Uncertainty and inference, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs52/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ggplot2)
+set.seed(60637)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Continuing inference}
+
+\begin{itemize}
+\item Last class, we assumed we had a finite population that we observe all of, and the source of randomness in what we observed was due to random assignment of treatment. The inference we used there is called \textit{randomization inference.}\pause
+\item Now, we'll assume that our data is produced from a random generative process, where we're sampling from some (potentially infinite) population distribution that is not fully observed. The inference we will use in this setting is the type of inference we use for survey sampling. \pause
+\item It's important to consider \textit{what the source of randomness is} and \textit{what population we're making inferences about.} 
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Back to estimation}
+
+\begin{itemize}
+\item Returning to our example where we flip a coin twice, let $X$ be the number of heads we observe. Our coin is  \textit{not} fair, and the probability of getting a heads is 0.75. 
+\pause
+
+\item The random variable's probability distribution is then:
+
+$$
+f(x) = \begin{cases}
+1/16 & x = 0 \\
+3/8 & x = 1 \\
+9/16 & x = 2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Back to estimation}
+\begin{itemize}
+\item We use the coin flip example, but we can compare this to any ``random'' event where we can code the outcome in terms of a one or zero. \pause
+\item For example, with respect to the \citet{pager2003mark} data, we can use a process like this to model the probability that an employer will hire a white applicant without a criminal record. \pause
+\item We might say that there are different random processes, with different probabilities of success, for whites with and without criminal records, and blacks with and without criminal records. \pause
+\item Here, where we have multiple coin flips, we can compare that to the probability distribution of hires for two people with the same profile. 
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Let's take a look at the mean.
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=4, echo=FALSE>>=
+plotdata <- data.frame(
+  x = c(0, 1, 2),
+  xend = c(1, 2, 3),
+  fx = c(1/16, 3/8, 9/16),
+  Fx = cumsum(c(1/16, 3/8, 9/16))
+)
+
+# Expected value
+Ex <- sum(plotdata$x*plotdata$fx)
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = 1.5, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=1.5, y=0.75, label="E[X]") +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+\pause
+
+\begin{align*}
+\E[X] & = \sum_x x fx \\
+& = 0 \times \frac{1}{16} + 1 \times \frac{3}{8} + 2 \times \frac{9}{16} = \frac{24}{16}\\
+& = 1.5
+\end{align*}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+And the spread.
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=4, echo=FALSE>>=
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = Ex, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=Ex, y=0.75, label="E[X]", color = 'grey') +
+  geom_segment(aes(x = Ex, xend = Ex+sign(x-Ex)*(x-Ex)^2, y = fx, yend = fx),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  annotate(geom="text", x=1.8, y=0.72, label="Squared distance\nfrom mean") +
+  annotate(geom="text", x=(plotdata$x+Ex)/2, y=(plotdata$fx-0.05), label=(plotdata$x-Ex)^2, color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+Variance = average squared distance from the mean
+\begin{align*}
+\textrm{Var}[X] & = \E[(X - \E[X])^2]\\
+& = 2.25 \times \frac{1}{16} + 0.25 \times \frac{3}{8} + 0.25 \times \frac{9}{16} \\
+& = 0.375
+\end{align*}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+And the spread.
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=4, echo=FALSE>>=
+
+sdx <- sqrt(sum((plotdata$x-Ex)^2* plotdata$fx))
+
+ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_point() +
+  coord_cartesian(xlim = c(-0.8, 2.8),
+                  ylim = c(0,1)) +
+  geom_segment(aes(x = x, y = c(0,0,0), xend = x, yend = fx)) +
+  geom_vline(xintercept = Ex, lty = 'dashed', color = 'skyblue') +
+  annotate(geom="text", x=Ex, y=0.75, label="E[X]", color = 'grey') +
+  geom_segment(aes(x = Ex, xend = Ex-sdx, y = 0.5, yend = 0.5),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  geom_segment(aes(x = Ex, xend = Ex+sdx, y = 0.5, yend = 0.5),
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = Ex, y = fx), color = 'skyblue') +
+  annotate(geom="text", x=1.8, y=0.72, label="Square root of average\nsquared distance\nfrom mean") +
+  annotate(geom="text", x=(Ex+c(-1.05,1.05)*round(sdx, 3)/2), y=0.45,
+           label=round(sdx, 3), color = 'skyblue') +
+  ggtitle('PMF of X as number of heads in 2 UNfair coin flips')
+@
+}
+\end{figure}
+SD = square root of variance
+\begin{align*}
+= \sqrt{0.375} = 0.612\\
+\color{white} \ \\
+\color{white} \ 
+\end{align*}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+\item We can check our calculations of the expectation and spread in R.\pause
+\item First, we'll want to simulate the random process.\pause
+\end{itemize}
+\small
+<<>>=
+n <- 1000
+X <- c(0, 1, 2)
+probs <- c(1/16, 3/8, 9/16)
+x_observed <- sample(X, prob = probs,
+                     replace = TRUE,
+                     size = n)
+
+head(x_observed)
+@
+\pause
+
+
+<<>>=
+mean(x_observed)
+@
+\pause
+
+<<>>=
+var(x_observed)
+sd(x_observed)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\\}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item The process that we just did -- sampling and estimation based on observed data -- is a very common process in empirical research.
+
+\pause
+
+\item But we may notice that the mean, variance, and standard deviation are not exactly what we calculated analytically.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Let's try it again.
+\pause
+
+
+<<>>=
+x_observed <- sample(X,
+                     prob = probs,
+                     replace = TRUE,
+                     size = n)
+
+mean(x_observed)
+var(x_observed)
+sd(x_observed)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}
+
+\begin{itemize}
+\item The values that we get are close, but not identical.
+\pause
+
+\item This is because what we are observing in practice is a  \textit{sample} from the data.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Sampling and statistics}
+
+\begin{itemize}
+\item Very often, we only observe a limited number of observations, which are drawn from a larger population.
+\pause
+\item Review:
+
+\begin{itemize}
+\item We can summarize the data we observe with  \textit{statistics}. Statistics are functions of the data we observe.\pause
+
+
+$$
+T_n = h(X_1, \dots, X_n)
+$$
+\pause
+
+\item (Estimators are a class of statistics that we use to approximate specific estimands. Test statistics are the specific statistics we use to test hypotheses. )
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Sampling and statistics}
+
+\begin{itemize}
+\item Because our sampling process is a random process, these statistics themselves are random variables, with their own distributions.
+\pause
+
+\item We can describe our sample, but we might also like to  \textit{make inferences} about the larger population--i.e., to summarize what we know about that population based on the data we observe.
+\pause
+\item This is what we use statistics for, and why we talk about probability AND statistics.\pause
+\item Probability gives us a model of the world.
+\pause
+\item Statistics give us a way to relate the data that we see to the model.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item In our two coin flip example, suppose we don't know whether the coin is fair or not. We can observe the results of a large number of coin flips, and make an educated guess about the underlying population value.
+\pause
+
+\item Formally, that educated guess is called  \textit{estimation}.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}{i.i.d. Data}
+% 
+% \begin{itemize}
+% \item The standard treatment of estimation in statistics is built around the assumption that observations are  \textit{independent and identically distributed}.
+% \pause
+% 
+% \item Formally, if we have $n$ draws, $X_1, \dots, X_n$, these draws are i.i.d. if they are independent from each other, and all have the same CDF.
+% 
+% $$
+% X_1, \dots, X_n \sim F_X
+% $$
+% \end{itemize}\pause
+% 
+% \textit{Notational aside: $~$ is read as "distributed," and means that the random variable $X$ has the distribution function $F$.}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% In our coin flip example, each time we flip the coin:
+% \begin{itemize}
+% \item what we see on this flip has no relation to previous or future flips
+% \item the distribution of heads on every flip is identical.
+% \end{itemize}
+% \pause
+% 
+% Our coin flip random process produces i.i.d. random variables.
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Sample mean}
+
+Let's repeat our random sampling from the double coin flip, but we'll consider a smaller sample, of size $n = 100$.
+
+<<>>=
+n <- 100
+x_observed <- sample(X, 
+                     prob = probs, 
+                     replace = TRUE,
+                     size = n)
+
+head(x_observed)
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Sample mean}
+
+\begin{itemize}
+\item Our \textit{sample mean} is the mean we observe in our data. \pause
+\item This is one of the most commonly used sample statistics. It's called a plug-in estimator, because we just ``plug in'' the sample analog of the population quantity that we're interested in.
+\end{itemize}
+\pause
+
+$$\bar{X}_n = \frac{X_{1} + \dots + X_n}{n} = \frac{1}{n} \sum_{i = 1}^n X_i$$
+
+
+
+
+\pause
+
+<<>>=
+mean(x_observed)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\begin{itemize}
+\item We differentiate the  \textit{sample mean} from the  \textit{population mean} because the sample mean will vary with every new sample we draw.
+\pause
+
+\item We'll use a simulation with \texttt{replicate()} to see what would happen if we took a sample of size $n = 100$ from the population distribution many times.
+\end{itemize}
+\pause
+
+<<>>=
+
+n_iter <- 10000
+
+x_mat <- replicate(n_iter, sample(X,
+                                 prob = probs,
+                                 replace = TRUE,
+                                 size = n))
+
+dim(x_mat)
+head(x_mat[,1])
+head(x_mat[,2])
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+<<message = FALSE>>=
+
+sample_means <- apply(x_mat, 2, mean)
+length(sample_means)
+head(sample_means)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.45\textheight}{
+<<fig = TRUE, width = 6, height=4, fig.align='center', echo = FALSE>>=
+ggplot(data.frame(sample_means = sample_means), aes(x = sample_means)) +
+  geom_histogram(bins = 20, position = 'identity', color = 'white') +
+  geom_vline(xintercept = Ex, color = 'grey', lty = 'dashed')
+
+@
+}
+\end{figure}
+
+\pause
+
+We see the sample means are roughly distributed around the mean of the underlying population, \texttt{Ex}.
+\pause
+\\~\
+
+The expected value of the sample mean is the population mean.
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% We can check that this is the case.
+% 
+% 
+% \begin{align*}
+% \bar{X}_n & = \frac{X_{1} + \dots + X_n}{n} = \frac{1}{n} \sum_{i = 1}^n X_i
+% \end{align*}
+% \pause
+% 
+% 
+% By linearity of expectations $\dots$
+% 
+% \begin{align*}
+% \E[\bar{X}_n] & = \frac{1}{n} \sum_{i = 1}^n \E[X_i]\
+% \end{align*}
+% \pause
+% 
+% $\dots$ because the $X_i$ are i.i.d. $\dots$
+% 
+% \begin{align*}
+% & = \frac{1}{n} \sum_{i = 1}^n \E[X]
+% \end{align*}
+% \pause
+% 
+% \begin{align*}
+% & = \frac{1}{n} n \E[X]\
+% \end{align*}
+% 
+% \pause
+% 
+% \begin{align*}
+% & = \E[X]
+% \end{align*}
+% 
+% \pause
+% 
+% \textit{Refer to Aronow \& Miller p.97 for more extended version of proof}.
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+\begin{frame}{Sample variance}
+
+We can estimate the mean of the population using the sample mean. What about the sample variance?
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Sample variance}
+
+
+We'll do the same process with our simulations.
+\pause
+
+\begin{figure}
+\centering
+\resizebox{0.45\textwidth}{!}{
+<<fig = TRUE, width = 6, height=4, fig.align='center', echo = FALSE>>=
+sample_var <- apply(x_mat, 2, var)
+
+ggplot(data.frame(sample_var = sample_var), aes(x = sample_var)) +
+  geom_histogram(bins = 20, position = 'identity', color = 'white') +
+  geom_vline(xintercept = sdx^2, color = 'grey', lty = 'dashed')
+@
+}
+\end{figure}
+\pause
+
+We see the sample variances are roughly distributed around the variance of the underlying population, \texttt{sdx}\textsuperscript{2}.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+
+The formula for the unbiased sample variance is:
+
+$$S^2_n = \frac{1}{n-1}\sum_{i = 1}^n (X_i - \bar{X}_n)^2$$\pause
+
+This looks a little bit different from a straightforward sample analog to the population variance formula,
+
+$$
+\textrm{Var}[X] = \E[(X-\E[X])^2]
+$$\pause
+
+Why do we divide by $n-1$, instead of $n$?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+% -------------------------------------------------------------------------------%
+\begin{frame}
+
+$$
+S^2_n = \frac{1}{n-1}\sum_{i = 1}^n (X_i - \bar{X}_n)^2
+$$
+
+\begin{itemize}
+\item The sample mean, $\bar{X}_n$, has an expected value of $\E[X]$.
+\pause
+
+\item However, because it is made up of the $1, \dots, n$ $X_i$ that we actually observe, the expected difference between $(X_i - \bar{X}_n)$ is a little bit smaller than the expected difference between $(X_i - \E[X])$.
+
+\pause
+
+\item To account for this, we divide by $n-1$, instead of $n$.
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% We can check that the expected value of the unbiased sample variance estimator is the population variance. \pause
+% The estimator:
+% \pause
+% 
+% \begin{align*}
+% S^2_n = \frac{1}{n-1}\sum_{i = 1}^n (X_i - \bar{X}_n)^2
+% \end{align*}
+% 
+% \pause
+% Take the expectation:
+% 
+% \begin{align*}
+% \E[S^2_n] & = \E\left[\frac{1}{n-1}\sum_{i = 1}^n (X_i - \bar{X}_n)^2\right]
+% \end{align*}
+% 
+% \pause
+% By linearity of expectations:
+% 
+% \begin{align*}
+%  & = \frac{1}{n-1}\sum_{i = 1}^n \E\left[(X_i - \bar{X}_n)^2\right]
+% \end{align*}
+% 
+% \pause
+% 
+% \begin{align*}
+% & = \frac{1}{n-1}\sum_{i= 1}^n \E\left[X_i^2 -2 X_i\bar{X}_n + \bar{X}_n^2\right]
+% \end{align*}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}
+% %
+% % Expand expressions, and use linearity of expectations again.
+% %
+% % \begin{align*}
+% %  & = \frac{1}{n-1}\sum_{i= 1}^n \left( \E[X_i^2] -\frac{2}{n}\left(\E[X_i^2] +  \sum_{j \neq i} \E\left[ X_i X_j\right]\right) + \\
+% %  \frac{1}{n^2} \left( \sum_{j = 1}^n\E[X_j^2] + \sum_{j = 1}^n \sum_{k \neq j}^n \E[ X_j X_k]  \right)\right)
+% % \end{align*}
+% %
+% % \pause
+% %
+% % Because our data is i.i.d.:
+% %
+% %
+% % \begin{align*}
+% %  & = \frac{n}{n-1} \left( \E[X^2] -\frac{2}{n}\left(\E[X^2] +  (n-1) \E[ X]^2\right) + \frac{1}{n^2} \left(n\E[X^2] + n(n-1) \E[ X]^2 \right) \right)
+% % \end{align*}
+% %
+% % Organizing terms:
+% %
+% % \begin{align*}
+% %  & = \frac{n}{n-1} \left( \frac{n - 1}{n} \E[X^2] - \frac{n-1 }{n} \E[ X]^2 \right)
+% % \end{align*}
+% %
+% % \pause
+% %
+% % And simplifying:
+% %
+% % \begin{align*}
+% %  & = \E[X^2] - \E[ X]^2
+% % \end{align*}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We can check to see how R calculates in the \texttt{var()} function.
+\pause
+
+<<>>=
+head(x_observed)
+@
+\pause
+
+<<>>=
+var(x_observed)
+@
+\pause
+
+<<>>=
+
+sum( (x_observed - mean(x_observed) )^2)/(n-1)
+
+@
+\pause
+
+R uses the formula for the unbiased sample variance.
+
+
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Standard error of the estimator}
+
+\begin{itemize}
+\item The sample mean is itself a random variable, and so it has its own mean and variance. The mean of the sample mean is the population mean. The variance of the sample mean is:
+
+$$
+\textrm{Var}[\bar{X}_n] = \frac{\textrm{Var}[X]}{n}
+$$
+\pause
+
+\item And the standard deviation of the sample mean is:
+
+$$
+\sqrt{\textrm{Var}[\bar{X}_n]} = \sqrt{\frac{\textrm{Var}[X]}{n}}
+$$
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Standard error of the estimator}
+
+\begin{itemize}
+\item We often refer to the standard deviation of an estimator as the  \textit{standard error}.
+\pause
+
+\begin{itemize}
+\item The  \textit{standard error} describes the sampling variation of an  \textbf{estimator}; i.e., how much our estimates will vary based on the random sample that we draw.
+\pause
+\item \textit{standard deviation} describes the underlying variation in the  \textbf{population distribution}.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% Why is $\textrm{Var}[\bar{X}_n] = \frac{\textrm{Var}[X]}{n}$?
+% \pause
+% 
+% The estimator:
+% 
+% \begin{align*}
+% \bar{X}_n = \frac 1 n \sum_{i = 1}^n X_i
+% \end{align*}
+% 
+% \pause
+% 
+% Taking the variance on both sides:
+% 
+% $$
+% \textrm{Var}[\bar{X}_n] = \textrm{Var}\left[ \frac 1 n \sum_{i = 1}^n X_i\right]
+% $$
+% 
+% \pause
+% 
+% By the variance rules:
+% 
+% \begin{align*}
+% \textrm{Var}[\bar{X}_n] = \frac{1}{n^2}  \sum_{i = 1}^n \textrm{Var}\left[X_i\right]
+% \end{align*}
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% Because our observations are i.i.d.:
+% 
+% \begin{align*}
+% \textrm{Var}[\bar{X}_n] = \frac{1}{n^2}  \sum_{i = 1}^n \textrm{Var}\left[X\right]
+% \end{align*}
+% \pause
+% 
+% \begin{align*}
+% \textrm{Var}[\bar{X}_n] = \frac{\textrm{Var}\left[X\right]}{n}
+% \end{align*}
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Let's check this in our simulation. We saw that mathematically, $\textrm{Var}[X]$ was 0.375. So
+$$
+\frac{\textrm{Var}[X]}{n} = \frac{0.375}{100} = 0.00375
+$$
+\pause
+
+<<>>=
+var(sample_means)
+@
+\pause
+It's not exactly what we calculated mathematically.
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item In fact, from our \Sexpr{n_iter} separate samples, we calculate \Sexpr{n_iter} separate sample means. From the variation in these sample means, we again  \textit{estimate} the variance of the sample mean.
+\pause
+
+\item But \textit{this estimate is itself a random variable}, with, again, its own sampling distribution. We will get slightly different estimates of the sampling variance of the sample mean each time we take our \Sexpr{n_iter} separate samples. \pause
+
+\item In practice, we will estimate the standard error of the sample mean by plugging our unbiased sample variance formula into the standard error formula:
+
+$$
+\hat{\textrm{se}} = \sqrt{S^2_n/n }
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+% %-------------------------------------------------------------------------------%
+
+\begin{frame}{Weak Law of Large Numbers}
+
+\begin{itemize}
+\item As our sample size $n$ grows, we are increasingly likely to observe a sample mean $\bar X_n$ that is close to the mean of the distribution, $\E[X]$.
+\pause
+
+\item Formally,\\
+
+If $X_1, \dots, X_n$ are i.i.d. random variables,  then
+
+$$
+\bar{X}_n \overset{p}{\to} \E[X].
+$$
+\pause
+\item Convergence in probability, $\overset{p}{\to}$, here means that the probability that we measure a value of $\bar X_n$ that is any arbitrary distance away from $\E[X]$ is decreasing with our sample size.
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+
+<<width = 5, height=5, echo=FALSE>>=
+n <- 500
+x_mat <- replicate(8, sample(X,
+                                 prob = probs,
+                                 replace = TRUE,
+                                 size = n))
+new_mat <- apply(x_mat, 2, function(x) cumsum(x)/seq_along(x))
+new_mat <- data.frame(`Sample mean` = matrix(new_mat, byrow = FALSE, ncol = 1),
+                      n = 1:n,
+                      name = factor(rep(1:8, each =  n)),
+                      check.names = FALSE)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(new_mat[which(new_mat$n < 26),], aes(x = n, y = `Sample mean`, col = name)) +
+  geom_hline(yintercept = Ex, color = 'darkgrey', lty = 'dashed') +
+  geom_line() +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 500))
+
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(new_mat[which(new_mat$n < 51),], aes(x = n, y = `Sample mean`, col = name)) +
+  geom_hline(yintercept = Ex, color = 'darkgrey', lty = 'dashed') +
+  geom_line() +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 500))
+
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(new_mat[which(new_mat$n < 101),], aes(x = n, y = `Sample mean`, col = name)) +
+  geom_hline(yintercept = Ex, color = 'darkgrey', lty = 'dashed') +
+  geom_line() +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 500))
+
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(new_mat[which(new_mat$n < 201),], aes(x = n, y = `Sample mean`, col = name)) +
+  geom_hline(yintercept = Ex, color = 'darkgrey', lty = 'dashed') +
+  geom_line() +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 500))
+
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(new_mat[which(new_mat$n < 351),], aes(x = n, y = `Sample mean`, col = name)) +
+  geom_hline(yintercept = Ex, color = 'darkgrey', lty = 'dashed') +
+  geom_line() +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 500))
+
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Weak Law of Large Numbers}
+
+To see the WLLN in action, we'll try simulating our coinflip process, but with an increasing number of samples used to calculate the sample mean.
+
+
+\begin{figure}
+\centering
+\resizebox{0.6\textwidth}{!}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+
+ggplot(new_mat[which(new_mat$n < 501),], aes(x = n, y = `Sample mean`, col = name)) +
+  geom_hline(yintercept = Ex, color = 'darkgrey', lty = 'dashed') +
+  geom_line() +
+  theme(legend.position = 'none') +
+  coord_cartesian(xlim = c(0, 500))
+
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Weak Law of Large Numbers}
+
+\begin{itemize}
+\item Why is the WLLN so helpful to us?
+\pause
+
+\item Given a sufficient sample from a population, we can estimate features of a random variable to arbitrary precision
+\pause
+
+\item This is why we can use sample analogs of population features, like the sample mean, as plug-in estimators to estimate the population quantities.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Reading papers}
+
+What to get out of reading a research paper:
+\begin{itemize}
+\item \textcolor{Maroon}{What is the main question of the paper?}\pause
+\item What method do the authors use to address the question? \pause
+For empirical papers:\pause
+\begin{itemize}
+\item Data (Where does it come from/how is it generated? What is the sample population? What is being measured?)\pause
+\item Research design/strategy\pause
+\item Statistical tools\pause
+\end{itemize}
+\item What is the answer that the authors get to the main question?
+\end{itemize}
+
+\pause
+How would you answer these questions with the \cite{pager2003mark} paper?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+
+% \begin{frame}{Bootstrap estimation}
+% 
+% 
+% \begin{itemize}
+% \item Another approach to estimating the standard error of an estimate is to use bootstrapping.
+% \pause
+% 
+% \item If we knew the CDF of our population, we would know exactly how to sample from the distribution to determine the sampling variation of our estimate.
+% \pause
+% 
+% \item While we do not, we can  \textit{suppose} that the empirical CDF produced by the data that we observe is identical to the population CDF.
+% \pause
+% 
+% \item We can then just resample with replacement from our observed data, and see how much our estimates vary across resamples.
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}{Bootstrap estimation}
+% 
+% 
+% The bootstrapping procedure is:
+% 
+% \begin{itemize}
+% \item Repeat many times:
+% \begin{enumerate}
+% 
+%     \item Take a sample of size $n$  \textit{with replacement} from the observed data\pause
+% 
+%     \item Apply the estimating procedure on the bootstrap sample.
+%     \end{enumerate}
+% \pause
+% 
+% \item Calculate the standard deviation of these many bootstrap estimates.
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]
+% 
+% Let's consider our coin flip example, with 100 observations.
+% 
+% <<>>=
+% head(x_observed)
+% mean(x_observed)
+% var(x_observed)
+% sd(x_observed)
+% 
+% @
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]
+% 
+% 
+% <<>>=
+% n_boot <- 1000 # number of bootstrap iterations
+% 
+% boot_ests <- map(1:n_boot, # for n_boot number of times
+%                  # resample w/replacement
+%                  ~ sample(x_observed, replace = TRUE) %>%
+%                    mean()) # and calculate the resampled mean
+% 
+% head(boot_ests)
+% @
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]
+% 
+% <<>>=
+% 
+% sd(boot_ests)
+% @
+% 
+% \pause
+% 
+% Recall that the standard error of the mean is $\sqrt{\frac{\textrm{Var}[X]}{n}}$.
+% 
+% <<>>=
+% sqrt(.375/100)
+% @
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% \begin{itemize}
+% \item Bootstrapped estimates of the standard error are especially useful when our estimator is not as straightforward as the sample mean, for example estimators that involve ratios. \pause
+% \item Or when our sampling procedure is a bit more complicated, for example we sample "clusters" of units instead of individual units (we'll want to account for this in our bootstrap re-sampling).
+% \pause
+% \item It can be tricky to get a nice analytical solution for the standard error of the estimate in these situations, but the bootstrap estimator will tend to perform well when our data is i.i.d.
+% \end{itemize}
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}{Central Limit Theorem}
+% 
+% \begin{itemize}
+% \item We can approximate probability statements about the sample mean, $\bar{X}_n$ using the Normal distribution.
+% \pause
+% 
+% \item Formally,\\
+% 
+% If $X_1, \dots, X_n$ are i.i.d. random variables with mean $\E[X]$ and variance $\textrm{Var}[X]$, we can take a standardized version of the sample mean
+% 
+% $$
+% Z_n \equiv  \frac{\bar{X}_n - \E[X]}{\sqrt{\textrm{Var}[\bar{X}_n]}}
+% $$
+% which has mean 0 and variance 1. \pause
+% (Why?)
+% \pause
+% 
+% \item Then,
+% 
+% $$
+% Z_n  \overset{d}{\rightarrow} \mathcal{N}(0,1)
+% $$
+% 
+% 
+% where $\mathcal{N}(0,1)$ indicates the Standard Normal Distribution with mean 0 and variance 1.
+% \end{itemize}
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}{Normal distribution}
+% 
+% 
+% 
+% The Normal distribution is frequently used in probability and statistics, because it is a useful approximation to many natural phenomena.
+% 
+% $$
+% f(x) = \frac{1}{\sqrt{\sigma 2 \pi}}\textrm{exp}\left( -\frac{(x-\mu)^2}{2\sigma^2}\right)
+% $$
+% 
+% It is defined by two parameters, $\mu$, the center of the distribution, and $\sigma$, which defines the distribution's standard deviation, or spread. The distribution is often notated $\mathcal{N}(\mu, \sigma^2)$.
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{Normal distribution}
+% 
+% It has a bell curve shape, with more density around the middle, and less density at more extreme values.
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% result_n <- rnorm(n = 10000)
+% plotdata <- data.frame(
+%   x = result_n,
+%   Fx = pnorm(result_n),
+%   fx = dnorm(result_n)
+% )
+% 
+% g <- ggplot(plotdata, aes(x = x, y = fx)) +
+%   geom_line() +
+%   coord_cartesian(xlim = c(-2.5, 2.5),
+%                   ylim = c(0,0.5)) +
+%   geom_vline(xintercept = 0, lty = 'dashed', color = 'skyblue') +
+%   ggtitle('PDF of Standard Normal Distribution')
+% 
+% g + geom_segment(aes(x = 0, xend = -1, y = 0.2, yend = 0.2),
+%                arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+%   geom_segment(aes(x = 0, xend = 1, y = 0.2, yend = 0.2),
+%                arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+%   geom_point(aes(x = 0, y = 0.2), color = 'skyblue') +
+%   annotate(geom="text", x = 0.5, y = .19, label = as.character(expression(sigma)), parse = TRUE, color = 'steelblue') +
+%   annotate(geom="text", x = -0.5, y = .19, label = as.character(expression(sigma)), parse = TRUE, color = 'steelblue') +
+%   annotate(geom="text", x = 0.075, y = .42, label = as.character(expression(mu)), parse = TRUE, color = 'steelblue')
+% @
+% }
+% \end{figure}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% n <- 1000
+% x_list <- map(1:10000, ~ sample(X, prob = probs, replace = TRUE,
+%                                  size = n))
+% 
+% x_mat <- as_tibble(x_list, .name_repair = 'unique')
+% 
+% new_mat <- x_mat %>%
+%   mutate(across(everything(), ~ (cumsum(.x)/seq_along(.x)-Ex)/(sqrt(0.375/row_number()) )) ,
+%          n = 1:n)# %>%
+%   # pivot_longer(cols = starts_with('..'),
+%   #              values_to = "Sample mean")
+% 
+% 
+% x10 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:10]) )
+% x50 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:50]) )
+% x100 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:100]) )
+% x200 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:200]) )
+% x500 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:500]) )
+% x1000 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:1000]) )
+% x2000 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:2000]) )
+% x5000 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:5000]) )
+% x7500 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:7500]) )
+% x10000 <- tibble('Standardized sample mean' = unlist(new_mat[100,1:10000]) )
+% 
+% ggplot(x10, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('10 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x50, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('50 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x100, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('100 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x200, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('200 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x500, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('500 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x1000, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('1000 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x2000, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('2000 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x5000, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('5000 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x7500, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('7500 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% To see the CLT in action, we'll try simulating our coinflip process many times. We'll keep the individual sample size fixed at $n=$ 100.
+% 
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% ggplot(x10000, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02) +
+%   ggtitle('10000 samples') +
+%   coord_cartesian(xlim = c(-2.5, 2.5), ylim = c(0, 800))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% 
+% We can rescale the y axis to get relative frequency of sample means, and overlay the normal PDF.
+% 
+% \begin{figure}
+% \centering
+% \resizebox{0.6\textwidth}{!}{
+% <<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+% 
+% 
+% ggplot(x10000, aes(x = `Standardized sample mean`)) +
+%   geom_histogram(binwidth = .02, aes(y = ..count../1500)) +
+%   ggtitle('10000 samples') +
+%   ylab('Relative frequency') +
+%   coord_cartesian(xlim = c(-2.5, 2.5)) +
+%   stat_function(fun=dnorm,
+%                          color="red",
+%                          args=list(mean=0,
+%                                   sd=1))
+% 
+% @
+% }
+% \end{figure}
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]{CLT}
+% Why is the Central Limit Theorem so helpful to us?
+% \pause
+% 
+% It gives us a structure for quantifying our uncertainty under sufficiently large samples.
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}{Beyond i.i.d.}
+% \begin{itemize}
+% \item In practice, beyond simple processes like coin flips and dice, it's hard to defend the claim that our data is  \textit{literally} i.i.d.
+% \pause
+% 
+% \item The i.i.d. assumption is an approximation that gives us leverage to make statistical claims. Basically, we'd like to think that our data is close-enough to i.i.d.
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}{ Finite population random sampling}
+% 
+% \begin{itemize}
+% \item Suppose we are sampling from some finite population of units; say, students in a classroom, and we will measure ages. Suppose there are 5 students, with ages 7, 7, 7, 8, 8, and 9. We'll consider a random variable $X$, which is just one draw from the class.
+% \pause
+% 
+% \item We can identify the target mean and variance from our small population.
+% \pause
+% 
+% \begin{itemize}
+% \item $X = \{7,8,9\}$
+% \item $\E[X] = 7 \frac 2 3$
+% \item $\E[X] = \E[X^2]- \E[X]^2 = \frac 5 9$
+% \end{itemize}
+% \pause
+% 
+% \item We can randomly sample from the class  \textit{with replacement}, i.e., after each draw, we can resample from all students in the class again: each draw is independent and identically distributed.
+% \pause
+% 
+% \item If we randomly sample  \textit{without replacement}, draws are not independent--if I draw the student who is age 9 on my first draw, I can't get another age 9 draw again, and I'll run out after 5 draws.
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+% %-------------------------------------------------------------------------------%
+% \begin{frame}
+% 
+% \begin{itemize}
+% \item In practice most of our sampling in the social sciences is finite population random sampling  \textit{without} replacement.
+% \pause
+% 
+% \item This is a problem in my tiny classroom. But if the sample is sufficiently large, removing a few units doesn't affect the distribution for remaining draws in a meaningful way.
+% \pause
+% 
+% \item Suppose I am sampling from  \textit{all} third graders in the US. We can define the mean and variance for this population; suppose there are 1.2 million third graders age 7, 1 million third graders 8, and 1.4 million third graders age 9. The mean in this population is 8.056 and variance is 0.809.
+% \pause
+% 
+% \item After I sample a few third graders, the mean and variance for the remaining students is still approximately the same.
+% \pause
+% 
+% \item When we're dealing with sampling from finite populations, we often make the assumption that we're sampling from a hypothetical, infinite  \textit{superpopulation} that is so large that there is no effect of sampling without replacement.
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% 
+% 
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% }
+% 
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
