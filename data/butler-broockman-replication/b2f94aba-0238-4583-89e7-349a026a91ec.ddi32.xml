@@ -1,0 +1,3269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ddi:FragmentInstance xmlns:r="ddi:reusable:3_2" xmlns:ddi="ddi:instance:3_2">
+  <ddi:TopLevelReference>
+    <r:Agency>us.yale.isps</r:Agency>
+    <r:ID>b2f94aba-0238-4583-89e7-349a026a91ec</r:ID>
+    <r:Version>3</r:Version>
+    <r:TypeOfObject>StudyUnit</r:TypeOfObject>
+  </ddi:TopLevelReference>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <StudyUnit isUniversallyUnique="true" versionDate="2018-12-10T17:46:15.277Z" xmlns="ddi:studyunit:3_2">
+      <r:URN>urn:ddi:us.yale.isps:b2f94aba-0238-4583-89e7-349a026a91ec:3</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>b2f94aba-0238-4583-89e7-349a026a91ec</r:ID>
+      <r:Version>3</r:Version>
+      <r:UserID typeOfUserID="StudyNumber">D037</r:UserID>
+      <r:UserID typeOfUserID="Handle">http://hdl.handle.net/10079/0vt4bnj</r:UserID>
+      <r:UserAttributePair>
+        <r:AttributeKey>CreatedDate</r:AttributeKey>
+        <r:AttributeValue>11/28/2017 10:20:39 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>ArchiveDate</r:AttributeKey>
+        <r:AttributeValue>4/9/2012 12:00:00 AM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>CertifiedDate</r:AttributeKey>
+        <r:AttributeValue>12/10/2018 5:52:41 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>DepositAgreement</r:AttributeKey>
+        <r:AttributeValue>ISPS Data Archive: Data Deposit Agreement
+
+—Updated October 5, 2016—
+
+—Under General Counsel review—
+
+Terms of Data Deposit Agreement
+
+Your decision to deposit data in the ISPS Data Archive requires that you accept the terms of this Data Deposit Agreement. This agreement grants permission to Yale University, on behalf of ISPS, to (a) archive files associated with scholarly studies, and (b) to distribute these files for the purpose of replication (hereafter, Replication Files). 
+
+Specifically, by using the ISPS Data Archive, you accept the terms of this agreement, and you (or your proxy, on your behalf) agree to the following (please check each item if you agree):
+
+(1) You accept and agree to abide by ISPS Terms of Use &lt;link to http://isps.yale.edu/research/data/terms-of-use &gt;.
+
+(2) You agree that you will comply with all applicable laws and licenses.
+
+(3) If you are not the data owner, you represent that you have obtained the unrestricted permission of the owner to grant Yale University, on behalf of ISPS, the rights required by this license, that you will inform the data owner that ISPS administrators have access to all content, for purposes of maintaining the system and assisting users, in accordance with the policies specified here (ISPS does not make data available by other means such as FTP, removable media, etc.), and that the owner of the material will be clearly identified and acknowledged within the text or content of the submission.
+
+Important: The ISPS Data Archive expects all data contributors to comply with applicable copyright laws. Use of third-party copyrighted material without permission or that does not fall under one of the statutory exceptions, including but not limited to fair use, is illegal, unethical, and exposes Yale University to significant financial liability.
+
+(4) If some or all of the Replication Files you submit to the ISPS Data Archive are your original work, you represent that you have the right to grant the rights granted by you under this license. You also represent that your submission does not and, to the best of your knowledge, will not infringe upon anyone's intellectual property rights, including without limitation copyright, trademark, contractual or any other rights of any third parties.
+
+(5) If some or all of the files you submit to the ISPS Data Archive are based upon work that has been sponsored or supported by an agency or organization other than ISPS, you represent that you have fulfilled any right of review or other obligations required by such contract or agreement.
+
+(6) You represent that you have made a reasonable effort to ensure that data contained in your submission and distributed via the ISPS Data Archive are accurate. Please see the Best Practices and Tips sections of the About the ISPS Data Archive document &lt;link to http://isps.yale.edu/research/data/about#Best%20Practices%20and%20Tips &gt; for more information about format and content specifications. 
+
+(7) You agree that Yale University, on behalf of ISPS, is not responsible for the digital content of the Replication Files in the ISPS Data Archive, including, but not limited to, errors or omissions in any content, or any loss or damage of any kind incurred as a results of the use of any content uploaded, posted, emailed, shared and/or otherwise made available via the ISPS Data Archive.  
+
+Paragraphs (8) to (17) below apply to any and all Replication Files that you have deposited and marked for public distribution:
+
+(8) You agree to grant Yale University, on behalf of ISPS, the non-exclusive right to distribute your Replication Files, via the ISPS website under a Creative Commons Attribution-Non Commercial-No Derivatives 3.0 license &lt;link to http://isps.yale.edu/research/data/about &gt;, and that you have fulfilled any right of review or other obligations required by any contract or agreement as it pertains to rights.
+
+(9) You represent that in your use of the ISPS Data Archive will not be in violation of any applicable laws or policies, including those pertaining to the protection of private and confidential information. 
+
+(10) You certify that in preparing this submission for public distribution, you have removed all information identifying the research subjects in these data, and you have used due diligence in preventing information in the collection from being used to disclose the identity of research subjects (see more information here &lt;link to http://isps.yale.edu/research/data/about &gt;).
+
+(11) You agree to release and hold harmless Yale University, on behalf of ISPS, from any and all liability from claims arising out of any legal actions, including actions concerning identification of research subjects, breaches of confidentiality, or invasions of privacy by or on behalf of said subjects.
+
+(12) You agree that, for purposes of preservation and usability, ISPS may make and keep multiple copies of your Replication Files, including copies of your Replication Files in other digital formats. 
+
+(13) You agree that, ISPS Data Archive team will prepare your Replication Files for distribution in the following way: 
+(a) Deposit all files obtained from the data contributor in the Yale repository, 
+(b) Create copies of the files and standardize file names according to ISPS Data Archive naming conventions, 
+(c) Clean data files, including adding or clarifying variable- and value-labels and providing advice and direction regarding  confidential information,
+(d) Confirm replication of published results, 
+(e) Convert Data Files to ASCII when needed, 
+(f) Convert program files to R &lt;link to R www.r-project.org &gt; when needed,
+(g) Create a codebook with variable and value labels in XML format &lt;link to DDI www.ddialliance.org &gt;,
+(h) Create a metadata file describing the study and associated files, 
+(i) Invite you to review the files. 
+See more about how to archive &lt;http://isps.yale.edu/research/data/about#How%20to%20Archive? &gt;. 
+
+(14) You acknowledge that you are solely responsible for the correctness of the materials, their adherence to high academic standards, and their accuracy. The Archive team will afford you an opportunity to review the materials and you agree to make yourself reasonably available to assure that it meets the requirements set forth in Paragraph (9) and Paragraph (10) above in advance of electronic publication.
+
+(15) If you publish your submission in another repository, it is your responsibility to review and adhere to the Terms of Use, licensing agreements, and other applicable policies of that repository.
+
+(16) ISPS will clearly identify your name(s) as the author(s) or owner(s) of the Replication Files, and will not make any alteration, other than as allowed by this license, to your submission.
+
+(17) You agree that Yale University, on behalf of ISPS, has the right to limit access to Replication Files from the ISPS Data Archive in the event of a violation of any of the terms of this document. In addition, you have the right to request restricted access to already public Replication Files from the ISPS Data Archive for the following reasons: (a) Funder requirement or (b) Reaching pre-determined time limit on data.
+
+I have read the ISPS Data Archive Data Deposit Agreement and, in accordance with the terms in this Agreement, I give permission to Yale University, on behalf of ISPS, to archive my Replication Files.
+
+@checkI agree
+
+
+</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>AccessStatement</r:AttributeKey>
+        <r:AttributeValue>Public</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>ConfidentialityStatement</r:AttributeKey>
+        <r:AttributeValue>None known</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>RelatedDatabase</r:AttributeKey>
+        <r:AttributeValue>None known</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>RelatedPublications</r:AttributeKey>
+        <r:AttributeValue>Do Politicians Racially Discriminate Against Constituents? A Field Experiment on State Legislators</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>RelatedProjects</r:AttributeKey>
+        <r:AttributeValue>None known</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>ReviewType</r:AttributeKey>
+        <r:AttributeValue>Full</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>OrganizationName</r:AttributeKey>
+        <r:AttributeValue>ISPS</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>SampleSize</r:AttributeKey>
+        <r:AttributeValue>4,859</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>RandomizationProcedure</r:AttributeKey>
+        <r:AttributeValue>We assigned legislators to treatment groups using block randomization by state, legislative chamber, political party, and whether the legislator was up for reelection.</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>UnitOfRandomization</r:AttributeKey>
+        <r:AttributeValue>Individual</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>Treatment</r:AttributeKey>
+        <r:AttributeValue>An email sent to a state legislator. We signaled the race of the email sender by randomizing whether the email was signed by and sent from an email account with the name Jake Mueller or the name DeShawn Jackson. We also manipulated the text in order to signal the partisan preference of the email sender. </r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>TreatmentAdministration</r:AttributeKey>
+        <r:AttributeValue>Email</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>OutcomeMeasures</r:AttributeKey>
+        <r:AttributeValue>Whether the state legislator responded at all by November 4</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:Citation>
+        <r:Title>
+          <r:String xml:lang="en-US">Do Politicians Racially Discriminate Against Constituents? A Field Experiment on State Legislators</r:String>
+        </r:Title>
+        <r:Creator>
+          <r:CreatorName>
+            <r:String xml:lang="en-US">David Broockman, Daniel Butler</r:String>
+          </r:CreatorName>
+        </r:Creator>
+        <r:Contributor>
+          <r:ContributorName>
+            <r:String xml:lang="en-US">Limor Peer</r:String>
+          </r:ContributorName>
+        </r:Contributor>
+        <description xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">We use a field experiment to investigate whether race affects how responsive state legislators are to requests for help with registering to vote. In an email sent to each legislator, we randomized whether a putatively black or white alias was used and whether the email signaled the sender's partisan preference. Overall, we find that putatively black requests receive fewer replies. We explore two potential explanations for this discrimination: strategic partisan behavior and the legislators’ own race. We find that the putatively black alias continues to be differentially treated even when the emails signal partisanship, indicating that strategic considerations cannot completely explain the observed differential treatment. Further analysis reveals that white legislators of both parties exhibit similar levels of discrimination against the black alias. Minority legislators do the opposite, responding more frequently to the black alias. Implications for the study of race and politics in the United States are discussed.</description>
+      </r:Citation>
+      <r:FundingInformation>
+        <r:Description>
+          <r:Content xml:lang="en-US">Institution for Social and Policy Studies (ISPS), Yale University</r:Content>
+        </r:Description>
+      </r:FundingInformation>
+      <r:Coverage>
+        <r:TopicalCoverage isUniversallyUnique="true">
+          <r:URN>urn:ddi:us.yale.isps:c2fa02b4-9ee7-4f21-8e4c-6539d25f9034:3</r:URN>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>c2fa02b4-9ee7-4f21-8e4c-6539d25f9034</r:ID>
+          <r:Version>3</r:Version>
+          <r:Keyword>Race</r:Keyword>
+          <r:Keyword>Experiment-field</r:Keyword>
+          <r:Keyword>Discrimination</r:Keyword>
+        </r:TopicalCoverage>
+        <r:SpatialCoverage isUniversallyUnique="true">
+          <r:URN>urn:ddi:us.yale.isps:b3fd72a2-5566-4643-aac3-385e82ffb9e7:3</r:URN>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>b3fd72a2-5566-4643-aac3-385e82ffb9e7</r:ID>
+          <r:Version>3</r:Version>
+          <r:BoundingBox>
+            <r:WestLongitude>0</r:WestLongitude>
+            <r:EastLongitude>0</r:EastLongitude>
+            <r:SouthLatitude>0</r:SouthLatitude>
+            <r:NorthLatitude>0</r:NorthLatitude>
+          </r:BoundingBox>
+          <r:Description>
+            <r:Content xml:lang="en-US">United States</r:Content>
+          </r:Description>
+          <r:TopLevelReference>
+            <r:LevelName>United States</r:LevelName>
+          </r:TopLevelReference>
+        </r:SpatialCoverage>
+        <r:TemporalCoverage isUniversallyUnique="true">
+          <r:URN>urn:ddi:us.yale.isps:e672b20a-21d8-4f29-abd9-0b3320fb4d5f:3</r:URN>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>e672b20a-21d8-4f29-abd9-0b3320fb4d5f</r:ID>
+          <r:Version>3</r:Version>
+          <r:ReferenceDate>
+            <r:StartDate>2008-10</r:StartDate>
+            <r:EndDate>2008-11</r:EndDate>
+          </r:ReferenceDate>
+        </r:TemporalCoverage>
+      </r:Coverage>
+      <r:AnalysisUnit>Individual</r:AnalysisUnit>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:adfb70e6-c788-4db8-8524-2345a780b3aa:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>adfb70e6-c788-4db8-8524-2345a780b3aa</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Not Selected</r:UserID>
+        <r:UserID typeOfUserID="FormatName">Adobe Acrobat (8.1) .pdf</r:UserID>
+        <r:UserID typeOfUserID="Size">201728</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">False</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">Adobe</r:UserID>
+        <r:UserID typeOfUserID="SoftwareVersion">8.1</r:UserID>
+        <r:UserID typeOfUserID="Checksum">975CC3673D0A38D759697A2F2E3A73DF234DFD2F3F39200D0134FD77C064EBD3</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckOutcome">OK</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckMethod">ClamAV</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:UserID typeOfUserID="AcceptedDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Metadata record</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_metadata_record.pdf</r:String>
+          </r:AlternateTitle>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/cjsxm3m</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:85c0ba5f-fd47-4a12-bc15-269696663958:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>85c0ba5f-fd47-4a12-bc15-269696663958</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="FileNumber">D037F04</r:UserID>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Other</r:UserID>
+        <r:UserID typeOfUserID="FormatName">R</r:UserID>
+        <r:UserID typeOfUserID="Size">10240</r:UserID>
+        <r:UserID typeOfUserID="SourceInformation">isps(at)yale(dot)edu</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">True</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">R</r:UserID>
+        <r:UserID typeOfUserID="Checksum">1D7B0F9DA255F550094C8C5A1EFCEFA13B65A950EA0C041E6E801BE563802288</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckOutcome">OK</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckMethod">ClamAV</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:UserID typeOfUserID="AcceptedDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Program file</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_public_R.R</r:String>
+          </r:AlternateTitle>
+          <r:Copyright>
+            <r:String xml:lang="en-US">CC BY-NC-ND</r:String>
+          </r:Copyright>
+          <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Authors</source>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/2ngf276</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:b74fb834-ed57-41f7-b002-2e110660b1d7:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>b74fb834-ed57-41f7-b002-2e110660b1d7</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="FileNumber">D037F06</r:UserID>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Supplementary Materials</r:UserID>
+        <r:UserID typeOfUserID="FormatName">Adobe Acrobat (8.1) .pdf</r:UserID>
+        <r:UserID typeOfUserID="Size">140288</r:UserID>
+        <r:UserID typeOfUserID="SourceInformation">isps(at)yale(dot)edu</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">True</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">Adobe</r:UserID>
+        <r:UserID typeOfUserID="SoftwareVersion">8.1</r:UserID>
+        <r:UserID typeOfUserID="Checksum">F0FB7ECB61E065BF4FC67EE8025616504322614DBE3D2CB3E563441E0971B590</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckOutcome">OK</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckMethod">ClamAV</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:UserID typeOfUserID="AcceptedDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Supporting materials</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_supporting_appendix.pdf</r:String>
+          </r:AlternateTitle>
+          <r:Copyright>
+            <r:String xml:lang="en-US">CC BY-NC-ND</r:String>
+          </r:Copyright>
+          <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Authors</source>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/h9w0w44</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:bc0681cd-a137-4f1c-83c6-54300e1c46de:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>bc0681cd-a137-4f1c-83c6-54300e1c46de</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Data</r:UserID>
+        <r:UserID typeOfUserID="FormatName">.csv</r:UserID>
+        <r:UserID typeOfUserID="Size">160586</r:UserID>
+        <r:UserID typeOfUserID="CreationDate">12/10/2018 3:47:10 PM</r:UserID>
+        <r:UserID typeOfUserID="KindOfData">Observed behavior</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">False</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">12/10/2018 3:47:10 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">Text Editor</r:UserID>
+        <r:UserID typeOfUserID="Checksum">DA070187B161931EB60102008C9FE7907E4660438519FA9B9656A45D317D70DF</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:Citation>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_public_dta.csv</r:String>
+          </r:AlternateTitle>
+          <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Curation System</source>
+        </r:Citation>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:7a0c8055-2fae-475b-a726-8e4d47ba891c:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>7a0c8055-2fae-475b-a726-8e4d47ba891c</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="FileNumber">D037F05</r:UserID>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Other</r:UserID>
+        <r:UserID typeOfUserID="FormatName">Stata (10.0) .do</r:UserID>
+        <r:UserID typeOfUserID="Size">6144</r:UserID>
+        <r:UserID typeOfUserID="SourceInformation">isps(at)yale(dot)edu</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">True</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">Stata</r:UserID>
+        <r:UserID typeOfUserID="SoftwareVersion">10.0</r:UserID>
+        <r:UserID typeOfUserID="Checksum">D5B73578902A26E2B9A2848358F24C0FB41A483B3D06FE66CDAD8BDE850FC2A7</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckOutcome">OK</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckMethod">ClamAV</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:UserID typeOfUserID="AcceptedDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Program file</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_public_do.do</r:String>
+          </r:AlternateTitle>
+          <r:Copyright>
+            <r:String xml:lang="en-US">CC BY-NC-ND</r:String>
+          </r:Copyright>
+          <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Authors</source>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/wm37q5r</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:3568c501-785e-4535-902f-9e5cb4a6736d:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>3568c501-785e-4535-902f-9e5cb4a6736d</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="FileNumber">D037F02</r:UserID>
+        <r:UserID typeOfUserID="Version">1</r:UserID>
+        <r:UserID typeOfUserID="Type">Data</r:UserID>
+        <r:UserID typeOfUserID="FormatName">Excel .csv</r:UserID>
+        <r:UserID typeOfUserID="Size">160768</r:UserID>
+        <r:UserID typeOfUserID="CreationDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="KindOfData">Observed behavior</r:UserID>
+        <r:UserID typeOfUserID="SourceInformation">isps(at)yale(dot)edu</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">True</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">Text Editor</r:UserID>
+        <r:UserID typeOfUserID="Checksum">DA070187B161931EB60102008C9FE7907E4660438519FA9B9656A45D317D70DF</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckOutcome">OK</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckMethod">ClamAV</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:UserID typeOfUserID="AcceptedDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Dataset</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_public_csv.csv</r:String>
+          </r:AlternateTitle>
+          <r:Copyright>
+            <r:String xml:lang="en-US">CC BY-NC-ND</r:String>
+          </r:Copyright>
+          <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Authors</source>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/1c5b061</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:defd2897-abb5-4c9f-83fb-e5fe0017275a:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>defd2897-abb5-4c9f-83fb-e5fe0017275a</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Not Selected</r:UserID>
+        <r:UserID typeOfUserID="FormatName">.xml</r:UserID>
+        <r:UserID typeOfUserID="Size">45056</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">False</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">11/28/2017 10:20:39 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">XML</r:UserID>
+        <r:UserID typeOfUserID="Checksum">6D2644F37D0F873960497AA9A4A7C97F62A6C26D02FAC2864088BEA41315109A</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckOutcome">OK</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckMethod">ClamAV</r:UserID>
+        <r:UserID typeOfUserID="VirusCheckDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:UserID typeOfUserID="AcceptedDate">11/28/2017 10:25:51 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Codebook</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_public_xml.xml</r:String>
+          </r:AlternateTitle>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/n2z354p</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:OtherMaterial isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:9bd920ee-46ce-4099-8c7f-fb16fa4cab89:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>9bd920ee-46ce-4099-8c7f-fb16fa4cab89</r:ID>
+        <r:Version>3</r:Version>
+        <r:UserID typeOfUserID="FileNumber">D037F08</r:UserID>
+        <r:UserID typeOfUserID="PersistentLinkDate">12/10/2018 3:47:17 PM</r:UserID>
+        <r:UserID typeOfUserID="Version">0</r:UserID>
+        <r:UserID typeOfUserID="Type">Supplementary Materials</r:UserID>
+        <r:UserID typeOfUserID="FormatName">.xml</r:UserID>
+        <r:UserID typeOfUserID="Size">152189</r:UserID>
+        <r:UserID typeOfUserID="CreationDate">12/10/2018 3:47:17 PM</r:UserID>
+        <r:UserID typeOfUserID="IsPublicAccess">True</r:UserID>
+        <r:UserID typeOfUserID="UploadedDate">12/10/2018 3:47:17 PM</r:UserID>
+        <r:UserID typeOfUserID="Software">DDI</r:UserID>
+        <r:UserID typeOfUserID="Checksum">7778C2AFCA6985248CFDFBEDE4FCE9F94C5525A828F536B4D1D94C8B657A8DE2</r:UserID>
+        <r:UserID typeOfUserID="ChecksumMethod">SHA256</r:UserID>
+        <r:UserID typeOfUserID="ChecksumDate">12/10/2018 5:52:48 PM</r:UserID>
+        <r:Citation>
+          <r:Title>
+            <r:String xml:lang="en-US">Metadata (DDI 3.2)</r:String>
+          </r:Title>
+          <r:AlternateTitle>
+            <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011.ddi32.xml</r:String>
+          </r:AlternateTitle>
+          <r:Copyright>
+            <r:String xml:lang="en-US">CC BY-NC-ND</r:String>
+          </r:Copyright>
+          <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Curation System</source>
+        </r:Citation>
+        <r:ExternalURLReference>http://hdl.handle.net/10079/sbcc2tz</r:ExternalURLReference>
+      </r:OtherMaterial>
+      <r:Embargo isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:a9058a3a-9e81-4205-94d6-91dce3b0149d:3</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>a9058a3a-9e81-4205-94d6-91dce3b0149d</r:ID>
+        <r:Version>3</r:Version>
+        <r:Description>
+          <r:Content xml:lang="en-US">None known</r:Content>
+        </r:Description>
+      </r:Embargo>
+      <r:DataCollectionReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>4372798d-3094-4c58-b108-1af66d48a868</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>DataCollection</r:TypeOfObject>
+      </r:DataCollectionReference>
+      <r:PhysicalInstanceReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>c5083c61-5eb7-45ec-adf1-20e8283bfec7</r:ID>
+        <r:Version>4</r:Version>
+        <r:TypeOfObject>PhysicalInstance</r:TypeOfObject>
+      </r:PhysicalInstanceReference>
+    </StudyUnit>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <PhysicalInstance isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:c5083c61-5eb7-45ec-adf1-20e8283bfec7:4</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>c5083c61-5eb7-45ec-adf1-20e8283bfec7</r:ID>
+      <r:Version>4</r:Version>
+      <r:UserID typeOfUserID="FileNumber">D037F01</r:UserID>
+      <r:UserAttributePair>
+        <r:AttributeKey>ddi31:Paths</r:AttributeKey>
+        <r:AttributeValue>{"0":"D:\\data\\processing\\b2f94aba-0238-4583-89e7-349a026a91ec\\Butler_Broockman_AJPS_2011_public_dta.dta"}</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>FileType</r:AttributeKey>
+        <r:AttributeValue>Data</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>FormatName</r:AttributeKey>
+        <r:AttributeValue>Stata (10.0) .dta</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>Size</r:AttributeKey>
+        <r:AttributeValue>136192</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>CreationDate</r:AttributeKey>
+        <r:AttributeValue>11/28/2017 10:20:39 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>KindOfData</r:AttributeKey>
+        <r:AttributeValue>Observed behavior</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>SourceInformation</r:AttributeKey>
+        <r:AttributeValue>isps(at)yale(dot)edu</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>UploadedDate</r:AttributeKey>
+        <r:AttributeValue>11/28/2017 10:20:39 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>Software</r:AttributeKey>
+        <r:AttributeValue>Stata</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>SoftwareVersion</r:AttributeKey>
+        <r:AttributeValue>10.0</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>ChecksumDate</r:AttributeKey>
+        <r:AttributeValue>12/10/2018 5:52:48 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>VirusCheckOutcome</r:AttributeKey>
+        <r:AttributeValue>OK</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>VirusCheckMethod</r:AttributeKey>
+        <r:AttributeValue>ClamAV</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>VirusCheckDate</r:AttributeKey>
+        <r:AttributeValue>11/28/2017 10:25:50 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:UserAttributePair>
+        <r:AttributeKey>AcceptedDate</r:AttributeKey>
+        <r:AttributeValue>11/28/2017 10:25:51 PM</r:AttributeValue>
+      </r:UserAttributePair>
+      <r:Citation>
+        <r:Title>
+          <r:String xml:lang="en-US">Dataset</r:String>
+        </r:Title>
+        <r:AlternateTitle>
+          <r:String xml:lang="en-US">Butler_Broockman_AJPS_2011_public_dta.dta</r:String>
+        </r:AlternateTitle>
+        <r:Copyright>
+          <r:String xml:lang="en-US">CC BY-NC-ND</r:String>
+        </r:Copyright>
+        <source xml:lang="en-US" xmlns="http://purl.org/dc/elements/1.1/">Authors</source>
+      </r:Citation>
+      <DataFingerprint type="data">
+        <DigitalFingerprintValue>2401EA36E73FE747B3CBA898B3D82C2AEB290ADB6CFD0B25AF91B3331AC5DC98</DigitalFingerprintValue>
+        <AlgorithmSpecification>SHA256</AlgorithmSpecification>
+      </DataFingerprint>
+      <r:DataRelationshipReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>abfce5f0-de17-41c8-99ea-188b641c755f</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>DataRelationship</r:TypeOfObject>
+      </r:DataRelationshipReference>
+      <DataFileIdentification isMaster="false">
+        <DataFileURI isPublic="true">http://hdl.handle.net/10079/rv15f58</DataFileURI>
+      </DataFileIdentification>
+      <GrossFileStructure isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:81cf1790-5124-43e2-8c5b-4692d85503b5:4</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>81cf1790-5124-43e2-8c5b-4692d85503b5</r:ID>
+        <r:Version>4</r:Version>
+        <CaseQuantity>4859</CaseQuantity>
+      </GrossFileStructure>
+      <StatisticalSummary>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>bc969d35-5aef-48f2-9a95-a6e45dd48dfe</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>2668c42a-900a-4e3a-8b0a-0b49629a973a</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>b5d5a0c6-d651-496d-bc55-e121e6c0f871</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>57922f21-8ecf-4695-b00a-8953d504b728</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>65f9bbe1-f757-4af2-bde1-0a94695faae3</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>05338967-bd5c-46fe-a852-27941b5d4c22</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>8cd6e22a-a982-4e45-8ea4-5a953dcb29b8</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>223ba5ec-96d3-45e9-bb41-a60d1045a763</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>026ff4f8-58a7-4427-a177-0f7a87f7d70c</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>86b5800f-1e7c-4994-83cb-815da0096901</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>6e4e776d-2f60-439b-aa1c-2dc80266ee47</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>b4e73e31-9bb7-4962-ad47-463cf8dadb74</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>5f7733dc-7ad5-4c4c-83cf-04efdb905be1</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>0e5b9a11-3032-40f7-a752-313acae71113</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+        <VariableStatisticsReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>69425dd3-23a8-4201-9ac5-d36d83c4f5d2</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>VariableStatistics</r:TypeOfObject>
+        </VariableStatisticsReference>
+      </StatisticalSummary>
+    </PhysicalInstance>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <DataRelationship isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:abfce5f0-de17-41c8-99ea-188b641c755f:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>abfce5f0-de17-41c8-99ea-188b641c755f</r:ID>
+      <r:Version>1</r:Version>
+      <DataRelationshipName>
+        <r:String xml:lang="en-US">Temp Package</r:String>
+      </DataRelationshipName>
+      <LogicalRecord isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:d08b7a9f-659b-4294-8ec1-d4142caf4dba:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>d08b7a9f-659b-4294-8ec1-d4142caf4dba</r:ID>
+        <r:Version>1</r:Version>
+        <LogicalRecordName>
+          <r:String xml:lang="en-US">Temp Package</r:String>
+        </LogicalRecordName>
+        <VariablesInRecord>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>d14d7f7c-2ab0-471c-a9c7-93165a4c1822</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>2545b11d-329b-43c8-ac47-dad540339616</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>e8465a9c-2783-425a-956e-f2fe3ba0990d</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>64021049-6bdb-4110-9f9a-2f1b165353db</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>da89990f-0330-4fbe-a7c5-57d28c9e474e</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>9fb2f255-106f-4fc5-af3e-1d4cc5b5337a</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>2fda8b25-4795-4ede-ba9a-a4b4eb73f486</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>6ef56bfb-2250-45d2-aff8-d0f8d37eeb83</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>5d0bffc0-d38e-4d40-8ebd-45faef99c2be</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>347e8c94-bcbc-4667-a282-45113972e8ea</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>016a6b5a-dc4e-407a-b946-4c302cfd65cb</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>2bdbc721-671f-451b-acc4-a0e51a02d9fd</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>77a75fb3-aa2b-44aa-8df0-b2f973e682f1</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>63e87f14-84d4-47fc-b0a9-3f5758a3c126</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+          <VariableUsedReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>467a83ff-3a65-41e5-a99f-b737ba507ddd</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+          </VariableUsedReference>
+        </VariablesInRecord>
+      </LogicalRecord>
+    </DataRelationship>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:d14d7f7c-2ab0-471c-a9c7-93165a4c1822:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>d14d7f7c-2ab0-471c-a9c7-93165a4c1822</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_party</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Party of legislator</r:Content>
+      </r:Label>
+      <VariableRepresentation>
+        <r:TextRepresentation blankIsMissingValue="false" maxLength="1" />
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:2545b11d-329b-43c8-ac47-dad540339616:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>2545b11d-329b-43c8-ac47-dad540339616</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_republican</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Republican legislator</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>348933fd-2d8a-4873-90ea-ab437dc9f827</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:348933fd-2d8a-4873-90ea-ab437dc9f827:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>348933fd-2d8a-4873-90ea-ab437dc9f827</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">leg_republican Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:f108fd46-e29b-4b15-9cce-9b3ea74ddce1:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>f108fd46-e29b-4b15-9cce-9b3ea74ddce1</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>edbefcff-28eb-4f0b-aa41-1c2a89075983</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:2bf62a46-5777-4818-ae46-a4642fa78e5b:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>2bf62a46-5777-4818-ae46-a4642fa78e5b</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>4d83a90c-4d8e-4f6d-8a9f-125ab76fce5e</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:edbefcff-28eb-4f0b-aa41-1c2a89075983:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>edbefcff-28eb-4f0b-aa41-1c2a89075983</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Democrat</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:4d83a90c-4d8e-4f6d-8a9f-125ab76fce5e:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>4d83a90c-4d8e-4f6d-8a9f-125ab76fce5e</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Republican</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:e8465a9c-2783-425a-956e-f2fe3ba0990d:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>e8465a9c-2783-425a-956e-f2fe3ba0990d</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_black</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Black legislator</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>000ed421-fe6c-4a5f-aa87-286caea4ed37</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:000ed421-fe6c-4a5f-aa87-286caea4ed37:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>000ed421-fe6c-4a5f-aa87-286caea4ed37</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">leg_black Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:00e79c4a-18c9-4a5a-b965-33eb26bf9111:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>00e79c4a-18c9-4a5a-b965-33eb26bf9111</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>c306034a-4868-45ec-bb1f-80c2afd2f72e</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:77ee5d37-471c-413b-8496-e3a02f232f55:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>77ee5d37-471c-413b-8496-e3a02f232f55</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>fe37dd98-713f-440f-885b-df2218fbb210</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:c306034a-4868-45ec-bb1f-80c2afd2f72e:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>c306034a-4868-45ec-bb1f-80c2afd2f72e</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">not black legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:fe37dd98-713f-440f-885b-df2218fbb210:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>fe37dd98-713f-440f-885b-df2218fbb210</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">black legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:64021049-6bdb-4110-9f9a-2f1b165353db:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>64021049-6bdb-4110-9f9a-2f1b165353db</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_latino</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Latino legislator</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>65e8d053-9d44-4386-8137-31eff9f0a597</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:65e8d053-9d44-4386-8137-31eff9f0a597:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>65e8d053-9d44-4386-8137-31eff9f0a597</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">leg_latino Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:4e420492-ad74-4ff5-849a-ebb100644c4c:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>4e420492-ad74-4ff5-849a-ebb100644c4c</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>0f53b5a1-1f1b-4612-b3ae-ae11559846cc</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:c6b4514c-8699-43ee-bd04-0406b4fa44f1:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>c6b4514c-8699-43ee-bd04-0406b4fa44f1</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>ef3adbb3-f221-42c6-bd0c-5151cfcb6110</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:0f53b5a1-1f1b-4612-b3ae-ae11559846cc:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>0f53b5a1-1f1b-4612-b3ae-ae11559846cc</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">non-Latino legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:ef3adbb3-f221-42c6-bd0c-5151cfcb6110:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>ef3adbb3-f221-42c6-bd0c-5151cfcb6110</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Latino legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:da89990f-0330-4fbe-a7c5-57d28c9e474e:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>da89990f-0330-4fbe-a7c5-57d28c9e474e</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">reply_atall</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Responded to constituent</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>f8217b5c-9237-4262-a1aa-159a7d95013d</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:f8217b5c-9237-4262-a1aa-159a7d95013d:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>f8217b5c-9237-4262-a1aa-159a7d95013d</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">reply_at_all Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:684d00c9-d288-4e3f-b8dc-766ba90e8286:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>684d00c9-d288-4e3f-b8dc-766ba90e8286</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>01d73937-84e6-482a-966c-f6de7d45cf1e</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:827fe1ab-c1db-468f-b412-f0fa8bcfa8f0:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>827fe1ab-c1db-468f-b412-f0fa8bcfa8f0</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>957d8e69-5e6c-421c-b820-e4f9448b9883</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:01d73937-84e6-482a-966c-f6de7d45cf1e:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>01d73937-84e6-482a-966c-f6de7d45cf1e</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">did not receive response</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:957d8e69-5e6c-421c-b820-e4f9448b9883:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>957d8e69-5e6c-421c-b820-e4f9448b9883</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">received response</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:9fb2f255-106f-4fc5-af3e-1d4cc5b5337a:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>9fb2f255-106f-4fc5-af3e-1d4cc5b5337a</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_deshawn</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Treatment name "DeShawn"</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>10649886-ae96-4887-8f69-939786420df0</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:10649886-ae96-4887-8f69-939786420df0:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>10649886-ae96-4887-8f69-939786420df0</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_deshawn Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:99794b68-0122-4a30-a3c1-d323e505f661:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>99794b68-0122-4a30-a3c1-d323e505f661</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>0da44571-a909-459d-90d6-1f1a87eafe75</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:77419925-9576-4459-89fd-0fe727ede0e9:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>77419925-9576-4459-89fd-0fe727ede0e9</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>eddf7d9b-3e87-4715-9055-8ae28b44418e</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:0da44571-a909-459d-90d6-1f1a87eafe75:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>0da44571-a909-459d-90d6-1f1a87eafe75</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Jake</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:eddf7d9b-3e87-4715-9055-8ae28b44418e:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>eddf7d9b-3e87-4715-9055-8ae28b44418e</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">DeShawn</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:2fda8b25-4795-4ede-ba9a-a4b4eb73f486:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>2fda8b25-4795-4ede-ba9a-a4b4eb73f486</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_demprimary</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Asked to vote in Dem primary</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>6537a3d6-d2e0-441e-b512-d5927e2d7872</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:6537a3d6-d2e0-441e-b512-d5927e2d7872:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>6537a3d6-d2e0-441e-b512-d5927e2d7872</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_demprimary Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:a3493a81-34a5-49e3-8bb2-8f441920a956:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>a3493a81-34a5-49e3-8bb2-8f441920a956</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>46578b2d-392c-4a83-be68-62381bf827ca</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:16d66e64-7896-4216-92cb-0b6ef118be34:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>16d66e64-7896-4216-92cb-0b6ef118be34</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>e95602cb-6c32-4fdd-b200-5efa9b935744</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:46578b2d-392c-4a83-be68-62381bf827ca:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>46578b2d-392c-4a83-be68-62381bf827ca</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">non-Dem primary</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:e95602cb-6c32-4fdd-b200-5efa9b935744:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>e95602cb-6c32-4fdd-b200-5efa9b935744</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Dem primary</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:6ef56bfb-2250-45d2-aff8-d0f8d37eeb83:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>6ef56bfb-2250-45d2-aff8-d0f8d37eeb83</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_repprimary</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Asked to vote in Rep primary</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>9b56a733-3523-46c9-9fad-99bfd2a4a53f</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:9b56a733-3523-46c9-9fad-99bfd2a4a53f:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>9b56a733-3523-46c9-9fad-99bfd2a4a53f</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_repprimary Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:96bec2f5-5d08-41e0-aabd-cc01a0e0a608:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>96bec2f5-5d08-41e0-aabd-cc01a0e0a608</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>3eae61b5-175b-40f1-84db-7e6f4fe5b11b</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:28cc84af-5880-4fc6-9426-7b0b5141bb1a:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>28cc84af-5880-4fc6-9426-7b0b5141bb1a</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>1b585422-0765-4f85-b9e1-21bfcba1d681</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:3eae61b5-175b-40f1-84db-7e6f4fe5b11b:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>3eae61b5-175b-40f1-84db-7e6f4fe5b11b</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">non-Rep primary</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:1b585422-0765-4f85-b9e1-21bfcba1d681:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>1b585422-0765-4f85-b9e1-21bfcba1d681</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Rep primary</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:5d0bffc0-d38e-4d40-8ebd-45faef99c2be:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>5d0bffc0-d38e-4d40-8ebd-45faef99c2be</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_noprimary</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Did not id party for future elections</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>60948a28-e016-4fc4-b3f1-65c11a936b4c</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:60948a28-e016-4fc4-b3f1-65c11a936b4c:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>60948a28-e016-4fc4-b3f1-65c11a936b4c</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_noprimary Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:c72648db-426b-4480-a96d-d7b0225dd73d:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>c72648db-426b-4480-a96d-d7b0225dd73d</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>2526f34d-9abe-4c1e-b095-d4839b96e57a</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:bcd2f266-77bf-4035-9618-8b58e617bc97:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>bcd2f266-77bf-4035-9618-8b58e617bc97</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>9e9de6d7-e977-43ef-b55c-843e6780421b</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:2526f34d-9abe-4c1e-b095-d4839b96e57a:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>2526f34d-9abe-4c1e-b095-d4839b96e57a</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">R or D primary indicated</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:9e9de6d7-e977-43ef-b55c-843e6780421b:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>9e9de6d7-e977-43ef-b55c-843e6780421b</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">no party primary indicated</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:347e8c94-bcbc-4667-a282-45113972e8ea:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>347e8c94-bcbc-4667-a282-45113972e8ea</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_group</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Name/party group</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>83545f2f-7c08-40e6-8507-cb5cec4b0bef</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:83545f2f-7c08-40e6-8507-cb5cec4b0bef:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>83545f2f-7c08-40e6-8507-cb5cec4b0bef</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_group Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:54feaf47-1a76-4a70-af50-773c2f34e6a3:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>54feaf47-1a76-4a70-af50-773c2f34e6a3</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>edeb4fd2-1f67-42e4-95ef-df403deafd8d</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:7ee30839-e4c0-4d2b-b177-061bf4075fb3:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>7ee30839-e4c0-4d2b-b177-061bf4075fb3</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>a02299c7-133b-40c0-ad8f-527ed2ecca16</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>2</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:dced1858-2789-4b09-a436-0cda3304a252:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>dced1858-2789-4b09-a436-0cda3304a252</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>1b328a55-39e3-42ad-85f7-5879831e20a7</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>3</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:f26a33b9-ae78-400d-af86-cf562d25fb5b:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>f26a33b9-ae78-400d-af86-cf562d25fb5b</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>d4296f4e-1d12-4112-becc-1323cbaee028</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>4</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:855e325e-478b-4499-b773-2e39f5f22577:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>855e325e-478b-4499-b773-2e39f5f22577</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>e503fb8f-c310-458e-9ed0-c2d915ba6fa9</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>5</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:7fe60d0d-6649-4d28-816f-5af6f4d1b7da:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>7fe60d0d-6649-4d28-816f-5af6f4d1b7da</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>ed320cc4-876f-496f-9271-dcfaee3984ff</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>6</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:edeb4fd2-1f67-42e4-95ef-df403deafd8d:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>edeb4fd2-1f67-42e4-95ef-df403deafd8d</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Jake, no party</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:a02299c7-133b-40c0-ad8f-527ed2ecca16:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>a02299c7-133b-40c0-ad8f-527ed2ecca16</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">DeShawn Republican</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:1b328a55-39e3-42ad-85f7-5879831e20a7:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>1b328a55-39e3-42ad-85f7-5879831e20a7</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Jake Republican</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:d4296f4e-1d12-4112-becc-1323cbaee028:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>d4296f4e-1d12-4112-becc-1323cbaee028</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">DeShawn Democrat</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:e503fb8f-c310-458e-9ed0-c2d915ba6fa9:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>e503fb8f-c310-458e-9ed0-c2d915ba6fa9</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Jake Democrat</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:ed320cc4-876f-496f-9271-dcfaee3984ff:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>ed320cc4-876f-496f-9271-dcfaee3984ff</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">DeShawn, no party</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:016a6b5a-dc4e-407a-b946-4c302cfd65cb:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>016a6b5a-dc4e-407a-b946-4c302cfd65cb</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_jake</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Treatment name "Jake"</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>ba54f597-0a63-4796-a5b8-9d04f6b9d74f</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:ba54f597-0a63-4796-a5b8-9d04f6b9d74f:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>ba54f597-0a63-4796-a5b8-9d04f6b9d74f</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_jake Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:7c97e30c-fb50-4873-b781-3c98f1ccc7c8:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>7c97e30c-fb50-4873-b781-3c98f1ccc7c8</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>ee1ecd3b-088e-458c-b696-992cc42359a3</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:bcf988e2-0cfc-4e6c-ae75-80fcffb37aa7:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>bcf988e2-0cfc-4e6c-ae75-80fcffb37aa7</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>ef3d1ead-c1c9-46a6-8554-f0fd797a0818</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:ee1ecd3b-088e-458c-b696-992cc42359a3:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>ee1ecd3b-088e-458c-b696-992cc42359a3</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Not treatment Jake</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:ef3d1ead-c1c9-46a6-8554-f0fd797a0818:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>ef3d1ead-c1c9-46a6-8554-f0fd797a0818</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Treatment Jake</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:2bdbc721-671f-451b-acc4-a0e51a02d9fd:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>2bdbc721-671f-451b-acc4-a0e51a02d9fd</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_notwhite</r:String>
+      </VariableName>
+      <VariableRepresentation additivity="Stock">
+        <r:NumericRepresentation blankIsMissingValue="false">
+          <r:NumericTypeCode>Float</r:NumericTypeCode>
+        </r:NumericRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:77a75fb3-aa2b-44aa-8df0-b2f973e682f1:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>77a75fb3-aa2b-44aa-8df0-b2f973e682f1</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_white</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">White legislator</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>1331e72a-5458-46fb-8a35-a00408c823d3</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:1331e72a-5458-46fb-8a35-a00408c823d3:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>1331e72a-5458-46fb-8a35-a00408c823d3</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">leg_white Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:dd2efe21-79a8-49b7-84fc-fb3ef1c40cab:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>dd2efe21-79a8-49b7-84fc-fb3ef1c40cab</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>e6a3ff65-d711-4c49-9f31-7a8df40faf07</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:34816855-7d14-4331-a192-459054e11a0e:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>34816855-7d14-4331-a192-459054e11a0e</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>ed63e26d-597d-4900-9f78-0b18b524a8c4</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:e6a3ff65-d711-4c49-9f31-7a8df40faf07:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>e6a3ff65-d711-4c49-9f31-7a8df40faf07</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">non-white legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:ed63e26d-597d-4900-9f78-0b18b524a8c4:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>ed63e26d-597d-4900-9f78-0b18b524a8c4</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">white legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:63e87f14-84d4-47fc-b0a9-3f5758a3c126:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>63e87f14-84d4-47fc-b0a9-3f5758a3c126</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">leg_notblackotherminority</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Non-black minority legislator</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>88ccb5b2-ac54-40b3-952a-b1404791ae89</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:88ccb5b2-ac54-40b3-952a-b1404791ae89:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>88ccb5b2-ac54-40b3-952a-b1404791ae89</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">leg_notblackotherminority Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:3d2e8c6c-67f1-4ee7-a6f7-6e62b1b0e677:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>3d2e8c6c-67f1-4ee7-a6f7-6e62b1b0e677</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>b56062e5-a30a-4f99-96b3-265c953b80a8</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:96b5786e-e6b4-4dc9-ae75-d229947880a4:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>96b5786e-e6b4-4dc9-ae75-d229947880a4</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>f3a791b4-43d2-4682-adec-a0852306ade1</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:b56062e5-a30a-4f99-96b3-265c953b80a8:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>b56062e5-a30a-4f99-96b3-265c953b80a8</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">black or white legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:f3a791b4-43d2-4682-adec-a0852306ade1:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>f3a791b4-43d2-4682-adec-a0852306ade1</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">non-black minority legislator</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Variable isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:467a83ff-3a65-41e5-a99f-b737ba507ddd:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>467a83ff-3a65-41e5-a99f-b737ba507ddd</r:ID>
+      <r:Version>1</r:Version>
+      <VariableName>
+        <r:String xml:lang="en-US">treat_primary</r:String>
+      </VariableName>
+      <r:Label>
+        <r:Content xml:lang="en-US">Asked to vote in primary</r:Content>
+      </r:Label>
+      <VariableRepresentation additivity="Stock">
+        <r:CodeRepresentation blankIsMissingValue="false">
+          <r:CodeListReference>
+            <r:Agency>us.yale.isps</r:Agency>
+            <r:ID>9c57d8f6-7781-4a54-86b7-2b4bb8a12605</r:ID>
+            <r:Version>1</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+          </r:CodeListReference>
+        </r:CodeRepresentation>
+      </VariableRepresentation>
+    </Variable>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <CodeList isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:9c57d8f6-7781-4a54-86b7-2b4bb8a12605:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>9c57d8f6-7781-4a54-86b7-2b4bb8a12605</r:ID>
+      <r:Version>1</r:Version>
+      <CodeListName>
+        <r:String xml:lang="en-US">treat_primary Codes</r:String>
+      </CodeListName>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:af3c977e-519a-4ecd-bbb0-ec9380ba145d:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>af3c977e-519a-4ecd-bbb0-ec9380ba145d</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>500d05eb-7606-4cd5-870c-2465476fb4ec</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>0</r:Value>
+      </Code>
+      <Code isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:45234f02-872e-4777-9939-eb7ca9e80bac:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>45234f02-872e-4777-9939-eb7ca9e80bac</r:ID>
+        <r:Version>1</r:Version>
+        <r:CategoryReference>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>88e3448a-1f40-4150-b936-31dde501de21</r:ID>
+          <r:Version>1</r:Version>
+          <r:TypeOfObject>Category</r:TypeOfObject>
+        </r:CategoryReference>
+        <r:Value>1</r:Value>
+      </Code>
+    </CodeList>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:500d05eb-7606-4cd5-870c-2465476fb4ec:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>500d05eb-7606-4cd5-870c-2465476fb4ec</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">did not ask to vote in party primary</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Category isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.6984996Z" isMissing="false" xmlns="ddi:logicalproduct:3_2">
+      <r:URN>urn:ddi:us.yale.isps:88e3448a-1f40-4150-b936-31dde501de21:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>88e3448a-1f40-4150-b936-31dde501de21</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">asked to vote in primary</r:Content>
+      </r:Label>
+    </Category>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7296264Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:bc969d35-5aef-48f2-9a95-a6e45dd48dfe:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>bc969d35-5aef-48f2-9a95-a6e45dd48dfe</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>d14d7f7c-2ab0-471c-a9c7-93165a4c1822</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7296264Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:2668c42a-900a-4e3a-8b0a-0b49629a973a:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>2668c42a-900a-4e3a-8b0a-0b49629a973a</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>2545b11d-329b-43c8-ac47-dad540339616</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.446593949372299</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.497190776410645</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.24719866814782</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-1.95461423296869</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.21491968289093</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2689</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2170</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7296264Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:b5d5a0c6-d651-496d-bc55-e121e6c0f871:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>b5d5a0c6-d651-496d-bc55-e121e6c0f871</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>e8465a9c-2783-425a-956e-f2fe3ba0990d</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.0718254784935174</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.258225293461261</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.0666803021831541</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">9.01052358578022</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">3.31765202476043</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">4510</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">349</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7452412Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:57922f21-8ecf-4695-b00a-8953d504b728:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>57922f21-8ecf-4695-b00a-8953d504b728</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>64021049-6bdb-4110-9f9a-2f1b165353db</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.0290183165260343</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.167875113706413</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.028182053801941</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">29.5224834449212</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">5.61340644732425</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">4718</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">141</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7452412Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:65f9bbe1-f757-4af2-bde1-0a94695faae3:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>65f9bbe1-f757-4af2-bde1-0a94695faae3</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>da89990f-0330-4fbe-a7c5-57d28c9e474e</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.565342663099399</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.495762966540036</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.245780918992577</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-1.93125053982204</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-0.26371300038583</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2112</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2747</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7452412Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:05338967-bd5c-46fe-a852-27941b5d4c22:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>05338967-bd5c-46fe-a852-27941b5d4c22</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>9fb2f255-106f-4fc5-af3e-1d4cc5b5337a</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.499691294505042</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.500051363549879</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.250051366188093</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-2.0008221968729</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.00123520356201608</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2431</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2428</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7452412Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:8cd6e22a-a982-4e45-8ea4-5a953dcb29b8:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>8cd6e22a-a982-4e45-8ea4-5a953dcb29b8</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>2fda8b25-4795-4ede-ba9a-a4b4eb73f486</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.331549701584689</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.470818561110346</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.221670117486017</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-1.48815975357154</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.715858193634445</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">3248</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">1611</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7765663Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:223ba5ec-96d3-45e9-bb41-a60d1045a763:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>223ba5ec-96d3-45e9-bb41-a60d1045a763</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>6ef56bfb-2250-45d2-aff8-d0f8d37eeb83</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.335459971187487</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.472199605536683</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.222972467468999</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-1.51454163135738</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.697195764891644</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">3229</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">1630</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7765663Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:026ff4f8-58a7-4427-a177-0f7a87f7d70c:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>026ff4f8-58a7-4427-a177-0f7a87f7d70c</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>5d0bffc0-d38e-4d40-8ebd-45faef99c2be</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.332990327227825</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.471331612776423</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.222153489202424</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-1.4979875766902</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.708963451441083</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">3241</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">1618</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7765663Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:86b5800f-1e7c-4994-83cb-815da0096901:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>86b5800f-1e7c-4994-83cb-815da0096901</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>347e8c94-bcbc-4667-a282-45113972e8ea</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">6</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">3.32558139534884</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1.97060166985694</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">3.88327094124294</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-0.958449607275587</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-0.332667408420735</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">2</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">3</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">5</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">812</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>2</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">810</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>3</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">820</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>4</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">812</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>5</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">799</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>6</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">806</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7765663Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:6e4e776d-2f60-439b-aa1c-2dc80266ee47:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>6e4e776d-2f60-439b-aa1c-2dc80266ee47</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>016a6b5a-dc4e-407a-b946-4c302cfd65cb</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.500308705494958</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.500051363549879</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.250051366188093</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-2.0008221968729</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-0.00123520356201609</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2428</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">2431</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7765663Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:b4e73e31-9bb7-4962-ad47-463cf8dadb74:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>b4e73e31-9bb7-4962-ad47-463cf8dadb74</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>2bdbc721-671f-451b-acc4-a0e51a02d9fd</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.121424161350071</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.326653170983407</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.106702294113515</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">3.37850900312836</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">2.31886147783935</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7765663Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:5f7733dc-7ad5-4c4c-83cf-04efdb905be1:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>5f7733dc-7ad5-4c4c-83cf-04efdb905be1</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>77a75fb3-aa2b-44aa-8df0-b2f973e682f1</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.878575838649927</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.326653170983407</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.106702294113515</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">3.37850900312836</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-2.31886147783935</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">590</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">4269</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7921144Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:0e5b9a11-3032-40f7-a752-313acae71113:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>0e5b9a11-3032-40f7-a752-313acae71113</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>63e87f14-84d4-47fc-b0a9-3f5758a3c126</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.0495986828565549</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.217136723794023</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.047148356820002</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">15.2309157642311</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4.15025863972789</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">4618</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">241</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <VariableStatistics isUniversallyUnique="true" versionDate="2018-02-06T16:07:51.7921144Z" xmlns="ddi:physicalinstance:3_2">
+      <r:URN>urn:ddi:us.yale.isps:69425dd3-23a8-4201-9ac5-d36d83c4f5d2:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>69425dd3-23a8-4201-9ac5-d36d83c4f5d2</r:ID>
+      <r:Version>1</r:Version>
+      <r:VariableReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>467a83ff-3a65-41e5-a99f-b737ba507ddd</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>Variable</r:TypeOfObject>
+      </r:VariableReference>
+      <TotalResponses>4859</TotalResponses>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ValidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">4859</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>InvalidCases</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Minimum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Maximum</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Mean</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.667009672772177</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>StandardDeviation</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.471331612776424</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Variance</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0.222153489202425</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Kurtosis</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-1.4979875766902</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Skewness</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">-0.708963451441081</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>FirstQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">0</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>Median</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <SummaryStatistic>
+        <TypeOfSummaryStatistic>ThirdQuartile</TypeOfSummaryStatistic>
+        <Statistic isWeighted="false">1</Statistic>
+      </SummaryStatistic>
+      <UnfilteredCategoryStatistics>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>0</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">1618</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+        <VariableCategory>
+          <CategoryValue>
+            <r:Value>1</r:Value>
+          </CategoryValue>
+          <CategoryStatistic>
+            <TypeOfCategoryStatistic>Frequency</TypeOfCategoryStatistic>
+            <Statistic isWeighted="false">3241</Statistic>
+          </CategoryStatistic>
+        </VariableCategory>
+      </UnfilteredCategoryStatistics>
+    </VariableStatistics>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <DataCollection isUniversallyUnique="true" versionDate="2018-12-10T17:52:48.6342473Z" xmlns="ddi:datacollection:3_2">
+      <r:URN>urn:ddi:us.yale.isps:4372798d-3094-4c58-b108-1af66d48a868:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>4372798d-3094-4c58-b108-1af66d48a868</r:ID>
+      <r:Version>1</r:Version>
+      <r:Label>
+        <r:Content xml:lang="en-US">Do Politicians Racially Discriminate Against Constituents? A Field Experiment on State Legislators</r:Content>
+      </r:Label>
+      <MethodologyReference>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>8d74e89d-a25c-4221-adae-2234a92aed85</r:ID>
+        <r:Version>1</r:Version>
+        <r:TypeOfObject>DataCollectionMethodology</r:TypeOfObject>
+      </MethodologyReference>
+      <CollectionEvent isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:1ab625c1-e492-4533-a9af-520f9009bd41:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>1ab625c1-e492-4533-a9af-520f9009bd41</r:ID>
+        <r:Version>1</r:Version>
+        <DataCollectionDate>
+          <r:StartDate>2008-10</r:StartDate>
+          <r:EndDate>2008-11</r:EndDate>
+        </DataCollectionDate>
+        <ModeOfCollection isUniversallyUnique="true">
+          <r:URN>urn:ddi:us.yale.isps:2d46a518-2ed6-45c6-b38e-381b6c85efc9:1</r:URN>
+          <r:Agency>us.yale.isps</r:Agency>
+          <r:ID>2d46a518-2ed6-45c6-b38e-381b6c85efc9</r:ID>
+          <r:Version>1</r:Version>
+          <r:Description>
+            <r:Content xml:lang="en-US">Experiment: Web</r:Content>
+          </r:Description>
+        </ModeOfCollection>
+      </CollectionEvent>
+    </DataCollection>
+  </ddi:Fragment>
+  <ddi:Fragment xmlns:r="ddi:reusable:3_2">
+    <Methodology isUniversallyUnique="true" versionDate="2018-12-10T17:52:48.6342473Z" xmlns="ddi:datacollection:3_2">
+      <r:URN>urn:ddi:us.yale.isps:8d74e89d-a25c-4221-adae-2234a92aed85:1</r:URN>
+      <r:Agency>us.yale.isps</r:Agency>
+      <r:ID>8d74e89d-a25c-4221-adae-2234a92aed85</r:ID>
+      <r:Version>1</r:Version>
+      <DataCollectionMethodology isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:abdd2760-a7aa-4259-8a70-363deec4744e:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>abdd2760-a7aa-4259-8a70-363deec4744e</r:ID>
+        <r:Version>1</r:Version>
+        <r:Description>
+          <r:Content xml:lang="en-US">Field experiment</r:Content>
+        </r:Description>
+      </DataCollectionMethodology>
+      <SamplingProcedure isUniversallyUnique="true">
+        <r:URN>urn:ddi:us.yale.isps:86169f5b-7105-467a-b11e-addd0efaaaf0:1</r:URN>
+        <r:Agency>us.yale.isps</r:Agency>
+        <r:ID>86169f5b-7105-467a-b11e-addd0efaaaf0</r:ID>
+        <r:Version>1</r:Version>
+        <r:Description>
+          <r:Content xml:lang="en-US">State legislators in 44 U.S. states with valid email addresses that were available online through state legislative websites in September 2008.</r:Content>
+        </r:Description>
+      </SamplingProcedure>
+    </Methodology>
+  </ddi:Fragment>
+</ddi:FragmentInstance>
