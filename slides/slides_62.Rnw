@@ -1,0 +1,985 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 6: Linear models, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs62/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ggplot2)
+library(estimatr)
+set.seed(60637)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Returning to inference}
+
+\begin{itemize}
+\item We have some data that are produced from a random sampling procedure, where they are sampled from the same population. 
+\pause
+\item We've selected an estimating procedure, and produced a point estimate of some target estimand using our estimating procedure. 
+\pause
+\item We then produced an estimate of the standard error of our estimate. 
+\pause
+\item Now we would like to be able to say something what that means. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+One way to do this is to use our estimated standard errors to give an interval of uncertainty around our point estimate. 
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Confidence intervals}
+
+\begin{itemize}
+\item A valid confidence interval $CI_n$ for a target parameter $\theta$ with coverage $1-\alpha$
+$$
+\textrm{P}[\theta \in CI_n]\ge 1- \alpha
+$$
+\pause
+
+\item If $\alpha = 0.05$, the probability that the estimand $\theta$ is in our confidence interval is greater than or equal to 0.95.
+
+\pause
+
+
+\item $CI_n$ is a random interval. It is a function of the data we observe.
+
+\pause
+
+\item $\theta$ is a fixed parameter. It does not move.
+
+\pause
+(In the frequentist view of statistics.)
+
+\pause
+
+\item If you use valid confidence repeatedly in your work, 95\% of the time, your confidence intervals will include the true value of the relevant $\theta.$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We could trivially define valid confidence intervals by including the entire support of the data.
+\pause
+(Why wouldn't we want to do that?)
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item The formula for the 95\% confidence interval is:
+$$
+CI_n = \left(\hat \theta_n - 1.96 \times \hat{\textrm{se}},\  \hat \theta_n + 1.96 \times \hat{\textrm{se}} \right)
+$$\pause
+\item The 1.96 value tells us how many standard errors away from the mean we need to include in our interval to get valid coverage. \pause
+\item This formula is based on a \textit{normal approximation}, i.e., we assume the data is going to look like a normal distribution. 
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+The normal distribution has a bell curve shape, with more density around the middle, and less density at more extreme values. 
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+result_n <- rnorm(n = 10000)
+plotdata <- data.frame(
+  x = result_n,
+  Fx = pnorm(result_n),
+  fx = dnorm(result_n)
+)
+
+g <- ggplot(plotdata, aes(x = x, y = fx)) +
+  geom_line() +
+  coord_cartesian(xlim = c(-2.5, 2.5),
+                  ylim = c(0,0.5)) +
+  ggtitle('PDF of Standard Normal Distribution')
+
+g +
+  geom_vline(xintercept = 0, lty = 'dashed', color = 'skyblue') + 
+  geom_segment(aes(x = 0, xend = -1, y = 0.2, yend = 0.2), 
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_segment(aes(x = 0, xend = 1, y = 0.2, yend = 0.2), 
+               arrow = arrow(length = unit(0.25, "cm")), color = 'skyblue') +
+  geom_point(aes(x = 0, y = 0.2), color = 'skyblue') + 
+  annotate(geom="text", x = 0.5, y = .19, label = as.character(expression(sigma)), parse = TRUE, color = 'steelblue') + 
+  annotate(geom="text", x = -0.5, y = .19, label = as.character(expression(sigma)), parse = TRUE, color = 'steelblue') + 
+  annotate(geom="text", x = 0.075, y = .42, label = as.character(expression(mu)), parse = TRUE, color = 'steelblue') + 
+  theme_bw()
+@
+}
+\end{figure}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+If we want to describe symmetric bounds around the mean that contain 95\% of the distribution, this would be from the 2.5th percentile to the 97.5th percentile. 
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+g +
+  stat_function(fun = dnorm,
+                geom = "area",
+                fill = "skyblue",
+                xlim = c(-1.96, 1.96)) +
+  geom_vline(xintercept = 1.96, lty = 'dashed', color = 'skyblue') + 
+  geom_vline(xintercept = -1.96, lty = 'dashed', color = 'skyblue') +  
+  annotate(geom="text", x = -1.96, y = .2, label = round(-1.96, 3), parse = TRUE, color = 'steelblue') +  
+  annotate(geom="text", x = 1.96, y = .2, label = round(1.96, 3), parse = TRUE, color = 'steelblue') + 
+  theme_bw()
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+
+
+\begin{frame}[fragile]
+\small
+
+Returning to our example where we flip a coin twice, let $X$ be the number of heads we observe. Our coin is \textit{not} fair, and the probability of getting a heads is 0.75.
+
+<<>>=
+X <- c(0, 1, 2)
+fx <- c(1/16, 3/8, 9/16)
+(Ex <- sum(X*fx))
+@
+
+
+\pause
+
+Let's take a sample of size $n = 100$ from this distribution, and see what our confidence intervals look like.
+
+<<>>=
+n <- 100
+x_observed <- sample(X, prob = fx, replace = TRUE, size = n)
+
+head(x_observed)
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+Our estimates of the mean and standard error of the mean.
+
+<<>>=
+(theta_hat <- mean(x_observed))
+(se_hat <- sd(x_observed)/sqrt(length(x_observed)))
+@
+
+\pause
+
+Putting it together, the 95\% normal approximation-based confidence interval.
+
+<<>>=
+(CI95 <- c(theta_hat + c(-1,1)*1.96*se_hat))
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(data.frame(conf_lower = CI95[1], conf_upper = CI95[2], mean = theta_hat),
+       aes(y = 1, x = mean)) +
+  geom_point(color = 'skyblue') +
+  geom_linerange(aes(xmin=conf_lower,xmax=conf_upper), color = 'skyblue', alpha = 0.85) +
+  theme_bw() +
+  coord_cartesian(xlim = c(1.25, 1.75),) +
+  geom_vline(xintercept = Ex, color = 'black', lty = 'dashed') +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  ggtitle('95% Normal Approximation-Based CI,\n2 Weighted Coin Flips, Sample Size = 100')
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+What if we did this many times?
+
+\pause
+\scriptsize
+<<>>=
+n_iter <- 50
+x_mat <- replicate(n_iter, sample(X, prob = fx, replace = TRUE,
+                                  size = n))
+@
+
+\pause
+
+<<>>=
+CI_95f <- function(x){
+  theta_hat <- mean(x)
+  se_hat <- sd(x)/sqrt(length(x_observed))
+  CI_hat <- theta_hat +
+    c('conf_lower' = -1, 'conf_upper' = 1)*1.96*se_hat
+}
+
+sample_CIs <- as.data.frame(t(apply(x_mat, 2, CI_95f)))
+
+head(sample_CIs, 3)
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+sample_CIs$color <- factor(1 + 1*((Ex >= sample_CIs$conf_lower) & 
+        (Ex <= sample_CIs$conf_upper)))
+ggplot(sample_CIs,
+       aes(y = seq(from = 0, to = 2, length.out = n_iter), x = 1, color = color)) +
+  geom_linerange(aes(xmin=conf_lower,xmax=conf_upper), alpha = 0.85, show.legend = FALSE) +
+  scale_color_manual(values = c('red', 'skyblue')) + 
+  theme_bw() +
+  coord_cartesian(xlim = c(1.25, 1.75)) +
+  geom_vline(xintercept = Ex, color = 'black', lty = 'dashed') +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  ggtitle('95% Normal Approximation-Based CI,\n2 Weighted Coin Flips, Sample Size = 100')
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+\item The true mean stays the same.\pause
+
+\item The confidence intervals change, based on the sample.\pause
+
+\end{itemize}
+
+\small
+<<>>=
+mean( (Ex >= sample_CIs$conf_lower) & 
+        (Ex <= sample_CIs$conf_upper) )
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+What if we did this many more times?
+
+\pause
+\small
+<<>>=
+x_mat <- replicate(5000, sample(X, 
+                                prob = fx, 
+                                replace = TRUE,
+                                size = n))
+CI_n <- as.data.frame(t(apply(x_mat, 2, CI_95f)))
+@
+
+\pause
+
+<<>>=
+mean( (Ex >= CI_n$conf_lower) & (Ex <= CI_n$conf_upper) )
+@
+
+
+
+\end{frame}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]{Applied example}
+
+
+
+We can see this in action with respect to the paper by Devah Pager:
+
+\vskip 1 cm
+\Large
+\textcolor{Maroon}{Pager, D. (2003). The mark of a criminal record. \textit{American Journal of Sociology}, 108(5), 937-975.}
+\nocite{pager2003mark}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item The study was an audit study, where pairs of white and pairs of black hypothetical job applicants applied to real jobs.
+
+\pause
+
+\item In each pair, one respondent listed a criminal record on job applications; the other did not. Otherwise, applicants were matched.
+
+\pause
+
+
+\item The outcome is whether applicants got a callback.
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\small
+<<message=FALSE>>=
+dfp <- data.frame(
+  black = rep(c(0, 1), times = c(300, 400)),
+  record = c(rep(c(0, 1), each = 150),
+             rep(c(0, 1), each = 200)),
+  call_back = c(
+    # whites without criminal records
+    rep(c(0, 1), times = c(99, 51)), # 150
+    # whites with criminal records
+    rep(c(0, 1), times = c(125, 25)), # 150; 
+    # - callbacks could be 25 or 26
+    # blacks without criminal records
+    rep(c(0, 1), times = c(172, 28)), # 200
+    # blacks with criminal records
+    rep(c(0, 1), times = c(190, 10)) # 200
+  )
+)
+
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+<<message=FALSE>>=
+pager_agg <- aggregate(call_back~black + record, data = dfp, mean)
+pager_agg$race <- factor(pager_agg$black,
+                         levels = c(1, 0),
+                         labels = c('Black', 'White'))
+pager_agg$criminal_record <- factor(pager_agg$record,
+                                    levels = c(1, 0),
+                                    labels = c('Record', 'No Record'))
+
+pager_agg
+@
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{"../assets/pager_2003".png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Let's say our $\hat{\theta}$ here is the overall mean of \texttt{call\_back} among black applicants.
+
+<<>>=
+(theta_hat <- mean(dfp$call_back[which(dfp$black == 1)]) )
+@
+\pause
+
+Our $\hat{se}$ is our estimate of the standard error of the mean,
+$$\hat{se} = \sqrt{\hat{\textrm{Var}}[X]/n}.$$
+
+\pause
+
+We get this by plugging in our unbiased sample variance estimate into the formula for the standard error of the mean.
+
+<<>>=
+(se_hat <- sqrt(var(dfp$call_back[which(dfp$black == 1)])/
+                  length(which(dfp$black == 1))))
+
+
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+We can then get our 95\% confidence intervals by plugging into the formula,
+
+
+$$
+CI_n = \left(\hat \theta_n - 1.96 \times \hat{\textrm{se}},\  \theta_n + 1.96 \times \hat{\textrm{se}} \right)
+$$
+
+
+<<>>=
+(CI <- c(theta_hat + c(-1,1)*1.96*se_hat))
+@
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{Inference for linear models}
+
+\begin{itemize}
+\item As a special case of a linear model, when we regress $Y$ on an indicator, we just get the sample mean of $Y$.
+
+\pause
+
+\item In this case, estimating standard errors and confidence intervals follows the same procedures as for sample means.
+\end{itemize}
+
+<<>>=
+model <- lm_robust(call_back ~1,
+            data = dfp[which(dfp$black == 1),])
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Inference for linear models}
+
+\small
+<<>>=
+
+summary(model)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Inference for linear models}
+
+\small
+<<>>=
+
+confint.default(model)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We can think about parameters in a linear model in a similar way.
+
+$$
+\E[Y| X] = \beta_0 + {\beta}_1 X
+$$
+
+\pause
+\item The true population parameters are generally unknown.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We estimate them for a given sample.
+
+$$ \hat{Y}_i = \hat{\beta}_0 +  \hat{\beta}_1 X_i $$
+
+\pause
+
+\item We will think about our random sample being not just for one variable, but from the joint distribution of $(Y, X)$.
+
+\pause
+
+\item Then each $\hat{\beta}_k$ is also random, with its own sampling distribution.
+
+\pause
+
+\item We can get a point estimate for each of the parameters, $\hat{\beta}_k$: the coefficients in our linear model.
+
+\pause
+
+\item We also want to get an estimate of the standard errors of the estimates, $\sqrt{\hat{\textrm{Var}}[\hat{\beta}_k]}$.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item Let's try this with the dfp data, where the outcome $Y$ is \texttt{call\_back}, regressed on \texttt{black}.
+
+$$
+\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 \textrm{Black}_i
+$$
+
+\end{itemize}
+
+<<>>=
+model2 <- lm_robust(call_back ~ black, data = dfp)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item How do we go about interpreting these coefficients and confidence intervals?
+\end{itemize}
+
+\scriptsize
+<<>>=
+summary(model2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item How do we go about interpreting these coefficients and confidence intervals?
+\end{itemize}
+
+\scriptsize
+<<>>=
+
+confint.default(model2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+<<echo = FALSE>>=
+f <- 'slides_62.Rnw'
+knitr::purl(f)
+knitr::Sweave2knitr(f)
+@

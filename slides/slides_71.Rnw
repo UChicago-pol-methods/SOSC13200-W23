@@ -1,0 +1,860 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+\usepackage{booktabs}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 7: Multivariate regression, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs71/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(estimatr)
+library(modelsummary)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Housekeeping}
+
+\begin{itemize}
+\item Final project
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\centering
+\textcolor{Maroon}{Banerjee, A., Duflo, E., Glennerster, R., \& Kinnan, C. (2015). The miracle of microfinance? Evidence from a randomized evaluation. \textit{American Economic Journal: Applied Economics}, 7(1), 22-53.}\\~\
+\nocite{banerjee2015miracle}
+
+Data is available at openICPSR: \\~\
+\url{https://www.openicpsr.org/openicpsr/project/113599}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Reading papers}
+
+What to get out of reading a research paper:
+\begin{itemize}
+\item \textcolor{Maroon}{What is the main question of the paper?}\pause
+\item What method do the authors use to address the question? \pause
+For empirical papers:\pause
+\begin{itemize}
+\item Data (Where does it come from/how is it generated? What is the sample population? What is being measured?)\pause
+\item Research design/strategy\pause
+\item Statistical tools\pause
+\end{itemize}
+\item What is the answer that the authors get to the main question?
+\end{itemize}
+
+\pause
+How would you answer these questions with the \cite{banerjee2015miracle} paper?
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item The miracle of microfinance
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item What is the point of microfinance, and why might incurring debt help poor households?
+\item Downsides?
+\item Proposed add-on benefits?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Study design}
+
+\begin{itemize}
+\item Neighborhood selection criteria \pause \\
+\begin{quote}
+These areas were selected based on having no preexisting microfinance presence and on having residents who were desirable potential borrowers: poor, but not ``the poorest of the poor.'' Areas with high concentrations of construction workers were avoided because they move frequently, which makes them undesirable as microfinance clients...Conversely, the largest such areas in Hyderabad were not selected for the study, since Spandana was keen to start operations there.
+\end{quote}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Study design}
+
+\begin{itemize}
+\item Baseline survey ``random'' sampling procedures. Problems with this? \pause
+\item Pairwise randomization: Why? \pause
+\item Endline survey sampling procedures: \pause 
+\begin{itemize}
+\item households with high likelihood of having borrowed: \textit{those that had resided in the area for at least 3 years and contained at least 1 woman aged 18 to 55.}
+\item Oversample Spandana borrowers to search for heterogeneous treatment effects; \pause does this cause problems for inference?
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item What is the difference between treatment and control in this setting?
+\item Reduced-form/intent-to-treat estimates
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+Too many variables\dots
+\tiny
+<<>>=
+dat <- read.csv('../data/banerjee-et-al.csv')
+
+str(dat)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Table 2, Panel A}
+
+<<table2, echo = FALSE>>=
+area_controls <- c('area_pop_base', 
+                   'area_debt_total_base', 'area_business_total_base', 'area_exp_pc_mean_base', 'area_literate_head_base', 'area_literate_base')
+
+controls <- paste(area_controls, collapse = ' + ')
+outcomes <- c('spandana_1', 'othermfi_1', 'anymfi_1', 'anybank_1', 'anyinformal_1',  'anyloan_1', 'everlate_1', 'mfi_loan_cycles_1')
+
+lm_list <- lm_list2 <- list()
+for(out in outcomes){
+  ff <- formula(paste0(out, ' ~ treatment +', controls))
+  lm_list[[out]] <- lm_robust(ff, data = dat, clusters = areaid, weights = w1)
+  lm_list2[[out]] <- mean(dat[which(dat$treatment ==0),out], na.rm = TRUE)
+}
+
+names(lm_list) <- c('Spandana', 'Other MFI', 'Any MFI', 'Other bank', 'Informal', 'Total', 'Ever Late', 'Num Cycles')
+modelsummary(lm_list, stars = TRUE,
+             coef_map = 'treatment', 
+             add_rows = cbind(`Control mean` = 'Control mean', round(as.data.frame(lm_list2),3)), 
+             # gof_omit = 'R2',
+             output = '../assets/banerjee-et-al-table2.tex')
+@
+
+\begin{table}
+\let\center\empty
+\let\endcenter\relax
+\centering
+\resizebox{.9\textwidth}{!}{\input{../assets/banerjee-et-al-table2.tex}}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Interpreting multiple regression}
+
+For relationships with a single independent variable, we proposed the following framework:\pause
+\begin{itemize}
+\item We would like to describe a conditional relationship in the data
+$$
+\E[Y | X = x] = h(x)
+$$
+where a simple version is
+$$
+g(x) = \beta_0 +  \beta_1 x
+$$\pause
+\item In other words,
+$$
+Y_i = \beta_0 +  \beta_1 X_i + \epsilon_i
+$$
+where
+$$
+\E[\epsilon_i|X_i] = 0
+$$
+and
+$$
+\Var[\epsilon_i|X_i] = \sigma^2
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item For a multivariate generalization to $K$ variables, we can consider:
+$$
+\E[Y | X_1 = x_1, X_2 = x_2, \dots,  X_K = x_K] = h(x_1, x_2, \dots, x_K)
+$$
+where the we propose that $g(x_1, x_2, \dots, x_K)$ is
+$$
+g(x) = \beta_0 +  \beta_1 x_1 + \beta_2 x_2 + \dots \beta_K x_K
+$$\pause
+\item This is a \textit{model} of the conditional relationship we're interested in. \pause
+\item It produces a \textit{linear approximation} of the conditional expectation, but if the true relationship is not linear, we are just approximating it.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We can then define \textit{residuals} in the same way we did for the univariate model:
+$$
+\hat \epsilon_i = Y_i - \hat Y_i = Y_i- \left( \hat \beta_0 + \hat \beta_1 X_{1i} + \hat \beta_2 X_{2i} + \dots + \hat \beta_K X_{Ki}\right).
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item In the same way as with univariate regression, we calculate estimates of $\hat \beta_0$, $\hat \beta_1$, $\hat \beta_2$, \dots, $\hat \beta_K$ as the values that minimize the residual sums of squares\pause
+$$
+\text{RSS} = \sum_{i = 1}^n\hat{\epsilon}_i^2
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item This tells us how we get the least squares regression estimates for coefficients, but how do we interpret them?
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Consider a simple multiple regression model,
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon
+$$\pause
+\item Including more independent variables in our model can give us more predictive power for $Y$; if $Y$ varies with $X_1$ \textit{and} $X_2$, and $X_1$ and $X_2$ are not perfectly correlated, we are going to be able to explain more of the variation in $Y$ by including both $X_1$ and $X_2$. \pause
+\item We interpret the coefficient on $\beta_1$ as the amount that our prediction for $Y$ changes with a one unit change in $X_1$, \textit{holding the value of} $X_2$ \textit{constant}. \pause This is what we mean when we say we \textit{control} for additional variables in a model.
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item This model is not inherently causal. It just describes a relationship. \pause
+\item Consider a \textit{causal} model, where $W_i$ is a manipulated binary treatment variable:
+$$
+Y = \gamma_0 + \gamma_1 W + \epsilon
+$$\pause
+\item The model is not different from our univariate regression model, but our interpretation differs based on what we know about the relationships between the variables. \pause
+\item We can also have a causal model, where we have one causal variable, and we control for additional explanatory variables that are not directly causal. 
+$$
+Y = \gamma_0 + \gamma_1 W + \beta_1 X_1 + \beta_2 X_2 + \epsilon
+$$\pause
+\item If we already believe that we can get a causal interpretation from the first model (for example, because of \textit{independence} of treatment and outcomes), why would we use the second model?
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Returning to Table 2, Panel A}
+
+\begin{table}
+\let\center\empty
+\let\endcenter\relax
+\centering
+\resizebox{.9\textwidth}{!}{\input{../assets/banerjee-et-al-table2.tex}}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+\scriptsize
+<<>>=
+
+formula1 <- formula(paste0('spandana_1 ~ treatment', 
+                           '+ area_pop_base',
+                           '+ area_debt_total_base',
+                           '+ area_business_total_base',
+                           '+ area_exp_pc_mean_base',
+                           '+ area_literate_head_base',
+                           '+ area_literate_base'))
+
+lm_robust(formula1, data = dat, clusters = areaid, weights = w1)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item Banerjee et al. account for oversampling of Spandana borrowers, and also cluster standard errors at the area level (why?)
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}[fragile]%{Frametitle}
+% 
+% \scriptsize
+% <<>>=
+% # number of observations
+% sum(!is.na(dat$spandana_1))
+% 
+% # Control mean
+% mean(dat[which(dat$treatment ==0),'spandana_1'], na.rm = TRUE)
+% @
+% 
+% 
+% 
+% \end{frame}
+% 
+% 
+% %%%%%NOTE%%%%%
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% \\~\
+% }
+% 
+% %-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]%{Frametitle}
+If we just use the regression estimate without controls, is it meaningfully different from the version with controls?\\
+
+
+\scriptsize
+<<>>=
+
+formula2 <- formula('spandana_1 ~ treatment')
+
+lm_robust(formula2, data = dat, clusters = areaid, weights = w1)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Table 2, Panel A, with controls}
+
+
+
+\begin{table}
+\let\center\empty
+\let\endcenter\relax
+\centering
+\resizebox{.9\textwidth}{!}{\input{../assets/banerjee-et-al-table2.tex}}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Table 2, Panel A, without controls}
+
+<<table2alt, echo = FALSE>>=
+
+lm_list_alt<- list()
+for(out in outcomes){
+  ff <- formula(paste0(out, ' ~ treatment'))
+  lm_list_alt[[out]] <- lm_robust(ff, data = dat, clusters = areaid, weights = w1)
+}
+
+names(lm_list_alt) <- c('Spandana', 'Other MFI', 'Any MFI', 'Other bank', 'Informal', 'Total', 'Ever Late', 'Num Cycles')
+modelsummary(lm_list_alt, stars = TRUE,
+             coef_map = 'treatment', 
+             add_rows = cbind(`Control mean` = 'Control mean', round(as.data.frame(lm_list2),3)), 
+             # gof_omit = 'R2',
+             output = '../assets/banerjee-et-al-table2alt.tex')
+@
+
+\begin{table}
+\let\center\empty
+\let\endcenter\relax
+\centering
+\resizebox{.9\textwidth}{!}{\input{../assets/banerjee-et-al-table2alt.tex}}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item Is there a design-based reason why we might not see much difference with covariate adjustment?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Where do we see effects of microfinance?}
+
+\begin{itemize}
+\item Credit?\pause
+\item Small business development? \pause (among which businesses?)\pause
+\item Poverty reduction? \pause
+\item Household consumption? \pause
+\item Social welfare: education, health, female empowerment?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Big picture take-away}
+
+\begin{itemize}
+\item Take-aways from this study?
+\item How much can we generalize about effects of microfinance?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+<<echo = FALSE>>=
+f <- 'slides_71.Rnw'
+knitr::purl(f)
+knitr::Sweave2knitr(f)
+@

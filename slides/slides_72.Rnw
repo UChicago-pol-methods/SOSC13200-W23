@@ -1,0 +1,430 @@
+\documentclass[xcolor={dvipsnames}]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+\usepackage{booktabs}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 7: Multivariate regression, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs72/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+
+\Large
+\textcolor{Maroon}{Card, David and Krueger, Alan B. (1994). Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania. \textit{American Economic Review.}}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ggplot2)
+library(estimatr)
+library(modelsummary)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Reading in the data}
+\nocite{card1993minimum}
+
+\scriptsize
+<<>>=
+file <- "https://raw.githubusercontent.com/UChicago-pol-methods/SOSC13200-W23/main/data/card-krueger.csv"
+dat <- read.csv(file, as.is = TRUE)
+
+head(dat)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Reading in the data}
+\tiny
+<<>>=
+str(dat)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../assets/card-kruegert1.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{../assets/card-kruegert2.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{../assets/card-kruegerf1.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Formulas}
+Table 3:
+$$
+\Delta E_i = a + \bB \X_i + c \text{NJ}_i + \epsilon_i
+$$
+\\~\
+
+Table 4:
+
+$$
+\Delta E_i = a + \bB' \X_i + c' \text{GAP}_i + \epsilon_i
+$$
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{../assets/card-kruegergap.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{../assets/card-kruegert3.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{../assets/card-kruegert4.png}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Table 4}
+
+<<echo = FALSE>>=
+dat_wide <- reshape(dat, direction = 'wide', idvar = 'id', 
+                    v.names = c('fte', 'ft', 'pt', 'mgrs', 'wage', 'meal', 'hrsopen', 'bonus',
+                                'ncalls','inctime','firstinc','nregs'),
+                    drop = c('d_nj', 'Wave'),
+                    timevar = 'd')
+dat_wide$Y <- dat_wide$fte.1-dat_wide$fte.0
+
+# discuss coding of gap
+dat_wide$gap <- ifelse(dat_wide$nj==1 & dat_wide$wage.0<= 5.05,((5.05-dat_wide$wage.0)/dat_wide$wage.0),0)
+
+# conditioning variables, based on table footnote
+dat_wide <- dat_wide[which( !is.na(dat_wide$Y) &
+                              !is.na(dat_wide$wage.0) &
+                              !is.na(dat_wide$wage.1)),]
+
+lm1 <- lm_robust(Y ~ nj, data = dat_wide)
+lm2 <- lm_robust(Y ~ nj + kfc + roys + wendys + co_owned, data = dat_wide)
+lm3 <- lm_robust(Y ~ gap, data = dat_wide)
+lm4 <- lm_robust(Y ~ gap + kfc + roys + wendys + co_owned, data = dat_wide)
+lm5 <- lm_robust(Y ~ gap + kfc + roys + wendys + co_owned + centralj + southj + pa1 + pa2, data = dat_wide)
+
+
+modelsummary(list(lm1, lm2, lm3, lm4, lm5), stars = TRUE,
+             # coef_map = c('nj', 'gap'), 
+             coef_rename = c(nj = 'New Jersey Dummy', gap = 'Initial Wage Gap'),
+             coef_omit = 'Int|kfc|wendy|co|roys|central|south|pa',
+             add_rows = as.data.frame(rbind(c('Controls for chain and ownership', 'no', 'yes', 'no', 'yes', 'yes'),
+                              c('Controls for region', 'no', 'no', 'no', 'no', 'yes'))), 
+             gof_omit = 'Std|R2',
+             output = '../assets/card-krueger-table4.tex')
+
+@
+
+
+\begin{table}
+\let\center\empty
+\let\endcenter\relax
+\centering
+\resizebox{.9\textwidth}{!}{\input{../assets/card-krueger-table4.tex}}
+\end{table}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%

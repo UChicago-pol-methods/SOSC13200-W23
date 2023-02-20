@@ -1,0 +1,1198 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 6: Linear models, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs61/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}{Housekeeping}
+
+\begin{itemize}
+\item Final project at \url{https://github.com/UChicago-pol-methods/SOSC13200-W23/blob/main/assignments/final-project.md}\pause
+\item Package installation
+\item Extra credit problem
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ggplot2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We often want to discuss the relationship between an \textit{independent variable} and a \textit{dependent variable}. \pause
+\item One way to do this is to talk about a conditional mean; for example, if $X \in \{0,1\}$, we may be interested in $\E[Y|X = 0]$ and  $\E[Y|X = 1]$.\pause
+\item (Which one is the \textit{independent variable} and which is the \textit{dependent variable}?) \pause
+\item What if $X$ takes on more than a few values?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]
+Recall:\\~\\
+
+\Large
+\textcolor{Maroon}{Angrist, Joshua D., and Alan B. Krueger. "Does compulsory school attendance affect schooling and earnings?" \textit{The Quarterly Journal of Economics} 106.4 (1991): 979-1014.}
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+
+<<>>=
+file <- "https://raw.githubusercontent.com/UChicago-pol-methods/SOSC13200-W23/main/data/angrist-krueger.csv"
+dat <- read.csv(file, as.is = TRUE)
+
+dat$year_of_birth_adj <- dat$year_of_birth + 
+  0.25 * (dat$quarter_of_birth-1)
+
+states_above_16 <- c(15, 23, 32, 35, 39, 40, 41, 42, 48, 49, 51, 53)
+dat$states_above_16 <- 1 * (dat$place_of_birth %in% states_above_16)
+
+dat_agg <- aggregate(x = dat[, c('log_weekly_wage', 'education')], 
+                     by = list(`year_of_birth_adj` = dat$year_of_birth_adj,
+                               `quarter_of_birth` = dat$quarter_of_birth,
+                               `above` = as.factor(dat$states_above_16)),
+                     FUN = mean)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+
+<<>>=
+head(dat_agg)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(dat_agg, aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  # geom_smooth(method = 'lm') + # lines
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Suppose we want to draw a line through these points.
+\item What is the best way to pick the line?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(dat_agg[which(dat_agg$above == 0),], aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  # geom_smooth(method = 'lm', se = FALSE) + # lines
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(dat_agg[which(dat_agg$above == 0),], aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  geom_smooth(method = 'lm', se = FALSE) + # lines
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(dat_agg[which(dat_agg$above == 1),], aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  # geom_smooth(method = 'lm', se = FALSE) + # lines
+  scale_color_manual(values = '#00BFC4') +
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(dat_agg[which(dat_agg$above == 1),], aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  geom_smooth(method = 'lm', se = FALSE) + # lines
+  scale_color_manual(values = '#00BFC4') +
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(dat_agg, aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  geom_smooth(method = 'lm', se = FALSE) + # lines
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We would like to describe a conditional relationship in the data
+$$
+\E[Y | X = x] = h(x)
+$$
+where one simple version is
+$$
+g(x) = \beta_0 +  \beta_1 x
+$$\pause
+\item In other words,
+$$
+Y_i = \beta_0 +  \beta_1 X_i + \epsilon_i
+$$
+where
+$$
+\E[\epsilon_i|X_i] = 0
+$$
+and
+$$
+\Var[\epsilon_i|X_i] = \sigma^2
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item In practice, we describe $Y_i$ as a function of $X_i$ in the data we \textit{observe}.\pause
+\item We refer to this as ``regressing $Y$ \textit{on} $X$.''
+$$
+\hat Y_i = \hat \beta_0 + \hat \beta_1 X_i
+$$\pause
+\item We can then define \textit{residuals}
+$$
+\hat \epsilon_i = Y_i - \hat Y_i = Y_i- \left( \hat \beta_0 + \hat \beta_1 X_i\right).
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We calculate estimates of $\hat \beta_0$ and $\hat \beta_1$ as the values that minimize the residual sums of squares\pause
+$$
+\text{RSS} = \sum_{i = 1}^n\hat{\epsilon}_i^2
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+Suppose we had the following data points:
+
+<<>>=
+toy_dat <- data.frame(Y = c(2, 3, 4), 
+                      X = c(5, 10, 10))
+toy_dat
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+What values for $\hat \beta_0$ and $\hat \beta_1$ minimize the residual sum of squares?
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(toy_dat, aes(x = X,
+                    y = Y)) +
+  geom_point() + # points with color
+  theme_bw() # plot style
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]
+What values for $\hat \beta_0$ and $\hat \beta_1$ minimize the residual sum of squares?
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(toy_dat, aes(x = X,
+                    y = Y)) +
+  geom_point() + # points with color
+  theme_bw() + # plot style
+  geom_smooth(method = 'lm', se = FALSE) # lines
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+What values for $\hat \beta_0$ and $\hat \beta_1$ minimize the residual sum of squares?
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+toy_dat$fitted <- fitted(lm(Y~X, data = toy_dat))
+
+ggplot(toy_dat, aes(x = X,
+                    y = Y)) +
+  geom_point() + # points with color
+  theme_bw() + # plot style
+  geom_smooth(method = 'lm', se = FALSE) + # lines
+  geom_segment(aes(x = X, y = Y,
+                   xend = X, yend = fitted), 
+               color = 'grey')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+We can also think about $\hat \beta_0$ and $\hat \beta_1$ as the \textit{y-intercept}, i.e., where the line crosses the y-axis, and the \textit{slope}, respectively. 
+
+<<load>>=
+lm(Y~X, data = toy_dat)
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+We can also think about $\hat \beta_0$ and $\hat \beta_1$ as the \textit{y-intercept}, i.e., where the line crosses the y-axis, and the \textit{slope}, respectively. 
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(toy_dat, aes(x = X,
+                    y = Y)) +
+  geom_point() + # points with color
+  theme_bw() + # plot style
+  xlim(0, NA) +
+  ylim(0, NA) +
+  stat_smooth(method="lm", fullrange=TRUE, se = FALSE) # lines
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+\scriptsize
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+lm0 <- lm(log_weekly_wage ~ education, data = dat_agg[which(dat_agg$above == 0),])
+lm1 <- lm(log_weekly_wage ~ education, data = dat_agg[which(dat_agg$above == 1),])
+dat_agg$fitted <- NA
+dat_agg$fitted[which(dat_agg$above == 0)] <- fitted(lm0)
+dat_agg$fitted[which(dat_agg$above == 1)] <- fitted(lm1)
+
+ggplot(dat_agg, aes(x = education,
+                    y = log_weekly_wage,
+                    color = above)) +
+  geom_point() + # points with color
+  geom_smooth(method = 'lm', se = FALSE) + # lines
+  theme_bw() + # plot style
+  ylab('Log Weekly Earnings') +  # y-axis label
+  xlab('Years of Completed Education') + # x-axis label
+  ggtitle('Angrist and Krueger, Earnings on Education\nby Age of Compulsory Schooling') + 
+  geom_segment(aes(x = education, y = log_weekly_wage,
+                   xend = education, yend = fitted, color = above),
+               alpha = 0.25) + 
+  coord_cartesian(xlim = c(12.2, 13.4), ylim = c(5.88, 5.94))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Why do we minimize the sum of \textit{squared} distances? (rather than\dots absolute distances? Or cubed distances?)
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Why do we minimize the sum of \textit{squared} distances? (rather than\dots absolute distances? Or cubed distances?)
+\item According to IMS:
+\begin{itemize}
+\item \textit{It is the most commonly used method.}
+\item \textit{Computing the least squares line is widely supported in statistical software.}
+\item \textit{In many applications, a residual twice as large as another residual is more than twice as bad. For example, being off by 4 is usually more than twice as bad as being off by 2. Squaring the residuals accounts for this discrepancy.}
+\item \textit{The analyses which link the model to inference about a population are most straightforward when the line is fit through least squares.} \pause (What does this mean??)\pause
+\end{itemize}
+\item Other potential reasons\dots
+\begin{itemize}
+\item Squared distances will always be positive (so will absolute distances)
+\item But absolute distances don't provide a unique solution to the minimization problem, squared distances do
+\item It's easier to take the derivative of the square, rather than absolute.
+\item \textbf{Minimizing RSS gives a linear approximation to the conditional expectation function.} \pause (Why is it only an approximation? When is it not approximate?)
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Why do we take the squared distance in terms of $Y$--instead of in terms of $X$? \pause
+\item What if we regressed $X \sim Y$ instead of $Y \sim X$?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[c]{Returning to Butler and Broockman\dots}
+
+\Large
+\centering
+\textcolor{Maroon}{Butler, Daniel M., \& Broockman, David E. (2011). Do politicians racially discriminate against constituents? A field experiment on state legislators.}\\~\
+
+Data is available at the Yale ISPS data archive: \\~\
+\url{isps.yale.edu/research/data}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading the data}
+
+\scriptsize
+
+<<load2>>=
+df <- read.csv('../data/butler-broockman.csv', as.is = TRUE)
+head(df)
+@
+\nocite{butler2011politicians}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+
+Recall that treatment is 1 if the sender was DeShawn Jackson, and 0 if Jake Mueller. 
+
+<<>>=
+table(df$treat_deshawn)
+@
+
+
+\pause
+
+The primary outcome is whether legislators replied at all. 
+
+<<>>=
+table(df$reply_atall)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We're going to manipulate our data so it takes the format $Y$ $\sim$ $W$. 
+
+
+<<>>=
+df$W <- df$treat_deshawn
+df$Y <- df$reply_atall
+@
+
+
+\pause
+
+To get the difference-in-means estimate of the ATE, 
+
+<<>>=
+Y1 <- df$Y[which(df$W == 1)]
+Y0 <- df$Y[which(df$W == 0)]
+@
+
+
+\pause
+
+<<>>=
+(dm_hat <- mean(Y1) - mean(Y0))
+@
+
+\pause
+Legislators were 1.7 percentage points less likely to reply to an email if the sender was identified as DeShawn Jackson as compared to Jake Mueller. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+What is the relationship with the conditional means?
+
+
+<<>>=
+lm(Y~W, data = df)
+@
+
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item How do we interpret the coefficient on $W$?\pause
+\item The intercept?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Credit to Andy Eggers\dots}
+
+\begin{itemize}
+\item The \textit{fitted} regression can be written as
+$$ \hat{Y_i} = .574 - .018 W_i $$ \pause
+\item We can express the conditional means as:
+$$
+\hat{Y} = \begin{cases}
+.574 & W_i = 0 \\\
+.574 - .018 & W_i = 1 
+\end{cases}
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Credit to Andy Eggers\dots}
+
+
+<<>>=
+lm(reply_atall ~ leg_party, data = df)
+@
+
+
+<<>>=
+lm(reply_atall ~ leg_party - 1, data = df)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(df, aes(x = leg_republican,
+                    y = Y)) +
+  geom_point() + # points with color
+  theme_bw() + # plot style
+  xlim(0, NA) +
+  ylim(0, NA) +
+  stat_smooth(method="lm", fullrange=TRUE, se = FALSE) # lines
+@
+}
+\end{figure}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+Minimizing the sum of squared distances \dots
+\scriptsize
+
+<<>>=
+table(df$Y[which(df$leg_republican == 0)])
+
+mean(df$Y[which(df$leg_republican == 0)])
+@
+
+<<>>=
+table(df$Y[which(df$leg_republican == 1)])
+
+mean(df$Y[which(df$leg_republican == 1)])
+
+@
+\pause
+
+\dots reproduces exactly the conditional means with a binary independent variable. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Extracting components from an lm object}
+
+\scriptsize
+<<>>=
+lm1 <- lm(Y ~ W, data = df)
+names(lm1)
+summary(lm1)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+<<echo = FALSE>>=
+f <- 'slides_61.Rnw'
+knitr::purl(f)
+knitr::Sweave2knitr(f)
+@
