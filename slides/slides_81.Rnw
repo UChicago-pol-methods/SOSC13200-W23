@@ -1,0 +1,1285 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+\usepackage{booktabs}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 8: Inference for multivariate regression, part I}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs81/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+<<echo = FALSE>>=
+ options(scipen=1, digits=2)
+@
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+library(ggplot2)
+library(estimatr)
+library(gridExtra)
+set.seed(60637)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Housekeeping.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+Recall our multivariate regression model:
+
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_K X_K + \epsilon
+$$
+\pause
+\begin{itemize}
+\item How do we interpret $\beta_0$? \pause $\beta_1$? \pause $\beta_K$?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We observe some data, which we (maybe) assume is randomly sampled from a larger population. \pause
+\item The model describes the true relationships among the variables. \pause
+\item But the true population parameters are generally unknown.
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item We estimate the parameter values for a given sample, as the values that minimize the sum of squared residuals.
+
+$$ \hat{Y}_i = \hat{\beta}_0 +  \hat{\beta}_1 X_{1i} + \hat{\beta}_2 X_{2i} + \dots + \hat{\beta}_K X_{Ki} $$
+\pause
+\item Recall that the residual is defined as:
+$$
+\hat{\epsilon_i} = \hat{Y}_i - Y_i
+$$\pause
+\item We will think about our random sample being not just for one variable, but from the joint distribution of $(Y, X_1, X_2, \dots, X_K)$.
+
+\pause
+
+\item Then each $\hat{\beta}_k$ is also random, with its own sampling distribution.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item We can get a point estimate for each of the parameters, $\hat{\beta}_k$: the coefficients in our linear model.\pause
+\item We also want to get an estimate of the standard errors of the estimates, $\sqrt{\hat{\textrm{Var}}[\hat{\beta}_k]}$, to describe how much we think these coefficients vary across samples. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose our true relationship is:
+
+$$
+Y = 3 + 2X_1 + \epsilon
+$$
+\pause
+If we were to see the full data:
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+n <- 50000
+
+x <- sample(seq(0,1, .05), n, replace = TRUE)
+y <- 3 + 2*x + rnorm(n)
+df <- data.frame(x = x,y = y)
+
+ggplot(df, aes(x, y)) +
+  geom_point(alpha = 0.05) +
+  geom_abline(slope = 2, intercept = 3, color = 'skyblue', lwd = 1.5) +
+  coord_cartesian(xlim = c(0,1), ylim = c(1,7)) +
+  theme_bw()
+
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose our true relationship is:
+
+$$
+Y = 3 + 2X_1 + \epsilon
+$$
+If we only saw 100 observations from the data:
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+lm_eqn <- function(df){
+  m <- lm(y ~ x, df);
+  eq <- substitute(italic(y) == a + b %.% italic(X), 
+                   list(a = format(unname(coef(m)[1]), digits = 3),
+                        b = format(unname(coef(m)[2]), digits = 3)))
+  as.character(as.expression(eq));
+}
+
+n <- 100
+
+x <- sample(seq(0,1, .05), n, replace = TRUE)
+y <- 3 + 2*x + rnorm(n)
+df <- data.frame(x = x,y = y)
+
+lm0a <- lm(y~x)
+lm0laba <- lm_eqn(df)
+
+g <- ggplot(df) +
+  coord_cartesian(xlim = c(0,1), ylim = c(1,7)) +
+  geom_abline(slope = 2, intercept = 3, color = 'skyblue', lwd = 1.5, alpha = 0.5) +
+  theme_bw()
+
+g <- g + geom_abline(intercept = coef(lm0a)[1], slope = coef(lm0a)[2], color = 'blue') +
+  geom_text(aes(x = 0.25, y = 6.25, label = lm0laba), parse = TRUE, data.frame(), color = 'blue')
+g + geom_point(aes(x = df$x, y = df$y), alpha = 0.5)
+
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose our true relationship is:
+
+$$
+Y = 3 + 2X_1 + \epsilon
+$$
+
+If we only saw 100 observations from the data:
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+x <- sample(seq(0,1, .05), n, replace = TRUE)
+y <- 3 + 2*x + rnorm(n)
+df <- data.frame(x = x,y = y)
+
+lm0b <- lm(y~x)
+lm0labb <- lm_eqn(df)
+
+g <- g + geom_abline(intercept = coef(lm0b)[1], slope = coef(lm0b)[2], color = 'darkgreen') +
+  geom_text(aes(x = 0.25, y = 6, label = lm0labb), parse = TRUE, data.frame(), color = 'darkgreen')
+g + geom_point(aes(x = df$x, y = df$y), alpha = 0.5)
+
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose our true relationship is:
+
+$$
+Y = 3 + 2X_1 + \epsilon
+$$
+
+If we only saw 100 observations from the data:
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+x <- sample(seq(0,1, .05), n, replace = TRUE)
+y <- 3 + 2*x + rnorm(n)
+df <- data.frame(x = x,y = y)
+
+lm0c <- lm(y~x)
+lm0labc <- lm_eqn(df)
+
+
+g <- g + geom_abline(intercept = coef(lm0c)[1], slope = coef(lm0c)[2], color = 'orange') +
+  geom_text(aes(x = 0.25, y = 5.75, label = lm0labc), parse = TRUE, data.frame(), color = 'orange')
+g + geom_point(aes(x = df$x, y = df$y), alpha = 0.5)
+
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose our true relationship is:
+
+$$
+Y = 3 + 2X_1 + \epsilon
+$$
+
+If we only saw 100 observations from the data:
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+x <- sample(seq(0,1, .05), n, replace = TRUE)
+y <- 3 + 2*x + rnorm(n)
+df <- data.frame(x = x,y = y)
+
+lm0d <- lm(y~x)
+lm0labd <- lm_eqn(df)
+
+
+
+g <- g + geom_abline(intercept = coef(lm0d)[1], slope = coef(lm0d)[2], color = 'pink') +
+  geom_text(aes(x = 0.25, y = 5.5, label = lm0labd), parse = TRUE, data.frame(), color = 'pink')
+g + geom_point(aes(x = df$x, y = df$y), alpha = 0.5)
+
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose our true relationship is:
+
+$$
+Y = 3 + 2X_1 + \epsilon
+$$
+
+If we only saw 100 observations from the data:
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+x <- sample(seq(0,1, .05), n, replace = TRUE)
+y <- 3 + 2*x + rnorm(n)
+df <- data.frame(x = x,y = y)
+
+lm0e <- lm(y~x)
+lm0labe <- lm_eqn(df)
+
+g <- g + geom_abline(intercept = coef(lm0e)[1], slope = coef(lm0e)[2], color = 'purple') +
+  geom_text(aes(x = 0.25, y = 5.25, label = lm0labe), parse = TRUE, data.frame(), color = 'purple')
+g + geom_point(aes(x = df$x, y = df$y), alpha = 0.5)
+@
+}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item Each time we sample from the population, we get a slightly different fit for our regression line. \pause
+\item Our goal is to describe the \textit{variability} in our parameter estimates. \pause
+\item Here, we have a regression line with just an intercept and a slope. But we could consider the same resampling and fitting procedure for any joint distribution of $(Y, X_1, X_2, \dots, X_K)$, 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+\begin{itemize}
+\item We will use \textbf{robust} standard errors. \pause
+\item These standard errors don't require much beyond that our data is i.i.d.: random samples from the same joint distribution. \pause
+\item ``Classical'' regression modeling puts much stronger assumptions on the data, including that errors are ``homoskedastic;'' they don't vary with $X$
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+X <- runif(1e3)
+Y <- 3*X + rnorm(1e3, sd = 0.57)
+Y2 <- 3*X + rnorm(1e3)*X
+# Yhat <- 3*X
+# mean((Y-Yhat)^2)
+# mean((Y2-Yhat)^2)
+
+
+df <- data.frame(X, Y, Y2)
+
+g1 <- ggplot(df, aes(x = X, y = Y)) + 
+  geom_point(alpha = 0.5) + 
+  coord_cartesian(ylim = c(-0.25, 5.25)) + 
+  ggtitle('Homoskedastic data') + theme_bw() +
+  geom_abline(slope = 3, intercept = 0, color = 'skyblue', lwd = 1.5, alpha = 0.5)
+
+g2 <- ggplot(df, aes(x = X, y = Y2)) + 
+  geom_point(alpha = 0.5) + 
+  coord_cartesian(ylim = c(-0.25, 5.25)) +
+  ggtitle('Heteroskedastic data') + theme_bw() +
+  geom_abline(slope = 3, intercept = 0, color = 'skyblue', lwd = 1.5, alpha = 0.5)
+
+
+grid.arrange(g1, g2, ncol=2)
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+Using classical standard errors
+
+\scriptsize
+<<>>=
+summary(lm(y ~ x, data = data.frame(x = X, y = Y)))$coef[,1:2]
+summary(lm(y ~ x, data = data.frame(x = X, y = Y2)))$coef[,1:2]
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+Using robust standard errors
+
+\scriptsize
+<<>>=
+broom::tidy(lm_robust(y ~ x, data = data.frame(x = X, y = Y)))[,1:3]
+broom::tidy(lm_robust(y ~ x, data = data.frame(x = X, y = Y2)))[,1:3]
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[c]{Applied example}
+
+
+
+Recall:
+
+\vskip 1 cm
+\Large
+\textcolor{Maroon}{Pager, D. (2003). The mark of a criminal record. \textit{American Journal of Sociology}, 108(5), 937-975.}
+\nocite{pager2003mark}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\small
+<<message=FALSE>>=
+dfp <- data.frame(
+  black = rep(c(0, 1), times = c(300, 400)),
+  record = c(rep(c(0, 1), each = 150),
+             rep(c(0, 1), each = 200)),
+  call_back = c(
+    # whites without criminal records
+    rep(c(0, 1), times = c(99, 51)), # 150
+    # whites with criminal records
+    rep(c(0, 1), times = c(125, 25)), # 150; 
+    # - callbacks could be 25 or 26
+    # blacks without criminal records
+    rep(c(0, 1), times = c(172, 28)), # 200
+    # blacks with criminal records
+    rep(c(0, 1), times = c(190, 10)) # 200
+  )
+)
+
+@
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item Let's try this with the dfp data, where the outcome $Y$ is \texttt{call\_back}, regressed on \texttt{black} and \texttt{record}, interacted.
+
+$$
+\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 \textrm{Black}_i + \hat{\beta}_2 \textrm{Record}_i + \hat{\beta}_3 \textrm{Black}_i  \times \textrm{Record}_i
+$$
+
+\end{itemize}
+
+<<>>=
+model2 <- lm_robust(call_back ~ black*record, data = dfp)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item How do we go about interpreting these coefficients? confidence intervals? p-values?
+\end{itemize}
+
+\scriptsize
+<<>>=
+summary(model2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Confidence intervals}
+
+\begin{itemize}
+\item A valid confidence interval $CI_n$ for a target parameter $\theta$ with coverage $1-\alpha$
+$$
+\textrm{P}[\theta \in CI_n]\ge 1- \alpha
+$$
+\pause
+
+\item If $\alpha = 0.05$, the probability that the estimand $\theta$ is in our confidence interval is greater than or equal to 0.95.
+
+\pause
+
+
+\item $CI_n$ is a random interval. It is a function of the data we observe.
+
+\pause
+
+\item $\theta$ is a fixed parameter. It does not move.
+
+\pause
+(In the frequentist view of statistics.)
+
+\pause
+
+\item If you use valid confidence repeatedly in your work, 95\% of the time, your confidence intervals will include the true value of the relevant $\theta.$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item The formula for the 95\% confidence interval is:
+$$
+CI_n = \left(\hat \theta_n - 1.96 \times \hat{\textrm{se}},\  \hat\theta_n + 1.96 \times \hat{\textrm{se}} \right)
+$$\pause
+\item The 1.96 value tells us how many standard errors away from the mean we need to include in our interval to get valid coverage. \pause
+\item This formula is based on a \textit{normal approximation}, i.e., we assume the data is going to look like a normal distribution. 
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item How do we go about interpreting these coefficients? confidence intervals? p-values?
+\end{itemize}
+
+\scriptsize
+<<>>=
+confint(model2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{P-values}
+
+
+Suppose $\hat{\theta}$ is the general form for an estimate produced by our estimator, and $\hat{\theta}^*$ is the value we have actually observed. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{P-values}
+
+\begin{itemize}
+\item A two-tailed p-value under the null hypothesis is 
+$$
+p = \textrm{P}_0[|\hat{\theta}| \ge |\hat{\theta}^*|]
+$$
+\end{itemize}
+
+i.e., the probability \textit{under the null distribution} that we would see an estimate of $\hat{\theta}$ as or more extreme as what we saw from the data. 
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Confidence intervals and p-values help us get back to testing hypotheses. 
+\end{itemize}
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Two-sided hypotheses}
+
+$$
+H_0:\theta = 0
+$$
+
+
+$$
+H_A: \theta \neq 0
+$$\pause
+
+\vspace{1cm}
+Note that we are \textit{not} imposing the sharp null of no individual effect here, we're looking at averages. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Confidence intervals and hypothesis tests have a specific relationship.\pause
+\item Consider all of the hypotheses that take the form:
+
+$$
+H_0: \theta = \theta_0
+$$
+$$
+H_A: \theta \neq \theta_0
+$$\pause
+
+\item If the calculated two-tailed $p$-value is less than $0.05$, reject the hypothesis. \pause
+\item If the calculated two-tailed $p$-value is greater than $0.05$, fail to reject the hypothesis. \pause
+\item  The $\theta_0$ for which we would fail to reject the hypothesis lie within the 95\% confidence interval. 
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+One way that this is very useful:\pause
+\begin{itemize}
+\item If $0$ is outside the 95\% confidence interval, we would reject the hypothesis that $\theta = 0$ at $p \le 0.05$. \pause
+\item If $0$ is outside the 99\% confidence interval, we would reject the hypothesis that $\theta = 0$ at $p \le 0.01$. \pause
+\item If $0$ is outside the 99.9\% confidence interval, we would reject the hypothesis that $\theta = 0$ at $p \le 0.001$. 
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{itemize}
+
+\item How do we go about interpreting these coefficients? confidence intervals? p-values?
+\end{itemize}
+
+\scriptsize
+<<>>=
+summary(model2)
+round(model2$p.value,5)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+% \begin{frame}{One-sided hypotheses}
+% 
+% We can also consider other alternative hypotheses. For example, the hypothesis that treatment effects are less than zero. This is called a one-sided hypothesis. 
+% 
+% 
+% \pause
+% 
+% $$
+% H_0: \theta = 0
+% $$
+% 
+% 
+% $$
+% H_A: \theta < 0
+% $$
+% 
+% \end{frame}
+% 
+% %%%%%NOTE%%%%%
+% \note{
+% \scriptsize \singlespacing
+% 
+% \begin{itemize}
+% \item xxxx
+% \end{itemize}
+% \\~\
+% }
+% 
+% %-------------------------------------------------------------------------------%
+
+\begin{frame}{Bootstrap estimation}
+
+
+\begin{itemize}
+\item Another approach to estimating the standard error of an estimate is to use bootstrapping.
+\pause
+
+\item If we fully knew the joint distribution of our population, we would know exactly how to determine the sampling variation of our estimate.
+\pause
+
+\item While we do not, we can  \textit{suppose} that the empirical joint distribution produced by the data that we observe is identical to the population joint distribution.
+\pause
+
+\item We can then just re-sample with replacement from our observed data, and see how much our estimates vary across re-samples.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Bootstrap estimation}
+
+
+The bootstrapping procedure is:
+
+\begin{itemize}
+\item Repeat many times:
+\begin{enumerate}
+
+\item Take a sample of size $n$  \textit{with replacement} from the observed data\pause
+
+\item Apply the estimating procedure on the bootstrap sample.
+\end{enumerate}
+\pause
+
+\item Calculate the standard deviation of a parameter estimate across these many bootstrap estimates.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+We can try this with the \cite{pager2003mark} data. 
+
+\scriptsize
+<<>>=
+outmat <- replicate(1000, # do this 1000 times
+                    {
+                      # Take a sample of size n with replacement from the data
+                      idx <- sample(1:nrow(dfp), replace = TRUE) 
+                      # fit the model on the sampled data
+                      lmx <- lm_robust(call_back ~ black*record, 
+                                       data = dfp[idx,])
+                      coef(lmx)
+                    })
+outmat <- t(outmat)
+dim(outmat)
+head(outmat, 4)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+We can try this with the \cite{pager2003mark} data. 
+
+\scriptsize
+<<>>=
+apply(outmat, 2, sd)
+@
+\pause
+\normalsize
+
+Compare this to the robust standard errors from our model. 
+\scriptsize
+<<>>=
+model2$std.error
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]%{Frametitle}
+
+We can also get confidence intervals from the bootstrap estimates. \pause
+
+For each parameter\dots
+\begin{enumerate}
+\item Sort bootstrap estimates from smallest to largest 
+\item Find the lower bound as the $\alpha/2$ percentile, and the upper bound$1-\alpha/2$ percentile; i.e., so that $(1-\alpha)$\% of estimates are within this range
+\end{enumerate}
+
+\scriptsize
+<<>>=
+t(apply(outmat, 2, quantile, probs = c(0.025, 0.075)))
+@
+\pause
+\normalsize
+
+Compare this to the confidence intervals from our model. 
+\scriptsize
+<<>>=
+confint(model2)
+@
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item \texttt{estimatr::lm\_robust()} outputs robust standard errors by default; this is why it's really nice to use. \pause
+\item There are options for different types of robust standard errors which have different small sample properties, but they're asymptotically equivalent.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
