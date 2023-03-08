@@ -1,0 +1,765 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+\usepackage{booktabs}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
+
+\makeatletter
+\newcommand{\Pause}[1][]{\unless\ifmeasuring@\relax
+\pause[#1]%
+\fi}
+\makeatother
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 8: Inference for multivariate regression, part II}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, prefix.string = figs82/}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+<<echo = FALSE>>=
+options(scipen=1, digits=2)
+@
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+set.seed(60637)
+# For plotting:
+library(ggplot2)
+# library(devtools)
+# devtools::install_github("wilkelab/ungeviz")
+library(ungeviz)
+library(ggridges)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Housekeeping
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[c]
+
+\Large
+
+P-hacking
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[fragile]{P-values}
+
+
+Suppose $\hat{\theta}$ is the general form for an estimate produced by our estimator, and $\hat{\theta}^*$ is the value we have actually observed. 
+
+\end{frame}
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{P-values}
+
+\begin{itemize}
+\item A two-tailed p-value under the null hypothesis is 
+$$
+p = \textrm{P}_0[|\hat{\theta}| \ge |\hat{\theta}^*|]
+$$
+\end{itemize}
+
+i.e., the probability \textit{under the null distribution} that we would see an estimate of $\hat{\theta}$ as or more extreme as what we saw from the data. 
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item Suppose we have some data, $(Y, X_1, X_2, \dots X_K)$.\pause
+\item Suppose the null distribution represents the truth. \pause
+\item If we test one hypothesis, what is the probability that we will find something that is statistically significant at $p \le 0.05$?\pause
+\item If we test two unrelated hypotheses, what is the probability that we will find something that is statistically significant at $p \le 0.05$?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item A: event we reject hypothesis 1 at $p \le 0.05$\pause
+\item B: event we reject hypothesis 2 at $p \le 0.05$\pause
+\item $\text{A} \independent \text{B}$: the two events are independent\pause
+\item $\textrm{P}[\text{A}] = 0.05$\pause
+\item $\textrm{P}[\text{B}] = 0.05$\pause
+\item $\textrm{P}[\text{A}\cup\text{B}]$? The probability we see event A OR B?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+\begin{align*}
+\uncover<+->{\textrm{P}[\text{A}\cup\text{B}] & = \textrm{P}[\text{A}] + \textrm{P}[\text{A}^\text{C}]\times\textrm{P}[\text{B}| \text{A}^\text{C}]}
+\uncover<+->{\intertext{A and B are independent, so $\textrm{P}[\text{B}| \text{A}^\text{C}] = \textrm{P}[\text{B}]$}}\\
+\uncover<+->{\textrm{P}[\text{A}\cup\text{B}] & = \textrm{P}[\text{A}] + \textrm{P}[\text{A}^\text{C}]\times\textrm{P}[\text{B}]}\\
+\uncover<+->{\textrm{P}[\text{A}\cup\text{B}] & = 0.05 + 0.95 \times 0.05}\\
+\uncover<+->{\textrm{P}[\text{A}\cup\text{B}] & = 0.0975}
+\end{align*}
+
+% Definition of circles
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\colorlet{circle edge}{blue!50}
+\colorlet{circle area}{blue!20}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+outline/.style={draw=circle edge, thick}}
+
+\setlength{\parskip}{5mm}
+% Set A or B
+\onslide<1->{
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\draw[filled] \firstcircle node {A}
+\secondcircle node {B};
+\node[anchor=south] at (current bounding box.north) {A$\cup$B};
+\end{tikzpicture}
+\end{figure}
+}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+If the null is true \dots
+\begin{itemize}
+\item and we conduct three independent tests, the probability that \textit{at least one of them} will be statistically significant at $p \le 0.05$ is $1-0.95^3 = 0.1426$ \pause
+\item and we conduct four independent tests, the probability that \textit{at least one of them} will be statistically significant at $p \le 0.05$ is $1-0.95^4 = 0.1855$ \pause
+\item and we conduct ten independent tests, the probability that \textit{at least one of them} will be statistically significant at $p \le 0.05$ is $1-0.95^{10} = 0.4013$ \pause
+\end{itemize}
+
+This becomes a real problem when researchers run many tests in their papers!
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{table}[]
+\centering
+\small
+\begin{tabular}{lcc}
+& \begin{tabular}[c]{@{}c@{}}\textbf{Fail to reject null hypothesis}\\ (p \textgreater 0.05)\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Reject null hypothesis}\\ (p $\le$ 0.05)\end{tabular}  \\
+\hline
+\textbf{Null hypothesis true} & True negative & Type I error, false positive  \\
+\textbf{Null hypothesis false} & Type II error, false negative & True positive
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item \textbf{Type I error:} (false positive) we see an effect, where one doesn't really exist \pause
+\item \textbf{Type II error:} (false negative) we didn't see an effect, but one really does exist
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Multiple testing scenarios}
+
+\begin{itemize}
+\item Comparisons across multiple treatments; A to B, B to C, A to C\dots\pause 
+\item Multiple outcomes \pause
+\item Heterogeneous treatment effects (where is the cut point)\pause
+\item Multiple regression specifications (specification search)\pause
+\end{itemize}
+
+These tests aren't all fully independent, but the more tests we do, the more likely we are to uncover a false positive. 
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Ways to account for multiple testing}
+
+\begin{itemize}
+\item Pre-specification of analyses \pause
+\item Separating data in training and testing sets (more on this with machine learning)\pause
+\item \textit{p-value adjustment}
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{p-value adjustment}
+
+\begin{table}[]
+\centering
+\small
+\begin{tabular}{lcc}
+& \begin{tabular}[c]{@{}c@{}}\textbf{Fail to reject null hypothesis}\\ (p \textgreater 0.05)\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Reject null hypothesis}\\ (p $\le$ 0.05)\end{tabular}  \\
+\hline
+\textbf{Null hypothesis true} & True negative & Type I error, false positive  \\
+\textbf{Null hypothesis false} & Type II error, false negative & True positive
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item Family-Wise Error Rate (FWER): the probability of falsely rejecting even one \textit{true} null hypothesis; \pause $\textrm{P}[\text{Type I error} > 0]$\pause
+\item False Discovery Rate (FDR): expected proportion of false discoveries among all discoveries; \pause $\E[\text{\# False discoveries}/ \text{\# All discoveries}]$ 
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{p-value adjustment}
+
+\begin{itemize}
+\item Correcting FWER
+\begin{itemize}
+\item Bonferroni correction: for $m$ hypotheses, for significance level $\alpha$, implement $\alpha/m$\pause
+\item four independent tests, the probability that \textit{at least one of them} will be statistically significant at $p \le \alpha$ is $1-(1-\alpha)^4 $
+\item For $\alpha = 0.05$, $1-0.95^4 = 0.1855$\pause
+\item With Bonferroni correction: $1-(1-\alpha/4)^4 = 0.0491$\pause
+\item Ten independent tests: $1-(1-\alpha/10)^{10} = 0.0489$
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{p-value adjustment}
+
+What if tests are not independent? \pause Bonferroni is too aggressive. 
+
+\begin{align*}
+\uncover<+->{\textrm{P}[\text{A}\cup\text{B}] & = \textrm{P}[\text{A}] + \textrm{P}[\text{A}^\text{C}]\times\textrm{P}[\text{B}| \text{A}^\text{C}]}
+\uncover<+->{\intertext{If A and B are positively correlated $\textrm{P}[\text{B}| \text{A}^\text{C}] \le \textrm{P}[\text{B}]$}}
+\end{align*}
+
+\begin{itemize}
+\item Correcting FWER
+\begin{itemize}
+\item Holm correction: for $m$ hypotheses, for significance level $\alpha$:
+\begin{itemize}
+\item Order the $m$ conventionally calculated p-values from smallest to largest \pause
+\item Find the \textit{smallest} p-value indexed as $k$ such that $p_k > \frac{\alpha}{m +1 -k}$\pause
+\item Reject all p-values greater than or equal to $p_k$, accept all p-values less $p_k$
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{p-value adjustment}
+
+
+\begin{itemize}
+\item Correcting FDR
+\begin{itemize}
+\item Benjamini-Hochberg correction: for $m$ hypotheses, for significance level $\alpha$:
+\begin{itemize}
+\item Order the $m$ conventionally calculated p-values from smallest to largest \pause
+\item Find the \textit{largest} p-value indexed as $k$ such that $p_k \le \frac{k}{m}\alpha$\pause
+\item Reject all p-values greater than $p_k$, accept all p-values less than or equal to $p_k$
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{p-value adjustment}
+
+
+\begin{itemize}
+\item In either case, for more complex settings, try simulation. 
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Multiple testing}
+
+
+\begin{itemize}
+\item When can you consider tests as unrelated?\pause
+\item Exploratory vs. confirmatory hypotheses?
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Some alternatives to confidence intervals (via \texttt{ungeviz})}
+
+Show the underlying data. 
+
+\tiny
+<<eval = FALSE, echo=TRUE>>=
+ggplot(iris, aes(Species, Sepal.Length,fill = Species)) +
+    geom_violin(alpha = 0.25, color = NA) +
+    geom_point(position = position_jitter(width = 0.3, height = 0), size = 0.5) +
+    geom_hpline(aes(colour = Species), stat = "summary", width = 0.6, size = 1.5, fun = 'mean')
+@
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.65\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(iris, aes(Species, Sepal.Length,fill = Species)) +
+    geom_violin(alpha = 0.25, color = NA) +
+    geom_point(position = position_jitter(width = 0.3, height = 0), size = 0.5) +
+    geom_hpline(aes(colour = Species), stat = "summary", width = 0.6, size = 1.5, fun = 'mean') + 
+    theme_bw() +
+    ylab('Sepal Length')
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Some alternatives to confidence intervals (via \texttt{ungeviz})}
+
+Shaded confidence strips. 
+
+\tiny
+<<eval = FALSE, echo=TRUE>>=
+ggplot(cacao_means, aes(x = estimate, y = location)) +
+    stat_confidence_density(aes(moe = std.error), confidence = 0.68, fill = "#81A7D6", height = 0.7) +
+    geom_errorbarh(aes(xmin = estimate - std.error, xmax = estimate + std.error), height = 0.3) +
+    geom_vpline(aes(x = estimate), size = 1.5, height = 0.7, color = "#D55E00")
+@
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.65\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+library(dplyr)
+library(forcats)
+library(broom)
+library(emmeans)
+
+cacao_lumped <- cacao %>%
+    mutate(
+        location = fct_lump(location, n = 10)
+    )
+
+cacao_means <- lm(rating ~ location, data = cacao_lumped) %>%
+    emmeans("location") %>%
+    tidy() %>%
+    mutate(location = fct_reorder(location, estimate))
+
+ggplot(cacao_means, aes(x = estimate, y = location)) +
+    stat_confidence_density(aes(moe = std.error), confidence = 0.68, fill = "#81A7D6", height = 0.7) +
+    geom_errorbarh(aes(xmin = estimate - std.error, xmax = estimate + std.error), height = 0.3) +
+    geom_vpline(aes(x = estimate), size = 1.5, height = 0.7, color = "#D55E00") +
+    xlim(2.8, 3.6) + 
+    theme_bw() 
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Some alternatives to confidence intervals (via \texttt{ungeviz})}
+
+Confidence densities. 
+
+\tiny
+<<eval = FALSE, echo=TRUE>>=
+ggplot(cacao_means, aes(x = estimate, y = location)) +
+    stat_confidence_density(
+        aes(moe = std.error, height = stat(density)), geom = "ridgeline",
+        confidence = 0.68, fill = "#81A7D6", alpha = 0.8, scale = 0.08, min_height = 0.1) +
+    geom_vpline(aes(x = estimate), size = 1.5, height = 0.5, color = "#D55E00")
+@
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.65\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+ggplot(cacao_means, aes(x = estimate, y = location)) +
+    stat_confidence_density(
+        aes(moe = std.error, height = stat(density)), geom = "ridgeline",
+        confidence = 0.68, fill = "#81A7D6", alpha = 0.8, scale = 0.08,
+        min_height = 0.1
+    ) +
+    geom_vpline(aes(x = estimate), size = 1.5, height = 0.5, color = "#D55E00") +
+    xlim(2.8, 3.6) + 
+    theme_bw()
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+Clause Wilke: \url{https://wilkelab.org/ungeviz/index.html}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{0.75\textheight}{
+<<fig = TRUE, width = 5, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%

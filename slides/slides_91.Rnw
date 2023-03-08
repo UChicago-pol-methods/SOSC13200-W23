@@ -1,0 +1,704 @@
+\documentclass[xcolor={dvipsnames}, handout]{beamer}
+
+\usepackage{../assets/pres-template_MOW}
+\usepackage{verbatim}
+
+\setkeys{Gin}{keepaspectratio}
+
+%--------------------------------------------------------------------------
+% Specific to this document ---------------------------------------
+\usepackage{booktabs}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
+
+\makeatletter
+\newcommand{\Pause}[1][]{\unless\ifmeasuring@\relax
+\pause[#1]%
+\fi}
+\makeatother
+
+%--------------------------------------------------------------------------
+% \setbeamercovered{transparent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\tabcolsep}{1.3pt}
+\title{Social Science Inquiry II}
+\subtitle{Week 9: Beyond linear regression}
+\date{Winter 2023}
+\author{Molly Offer-Westort}
+\institute{Department of Political Science, \\University of Chicago}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+
+%-------------------------------------------------------------------------------%
+\frame{\titlepage
+\thispagestyle{empty}
+}
+<<echo = FALSE>>=
+options(scipen=1, digits=2)
+@
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]{Loading packages for this class}
+
+<<packages>>=
+set.seed(60637)
+library(ggplot2)
+@
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+
+}
+
+
+
+
+%-------------------------------------------------------------------------------%
+\begin{frame}
+
+\begin{itemize}
+\item Housekeeping
+\end{itemize}
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item  xxxx
+\end{itemize}
+\~\n}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Machine learning}
+
+What is it?\pause
+\begin{itemize}
+\item A body of \textit{algorithmic} methods \dots \pause (an algorithm is just a recipe)\pause
+\item Somehow part of \textit{artificial intelligence}\dots \pause (basically, how computers perform tasks)\pause
+\item In general, a flexible, \textit{data-driven} approach to make predictions, classify data, or take decisions.
+\end{itemize}
+
+\nocite{athey2019machine}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Machine learning}
+
+How do the objectives of machine learning differ from those of conventional quantitative methods in the social sciences?\pause
+\begin{itemize}
+\item In conventional quantitative methods:
+\begin{itemize}
+\item identify and estimate a target estimand, which is often a parameter in a statistical model, \pause defined over some specified population of interest.\pause
+\item descriptive or causal, e.g., population employment rate, or effect of a policy\pause
+\end{itemize}
+\item In ML:
+\begin{itemize}
+\item development of algorithms to make classifications or predictions. \pause
+\item e.g., is this a picture of banana or a cat? \pause Will this person be more likely to click on an ad for sneakers or cookware?\pause
+\end{itemize}
+\item Is there overlap between the two?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Model fit vs. prediction}
+
+
+\begin{itemize}
+\item In linear regression, propose a model:
+$$ \hat{Y}_i = \hat{\beta}_0 +  \hat{\beta}_1 X_{1i} + \hat{\beta}_2 X_{2i} + \dots + \hat{\beta}_K X_{Ki} $$
+\item Select $\hat \beta_0 \dots \hat\beta_K$ to minimize 
+$$
+\sum_{i = 1}^N \hat{\varepsilon_i}^2 = \sum_{i = 1}^N\left(\hat{Y}_i - Y_i\right)^2
+$$
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Model fit vs. prediction}
+
+
+\begin{itemize}
+\item For prediction tasks, we could use the same model, 
+$$ \hat{Y}_i = \hat{\beta}_0 +  \hat{\beta}_1 X_{1i} + \hat{\beta}_2 X_{2i} + \dots + \hat{\beta}_K X_{Ki} $$
+\item But select $\hat \beta_0 \dots \hat\beta_K$ to minimize squared prediction error for the next observation:
+$$
+\hat{\varepsilon}_{N+1}^2 = \left(\hat{Y}_{N + 1} - Y_{N +1}\right)^2
+$$\pause
+\item Are these the same thing? \pause (no)\pause
+\item If prediction is our goal, can we do better than least squares regression? \pause (yes)
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Some ML tools}
+
+\begin{itemize}
+\item A major concern of ML: \textit{overfit}
+\begin{itemize}
+\item If your model fits the data \textit{too} perfectly, it's not useful for prediction
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Suppose we would like to fit a model to the following data:
+\begin{figure}
+\centering
+{
+<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
+x <- runif(15, 1, 10)
+y <- 3*x + rnorm(15, sd = 2)
+
+
+ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+We could use a single line:
+\begin{figure}
+\centering
+{
+<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
+ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
+    geom_point() +
+    geom_smooth(method = 'lm', se = FALSE) +
+    theme_bw()
+
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+Or we could fit a curve that goes between every point:
+\begin{figure}
+\centering
+{
+<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
+ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
+  geom_point() + 
+  geom_smooth(method = lm, se = FALSE, formula = y ~ splines::bs(x, 13)) + 
+  theme_bw()
+
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Cross-validation}
+
+
+\begin{itemize}
+\item If we were to draw another observation from the joint distribution of $(Y,X)$, which one do you think would do a better job of prediction? \pause
+\item ML methods propose a way to check this, by separating data into training and test sets. \pause
+\item You can fit different models on the training set, and then see which one does the best job of predicting response in the test set. \pause (This is not a new idea.)
+\item There are some different ways to do this:
+\begin{itemize}
+\item Leave-$k$-out
+\item Leave-one-out
+\item $k$-fold cross validation
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Regularization}
+
+\begin{itemize}
+\item Overfit can become a real problem when we have a lot of predictors ($K$) relative to our number of observations ($N$)\pause
+\item This is a common problem when we think about an industry setting, where for every customer a business might have a large number of measurements. \pause Which ones should they use to predict an outcome? 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Regularization}
+
+\begin{itemize}
+\item Consider a model:
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_K X_K + \varepsilon
+$$\pause
+\item With $K\ge N$, even if every $\beta_k$ is non-zero, we won't be able to make good predictions with all of our $\hat\beta_k$--and when we care about prediction, that's not our goal, anyhow. \pause
+\item With regularization, we shrink some of the $\hat \beta_k$ nearly all the way or all the way to zero. \pause
+\item For \textit{ridge regression} or \textit{lasso}, we select the $\hat\beta_k$ using: 
+$$
+\underset{\Beta}{\textrm{argmin}}\left\{\sum_{i = 1}^N \left(Y_i - \beta_0 + \sum_{k = 1}^K X_{ki}\beta_k\right)^2 + \lambda \sum_{k = 1}^K |\beta_k|^q 
+\right\}
+$$
+\end{itemize}
+\scriptsize
+\cite{hastie2009elements}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Regression Trees}
+
+\begin{itemize}
+\item Suppose we have joint data, $(Y,X)$, with just one predictor, $X$.\pause
+\item Our goal is to pick some value of $c$ so that we can split the data into two sub-samples \dots
+\begin{itemize}
+\item $X_i \le c$
+\item $X_i >c$
+\end{itemize}\pause
+\item\dots and for each sub-sample, predict $\hat Y $ as the mean of the $Y_i$ within each sample.\pause
+\item We want to pick $c$ to minimize:
+$$
+Q = \sum_{i:X_i \le c}(Y_i - \bar Y_{\text{lower}})^2 + \sum_{i:X_i > c}(Y_i - \bar Y_{\text{upper}})^2
+$$
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+{
+<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
+
+ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw()
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+{
+<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
+minc <- function(c){
+    sum((y[which(x <=c)] - mean(y[which(x <=c)]))^2) + 
+        sum((y[which(x >c)] - mean(y[which(x >c)]))^2)
+}
+
+newmin <- x[which.min(sapply(x, minc))]+.1
+
+ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
+    geom_point() +
+    theme_bw() +
+    geom_vline(xintercept = newmin, color = 'orange') +
+    annotate('text', y = 30, x = newmin-.2, label = 'c', color = 'orange') +
+    annotate('text', y = c(20, 20), x = c(2.5, 7.5),
+             label = paste0(expression(bar(Y)),'==',
+                            round(c(mean(y[which(x <=newmin)]), mean(y[which(x >newmin)])), 3) ),
+             color = 'orange', parse = TRUE)
+
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Regression Trees}
+
+\begin{itemize}
+\item Now suppose we have joint data, $(Y,X_1, \dots, X_k)$.\pause
+\item We will do the same approach to finding thresholds to minimize prediction error, but we'll want to pick which $X_k$ we use for threshholding, as well. \pause
+\item Generally, we'll define the depth of the tree as 2 or three variables; first we'll split on $X_k$, then we'll split on $X_j$\dots
+\end{itemize}
+
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Matrix completion: the Nexflix problem}
+
+\begin{itemize}
+\item Netflix has data on viewers, their characteristics, and how they rate movies. \pause
+\item The question: how to best recommend to them movies that they have not yet rated?\pause
+\item The challenge: come up with the best recommendation algorithm, winner gets \$1 million. \pause
+\item This can be framed as a matrix completion problem: put users on rows, movies on columns, predict all of the missing rankings.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+\begin{frame}{Causal inference}
+
+
+\begin{itemize}
+\item Machine learning tools can be super useful for causal inference. \pause
+\begin{itemize}
+\item Fit prediction models separately to treatment and control, so we can do a better job of estimating treatment effects at different covariate values. \pause
+\item Learn which covariates to include in a (causal) regression model. \pause
+\item For observational data, predict propensity to be in treatment vs. control group, based on covariates. 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Causal inference: no free lunch}
+
+
+\begin{itemize}
+\item Machine learning does not solve the fundamental problem of causal inference. \pause
+\item Causal interpretations are based on assumptions about the data generating process, or knowledge of assignment procedures. These are outside the realm of machine learning methods. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}{Prediction error}
+
+\begin{itemize}
+\item ML methods may do a good job of producing estimates, but how do we account for inference?\pause
+\item Cross-validation \pause
+\item Bootstrapping\pause
+\item Applying these solutions to prediction under multiple linear regression
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+\backupbegin
+%-------------------------------------------------------------------------------%
+
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{apalike}
+\bibliography{../assets/bib}
+\end{frame}
+%-------------------------------------------------------------------------------%
+
+\backupend
+\end{document}
+%
+\\~\
+%-------------------------------------------------------------------------------%
+%%% [[TEMPLATEs]] %%%
+%-------------------------------------------------------------------------------%
+\begin{frame}[fragile]
+
+\begin{figure}
+\centering
+{
+<<fig = TRUE, width = 7, height=5, echo=FALSE>>=
+hist(rnorm(10))
+@
+}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametile}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{...}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+
+}
+
+%-------------------------------------------------------------------------------%
+\begin{frame}%{Frametitle}
+
+\begin{itemize}
+\item xxx
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%NOTE%%%%%
+\note{
+\scriptsize \singlespacing
+
+\begin{itemize}
+\item xxxx
+\end{itemize}
+\\~\
+}
+
+%-------------------------------------------------------------------------------%
+
